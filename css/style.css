@@ -1,4 +1,6 @@
-/* GLOBALNY RESET STYLÓW */
+/*  
+	OGÓLNE STYLE 
+*/
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -11,7 +13,6 @@ html {
 	height: 100%;
 }
 
-/* GŁÓWNE STYLE APLIKACJI */
 body {
 	font-family: Verdana, sans-serif;
 	background-color: #f0f0f0;
@@ -20,7 +21,10 @@ body {
 	overflow-x: hidden;
 }
 
-.fixed-header {
+/*
+  NAGŁÓWEK
+*/
+.header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -33,21 +37,42 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 15px;
 }
 
-.fixed-header h1 {
-	margin: 0;
-	font-size: 1.5em;
-	color: white;
-}
-
-.fixed-header .controls {
+.header-left {
 	display: flex;
 	align-items: center;
 	gap: 15px;
 }
 
-.settings-btn {
+.header-right {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.header-link {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	gap: 15px;
+}
+
+.header-title {
+	margin: 0;
+	font-size: 1.5em;
+	color: white;
+}
+
+.header-logo {
+	width: 30px;
+	height: auto;
+}
+
+.settings-btn,
+.print-btn,
+.file-label {
 	background: none;
 	border: none;
 	color: white;
@@ -56,7 +81,9 @@ body {
 	transition: color 0.3s;
 }
 
-.settings-btn:hover {
+.settings-btn:hover,
+.print-btn:hover,
+.file-label:hover {
 	color: #ccc;
 }
 
@@ -64,20 +91,13 @@ body {
 	display: none;
 }
 
-.file-label {
-	background: none;
-	color: white;
-	padding: 0;
-	border: none;
-	cursor: pointer;
-	transition: color 0.3s;
+#game-select {
+	display: none;
 }
 
-.file-label:hover {
-	color: #ccc;
-	background: none;
-}
-
+/*
+  KONTENER PLANSZ
+*/
 #board-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -102,7 +122,6 @@ body {
 	height: auto;
 }
 
-/* Usuwamy domyślne style, aby nie blokować kolorów */
 .board-wrapper .notation-32e16 {
 	display: none !important;
 }
@@ -115,7 +134,9 @@ body {
 	font-weight: bold;
 }
 
-/* Style dla okna modalnego */
+/*
+  OKNO MODALNE (USTAWIENIA)
+*/
 .modal {
 	position: fixed;
 	top: 0;
@@ -128,6 +149,9 @@ body {
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0s 0.3s, opacity 0.3s ease-in-out;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .modal.show-modal {
@@ -145,15 +169,13 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 	text-align: left;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0.9);
+	position: relative;
+	transform: scale(0.9);
 	transition: transform 0.3s ease-in-out;
 }
 
 .modal.show-modal .modal-content {
-	transform: translate(-50%, -50%) scale(1);
+	transform: scale(1);
 }
 
 .modal-header {
@@ -170,16 +192,17 @@ body {
 	font-size: 28px;
 	font-weight: bold;
 	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 20px;
 }
 
 .close-btn:hover,
 .close-btn:focus {
 	color: #000;
 	text-decoration: none;
-	cursor: pointer;
 }
 
-/* Nowe style dla wyrównania elementów w siatce */
 .modal-grid {
 	display: grid;
 	grid-template-columns: minmax(100px, 1fr) 2fr;
@@ -194,17 +217,30 @@ body {
 	color: #333;
 }
 
-/* Style dla suwaka */
-#size-slider {
+/* Style dla suwaka i innych pól formularza */
+#size-slider,
+#orientation-select,
+input[type='color'] {
 	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	width: 100%;
-	height: 8px; /* Domyślna wysokość suwaka */
-	background: #ccc;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
 	border-radius: 5px;
+	background-color: white;
+	font-size: 1em;
 	outline: none;
+	transition: border-color 0.3s;
+	height: 38px;
+}
+
+#size-slider {
+	padding: 0;
+	height: 8px;
+	background: #ccc;
 	opacity: 0.7;
-	transition: opacity 0.2s;
-	margin: 10px 0; /* Dodanie marginesów */
+	margin: 10px 0;
 }
 
 #size-slider:hover {
@@ -233,44 +269,19 @@ body {
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-#size-slider::-moz-range-track {
-	width: 100%;
-	height: 8px;
-	background: #ccc;
-	border-radius: 5px;
-	border: none;
-}
-
-/* Style dla pola wyboru orientacji i koloru, ujednolicone */
-#orientation-select,
-input[type='color'] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background-color: white;
-	padding: 8px 12px;
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	cursor: pointer;
-	font-size: 1em;
-	outline: none;
-	transition: border-color 0.3s;
-	height: 38px; /* Nowa, jednolita wysokość */
-}
-
 #orientation-select {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 10px center;
 }
 
-#orientation-select:hover {
+#orientation-select:hover,
+input[type='color']:hover {
 	border-color: #333;
 }
 
 input[type='color'] {
 	padding: 0;
-	width: 100%;
 }
 
 input[type='color']::-webkit-color-swatch-wrapper {
@@ -287,14 +298,82 @@ input[type='color']::-moz-color-swatch {
 	border-radius: 4px;
 }
 
-/* Nowa klasa do podświetlania ostatniego ruchu */
-.highlight-last-move {
-	box-shadow: inset 0 0 0 5px rgba(255, 255, 0, 0.5);
-	z-index: 10;
+/*
+  DRUKOWANIE
+*/
+@media print {
+	body {
+		background-color: #fff;
+		margin: 0;
+	}
+
+	.fixed-header,
+	.fixed-footer,
+	.modal {
+		display: none !important;
+	}
+
+	#board-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: 10mm;
+		padding: 5mm;
+		width: 100%;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.board-wrapper {
+		width: 100% !important;
+		break-inside: avoid;
+		page-break-inside: avoid;
+		box-shadow: none;
+	}
 }
 
-/* Style dla stopki */
-.fixed-footer {
+/* 
+	DROP-AREA
+*/
+#file-drop-area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 300px;
+	height: 300px;
+	border: 3px dashed #ccc;
+	border-radius: 15px;
+	color: #888;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #f9f9f9;
+}
+
+#file-drop-area:hover {
+	color: #3399dd;
+	border-color: #3399dd;
+	background-color: transparent;
+}
+
+#file-drop-area.drag-over {
+	border-color: #22cc88;
+	background-color: #e8f5e9;
+	color: #22cc88;
+}
+
+#file-drop-area i {
+	font-size: 80px;
+}
+
+/*
+  STOPKA
+*/
+.footer {
 	position: fixed;
 	bottom: 0;
 	left: 0;
