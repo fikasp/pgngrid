@@ -69,11 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			wrapper.style.width = `${newSize}px`
 		})
 		boardContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(${newSize}px, 1fr))`
-		chessboards.forEach((board) => {
+		chessboards.forEach(({ board }) => {
 			board.resize()
 		})
 		// Ponowne zastosowanie kolorów po zmianie rozmiaru
 		changeBoardColors()
+		// Ponowne podświetlenie ruchów
+		highlightLastMoves()
 		// Zapisujemy ustawienia po zmianie
 		saveSettings()
 	})
@@ -92,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (pgnString) {
 			// Natychmiastowa zmiana koloru po wybraniu nowego
 			changeBoardColors()
+			highlightLastMoves()
 		}
 		// Zapisujemy ustawienia po zmianie
 		saveSettings()
@@ -144,10 +147,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 
 				game.move(move)
+				// Dodajemy informacje o polach "z" i "na"
 				positions.push({
 					fen: game.fen(),
 					moveText: moveText,
 					color: moveColor,
+					from: move.from,
+					to: move.to,
 				})
 			})
 
@@ -201,20 +207,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			const config = {
 				position: pos.fen,
 				draggable: false,
-				pieceTheme:
-					'png/{piece}.png',
+				// Używamy Twojej lokalnej ścieżki do grafik
+				pieceTheme: 'images/{piece}.png',
 				showNotation: false,
 				orientation: orientation,
-				lightSquareColor: '#f0d9b5',
-				darkSquareColor: '#b58863',
 			}
 
 			const board = new Chessboard(boardId, config)
-			chessboards.push(board)
+			chessboards.push({ board, boardId })
 		})
 
-		// Po wygenerowaniu plansz, ręcznie zmieniamy ich kolory
+		// Po wygenerowaniu plansz, ręcznie zmieniamy ich kolory i podświetlamy ruchy
 		changeBoardColors()
+		highlightLastMoves()
 	}
 
 	/**
@@ -222,13 +227,31 @@ document.addEventListener('DOMContentLoaded', function () {
 	 */
 	function changeBoardColors() {
 		const darkColor = darkColorPicker.value
-		const lightColor = lightenColor(darkColor, 0.5)
+		const lightColor = lightenColor(darkColor, 0.4)
 
 		document.querySelectorAll('.square-55d63').forEach((square) => {
 			if (square.classList.contains('black-3c85d')) {
 				square.style.backgroundColor = darkColor
 			} else if (square.classList.contains('white-1e1d7')) {
 				square.style.backgroundColor = lightColor
+			}
+		})
+	}
+
+	/**
+	 * Funkcja podświetlająca ostatnie ruchy na planszach.
+	 */
+	function highlightLastMoves() {
+		positions.forEach((pos, index) => {
+			const { boardId } = chessboards[index]
+			const fromSquare = document.querySelector(
+				`#${boardId} .square-${pos.from}`
+			)
+			const toSquare = document.querySelector(`#${boardId} .square-${pos.to}`)
+
+			if (fromSquare && toSquare) {
+				fromSquare.classList.add('highlight-last-move')
+				toSquare.classList.add('highlight-last-move')
 			}
 		})
 	}
