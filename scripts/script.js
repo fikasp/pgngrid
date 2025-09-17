@@ -1,32 +1,40 @@
-// Czekamy na pełne załadowanie strony
 document.addEventListener('DOMContentLoaded', function () {
-	// === Selektory elementów ===
-	const fileInput = document.getElementById('pgn-file')
+	// === Selektory elementów DOM ===
+	// Pobieranie referencji do wszystkich kluczowych elementów HTML,
+	// aby unikać wielokrotnego przeszukiwania drzewa DOM.
 	const boardContainer = document.getElementById('board-container')
 	const columnsSelect = document.getElementById('board-columns')
-	const orientationSelect = document.getElementById('orientation-select')
 	const darkColorPicker = document.getElementById('dark-color-picker')
-	const highlightColorPicker = document.getElementById('highlight-color-picker')
-	const printBtn = document.getElementById('print-btn')
-	const gameSelect = document.getElementById('game-select')
 	const fileDropArea = document.getElementById('file-drop-area')
+	const fileInput = document.getElementById('pgn-file')
+	const footer = document.querySelector('.footer')
+	const gameSelect = document.getElementById('game-select')
 	const header = document.querySelector('.header')
-	const footer = document.querySelector('.footer') // Nowy selektor, który obejmuje przyciski i etykietę wyboru pliku
-	const headerRight = document.querySelector('.header-right') // === Przyciski i elementy okna modalnego ===
-
+	const headerCenter = document.querySelector('.header-center')
+	const headerRight = document.querySelector('.header-right')
+	const highlightColorPicker = document.getElementById('highlight-color-picker')
+	const orientationSelect = document.getElementById('orientation-select')
+	const printBtn = document.getElementById('print-btn')
 	const settingsBtn = document.getElementById('settings-btn')
 	const modal = document.getElementById('settings-modal')
-	const closeBtn = document.querySelector('.close-btn') // Ukrywamy przyciski na starcie // Teraz ukrywamy cały kontener, który je zawiera
+	const closeBtn = document.querySelector('.close-btn')
 
-	if (headerRight) {
-		headerRight.style.display = 'none'
-	} // === Zmienne stanu ===
-
-	let pgnString = ''
+	// === Zmienne stanu aplikacji ===
+	// Zmienne przechowujące aktualny stan danych, takie jak wczytany PGN
+	// i informacje o partiach. Ułatwia to zarządzanie danymi.
 	const chessboards = []
+	let pgnString = ''
 	let positions = []
-	let allGames = [] // === FUNKCJE POMOCNICZE ===
+	let allGames = []
 
+	// === Funkcje pomocnicze ===
+	// Zestaw funkcji, które wykonują konkretne zadania, takie jak zapisywanie
+	// ustawień, renderowanie plansz czy obsługa plików.
+
+	/**
+	 * Zapisuje aktualne ustawienia użytkownika do pamięci przeglądarki (LocalStorage).
+	 * Dzięki temu ustawienia są zapamiętywane po odświeżeniu strony.
+	 */
 	function saveSettings() {
 		const settings = {
 			columns: columnsSelect.value,
@@ -37,22 +45,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 	}
 
+	/**
+	 * Wczytuje zapisane ustawienia z pamięci przeglądarki i aktualizuje
+	 * wartości selektorów i pól wyboru kolorów.
+	 */
 	function loadSettings() {
 		const savedSettings = localStorage.getItem('chessboardSettings')
 		if (savedSettings) {
 			const settings = JSON.parse(savedSettings)
-			updateColumnsSelect()
+			updateColumnsSelect() // Upewniamy się, że opcje kolumn są aktualne
 			if (columnsSelect) {
 				columnsSelect.value = settings.columns || 3
 			}
 			orientationSelect.value = settings.orientation
 			darkColorPicker.value = settings.darkColor
 			highlightColorPicker.value = settings.highlightColor || '#ffc107'
-
 			updateBoardLayout()
 		}
 	}
 
+	/**
+	 * Dynamicznie generuje opcje dla selektora kolumn na podstawie
+	 * aktualnej szerokości okna, aby plansze miały sensowny rozmiar.
+	 */
 	function updateColumnsSelect() {
 		if (!columnsSelect) return
 		const containerWidth = boardContainer.clientWidth
@@ -75,6 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	/**
+	 * Wyodrębnia nagłówki (np. Event, White, Black) z pliku PGN
+	 * przy użyciu wyrażeń regularnych.
+	 * @param {string} pgn - Ciąg znaków PGN partii.
+	 * @returns {object} Obiekt z nagłówkami i ich wartościami.
+	 */
 	function getHeadersFromPgnString(pgn) {
 		const headers = {}
 		const headerRegex = /\[(\w+)\s+"(.*?)"\]/g
@@ -85,6 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		return headers
 	}
 
+	/**
+	 * Przetwarza wczytany plik PGN, parsuje go na pojedyncze partie,
+	 * a następnie wywołuje funkcje odpowiedzialne za renderowanie.
+	 * @param {string} pgn - Cała zawartość pliku PGN.
+	 */
 	function processPgn(pgn) {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
@@ -92,9 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		allGames = []
 		pgn = pgn.trim()
 
-		fileDropArea.style.display = 'none' // Pokazujemy cały kontener, który zawiera przyciski i etykietę pliku
+		fileDropArea.style.display = 'none'
 		if (headerRight) {
-			headerRight.style.display = 'flex' // Używamy flex, aby przyciski ułożyły się poprawnie
+			headerRight.style.display = 'flex'
+		}
+		if (headerCenter) {
+			headerCenter.style.display = 'flex'
 		}
 
 		try {
@@ -103,9 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			gamesArray.forEach((gamePgn) => {
 				const fullPgn = `[Event ${gamePgn}`
 				const game = new Chess()
-
 				const headers = getHeadersFromPgnString(fullPgn)
-
 				if (game.load_pgn(fullPgn)) {
 					allGames.push({ pgn: fullPgn, header: headers })
 				}
@@ -115,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				alert('Nie znaleziono żadnej partii w pliku PGN.')
 				gameSelect.style.display = 'none'
 				return
-			} // Elementy, które zawsze są w header-right nie muszą być osobno pokazywane // printBtn.style.display = 'inline-block'; // settingsBtn.style.display = 'inline-block';
+			}
 
 			if (columnsSelect) {
 				columnsSelect.style.display = 'inline-block'
@@ -129,60 +156,57 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	/**
+	 * Wypełnia selektor partii listą dostępnych gier z pliku PGN.
+	 */
 	function populateGameSelect() {
 		gameSelect.innerHTML = ''
-
 		allGames.forEach((game, index) => {
 			const white = game.header.White || 'Biały'
 			const black = game.header.Black || 'Czarny'
 			const event = game.header.Event || 'Nieznana partia'
-
 			const option = document.createElement('option')
 			option.value = index
 			option.textContent = `${index + 1}. ${event} (${white} vs. ${black})`
 			gameSelect.appendChild(option)
 		})
-
 		gameSelect.style.display = 'block'
-
 		if (allGames.length > 0) {
 			gameSelect.value = '0'
 		}
 	}
 
+	/**
+	 * Renderuje plansze dla wybranej partii, tworząc osobne plansze
+	 * dla każdego ruchu.
+	 * @param {string} pgnToRender - PGN partii do wyświetlenia.
+	 */
 	function renderGame(pgnToRender) {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
 		positions = []
-
 		try {
 			const game = new Chess()
 			game.load_pgn(pgnToRender)
-
 			const header = game.header()
 			const startFen =
 				header.FEN || 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 			let startMoveNumber = 1
-
 			if (header.FEN) {
 				const fenParts = startFen.split(' ')
 				startMoveNumber = parseInt(fenParts[5], 10)
 			}
-
 			const history = game.history({ verbose: true })
 			const tempGame = new Chess(startFen)
-
 			history.forEach((move, index) => {
 				const moveColor = move.color
 				let moveText = ''
 				tempGame.move(move)
-
 				if (moveColor === 'w') {
 					moveText = `${startMoveNumber + Math.floor(index / 2)}. ${move.san}`
 				} else {
 					moveText = `${startMoveNumber + Math.floor(index / 2)}... ${move.san}`
 				}
-
 				positions.push({
 					fen: tempGame.fen(),
 					moveText: moveText,
@@ -191,7 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					to: move.to,
 				})
 			})
-
 			generateBoards()
 		} catch (error) {
 			console.error('Błąd podczas renderowania partii:', error)
@@ -199,6 +222,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	/**
+	 * Oblicza optymalny rozmiar plansz na podstawie liczby kolumn
+	 * i szerokości kontenera.
+	 */
 	function calculateBoardSize() {
 		if (!columnsSelect) return 400
 		const columns = parseInt(columnsSelect.value, 10)
@@ -211,6 +238,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		return Math.floor(boardSize)
 	}
 
+	/**
+	 * Aktualizuje układ siatki CSS dla kontenera plansz.
+	 */
 	function updateBoardLayout() {
 		if (columnsSelect) {
 			const columns = columnsSelect.value
@@ -218,6 +248,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	/**
+	 * Generuje i wyświetla wszystkie plansze szachowe na stronie
+	 * w oparciu o pozycje zapisane w tablicy `positions`.
+	 */
 	function generateBoards() {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
@@ -262,6 +296,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		updateBoardLayout()
 	}
 
+	/**
+	 * Zmienia kolory plansz w oparciu o wartości z selektorów kolorów.
+	 */
 	function changeBoardColors() {
 		const darkColor = darkColorPicker.value
 		const lightColor = lightenColor(darkColor, 0.5)
@@ -274,20 +311,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	}
 
+	/**
+	 * Podświetla ostatnie ruchy na planszach, dodając do nich cień.
+	 */
 	function highlightLastMoves() {
 		const highlightColor = highlightColorPicker.value
-
 		document.querySelectorAll('.square-55d63').forEach((square) => {
 			square.style.removeProperty('box-shadow')
 		})
-
 		positions.forEach((pos, index) => {
 			const { boardId } = chessboards[index]
 			const fromSquare = document.querySelector(
 				`#${boardId} .square-${pos.from}`
 			)
 			const toSquare = document.querySelector(`#${boardId} .square-${pos.to}`)
-
 			if (fromSquare && toSquare) {
 				fromSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
 				toSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
@@ -295,6 +332,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	}
 
+	/**
+	 * Rozjaśnia podany kolor HEX o określony procent.
+	 * @param {string} hex - Kod koloru w formacie HEX (np. '#333333').
+	 * @param {number} percent - Procent rozjaśnienia (np. 0.5 dla 50%).
+	 * @returns {string} Rozjaśniony kolor w formacie HEX.
+	 */
 	function lightenColor(hex, percent) {
 		let r = parseInt(hex.substring(1, 3), 16)
 		let g = parseInt(hex.substring(3, 5), 16)
@@ -308,6 +351,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		return '#' + r + g + b
 	}
 
+	/**
+	 * Obsługuje wczytywanie pliku przez FileReader.
+	 * @param {File} file - Obiekt pliku do przetworzenia.
+	 */
 	function handleFile(file) {
 		if (!file) return
 		const reader = new FileReader()
@@ -316,35 +363,65 @@ document.addEventListener('DOMContentLoaded', function () {
 			processPgn(pgnString)
 		}
 		reader.readAsText(file)
-	} // === OBSŁUGA ZDARZEŃ ===
+	}
+
+	/**
+	 * Dodaje uniwersalne nasłuchiwanie na zdarzenie "wheel" dla danego selektora,
+	 * umożliwiając zmianę wartości za pomocą kółka myszy.
+	 * @param {HTMLSelectElement} selectElement - Element <select> do nasłuchiwania.
+	 * @param {Function} callback - Funkcja wywoływana po zmianie wartości.
+	 */
+	function addWheelListener(selectElement, callback) {
+		if (!selectElement) return
+
+		selectElement.addEventListener('wheel', (event) => {
+			event.preventDefault()
+
+			let currentIndex = selectElement.selectedIndex
+			let newIndex = currentIndex
+			const maxIndex = selectElement.options.length - 1
+
+			if (event.deltaY > 0) {
+				newIndex = Math.min(currentIndex + 1, maxIndex)
+			} else {
+				newIndex = Math.max(currentIndex - 1, 0)
+			}
+
+			if (newIndex !== currentIndex) {
+				selectElement.selectedIndex = newIndex
+				callback()
+			}
+		})
+	}
+
+	// === Obsługa zdarzeń ===
+	// Główne miejsce, gdzie definiujemy reakcje na działania użytkownika.
 
 	loadSettings()
 
+	// Zdarzenia dla przeciągania i upuszczania plików
 	fileDropArea.addEventListener('click', () => {
 		fileInput.click()
 	})
-
 	fileDropArea.addEventListener('dragover', (e) => {
 		e.preventDefault()
 		fileDropArea.classList.add('drag-over')
 	})
-
 	fileDropArea.addEventListener('dragleave', () => {
 		fileDropArea.classList.remove('drag-over')
 	})
-
 	fileDropArea.addEventListener('drop', (e) => {
 		e.preventDefault()
 		fileDropArea.classList.remove('drag-over')
 		const file = e.dataTransfer.files[0]
 		handleFile(file)
 	})
-
 	fileInput.addEventListener('change', (event) => {
 		const file = event.target.files[0]
 		handleFile(file)
 	})
 
+	// Zdarzenia dla selektorów
 	if (columnsSelect) {
 		columnsSelect.addEventListener('change', () => {
 			if (pgnString) {
@@ -354,26 +431,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			saveSettings()
 		})
 	}
-	gameSelect.addEventListener('wheel', (event) => {
-		event.preventDefault()
-
-		if (allGames.length === 0) return
-
-		let currentIndex = gameSelect.selectedIndex
-		let newIndex = currentIndex
-
-		if (event.deltaY > 0) {
-			newIndex = Math.min(currentIndex + 1, allGames.length - 1)
-		} else {
-			newIndex = Math.max(currentIndex - 1, 0)
-		}
-
-		if (newIndex !== currentIndex) {
-			gameSelect.value = newIndex
-			renderGame(allGames[newIndex].pgn)
-		}
-	})
-
 	gameSelect.addEventListener('change', (event) => {
 		const selectedIndex = event.target.value
 		if (selectedIndex !== '') {
@@ -382,11 +439,35 @@ document.addEventListener('DOMContentLoaded', function () {
 			boardContainer.innerHTML = ''
 		}
 	})
-	orientationSelect.addEventListener('change', () => {
+
+	// Wywołanie uniwersalnej funkcji do przewijania dla obu selektorów
+	addWheelListener(gameSelect, () => {
+		const selectedIndex = gameSelect.value
+		if (selectedIndex !== '') {
+			renderGame(allGames[selectedIndex].pgn)
+		} else {
+			boardContainer.innerHTML = ''
+		}
+	})
+
+	addWheelListener(columnsSelect, () => {
+		if (pgnString) {
+			renderGame(allGames[gameSelect.value].pgn)
+		}
+		updateBoardLayout()
+		saveSettings()
+	})
+
+	addWheelListener(orientationSelect, () => {
 		if (pgnString) generateBoards()
 		saveSettings()
 	})
 
+	// Zdarzenia dla pól wyboru ustawień
+	orientationSelect.addEventListener('change', () => {
+		if (pgnString) generateBoards()
+		saveSettings()
+	})
 	darkColorPicker.addEventListener('input', () => {
 		if (pgnString) {
 			changeBoardColors()
@@ -394,7 +475,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		saveSettings()
 	})
-
 	highlightColorPicker.addEventListener('input', () => {
 		if (pgnString) {
 			highlightLastMoves()
@@ -402,29 +482,27 @@ document.addEventListener('DOMContentLoaded', function () {
 		saveSettings()
 	})
 
+	// Zdarzenia dla okna modalnego (ustawienia)
 	settingsBtn.addEventListener('click', () => {
 		modal.classList.add('show-modal')
 	})
-
 	closeBtn.addEventListener('click', () => {
 		modal.classList.remove('show-modal')
 	})
-
 	window.addEventListener('click', (event) => {
 		if (event.target === modal) {
 			modal.classList.remove('show-modal')
 		}
 	})
 
+	// Obsługa drukowania
 	printBtn.addEventListener('click', () => {
 		if (chessboards.length === 0) {
 			alert('Brak plansz do wydrukowania. Proszę wczytać plik PGN.')
 			return
 		}
-
 		const selectedIndex = gameSelect.value
 		let fileName = 'PGNgrid.pdf'
-
 		if (
 			selectedIndex !== '' &&
 			allGames[selectedIndex] &&
@@ -440,10 +518,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				'_'
 			)
 		}
-
 		if (header) header.style.display = 'none'
 		if (footer) footer.style.display = 'none'
-
 		window.print()
 	})
 
@@ -452,6 +528,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (footer) footer.style.display = 'block'
 	})
 
+	// Obsługa zmiany rozmiaru okna
 	window.onresize = () => {
 		updateColumnsSelect()
 		if (pgnString && allGames.length > 0) {
