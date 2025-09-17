@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// === Selektory elementów ===
 	const fileInput = document.getElementById('pgn-file')
 	const boardContainer = document.getElementById('board-container')
-	const sizeSlider = document.getElementById('size-slider')
+	const columnsSelect = document.getElementById('board-columns')
 	const orientationSelect = document.getElementById('orientation-select')
 	const darkColorPicker = document.getElementById('dark-color-picker')
 	const highlightColorPicker = document.getElementById('highlight-color-picker')
@@ -11,28 +11,25 @@ document.addEventListener('DOMContentLoaded', function () {
 	const gameSelect = document.getElementById('game-select')
 	const fileDropArea = document.getElementById('file-drop-area')
 	const header = document.querySelector('.header')
-	const footer = document.querySelector('.footer')
+	const footer = document.querySelector('.footer') // Nowy selektor, który obejmuje przyciski i etykietę wyboru pliku
+	const headerRight = document.querySelector('.header-right') // === Przyciski i elementy okna modalnego ===
 
-	// === Przyciski i elementy okna modalnego ===
 	const settingsBtn = document.getElementById('settings-btn')
 	const modal = document.getElementById('settings-modal')
-	const closeBtn = document.querySelector('.close-btn')
+	const closeBtn = document.querySelector('.close-btn') // Ukrywamy przyciski na starcie // Teraz ukrywamy cały kontener, który je zawiera
 
-	// Ukrywamy przyciski na starcie
-	printBtn.style.display = 'none'
-	settingsBtn.style.display = 'none'
+	if (headerRight) {
+		headerRight.style.display = 'none'
+	} // === Zmienne stanu ===
 
-	// === Zmienne stanu ===
 	let pgnString = ''
 	const chessboards = []
 	let positions = []
-	let allGames = []
-
-	// === FUNKCJE POMOCNICZE ===
+	let allGames = [] // === FUNKCJE POMOCNICZE ===
 
 	function saveSettings() {
 		const settings = {
-			size: sizeSlider.value,
+			columns: columnsSelect.value,
 			orientation: orientationSelect.value,
 			darkColor: darkColorPicker.value,
 			highlightColor: highlightColorPicker.value,
@@ -44,15 +41,37 @@ document.addEventListener('DOMContentLoaded', function () {
 		const savedSettings = localStorage.getItem('chessboardSettings')
 		if (savedSettings) {
 			const settings = JSON.parse(savedSettings)
-			sizeSlider.value = settings.size
+			updateColumnsSelect()
+			if (columnsSelect) {
+				columnsSelect.value = settings.columns || 3
+			}
 			orientationSelect.value = settings.orientation
 			darkColorPicker.value = settings.darkColor
 			highlightColorPicker.value = settings.highlightColor || '#ffc107'
 
-			document.querySelectorAll('.board-wrapper').forEach((wrapper) => {
-				wrapper.style.width = `${settings.size}px`
-			})
-			boardContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(${settings.size}px, 1fr))`
+			updateBoardLayout()
+		}
+	}
+
+	function updateColumnsSelect() {
+		if (!columnsSelect) return
+		const containerWidth = boardContainer.clientWidth
+		const minBoardSize = 150
+		const gap = 10
+		let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
+		maxColumns = Math.max(1, maxColumns)
+		const savedValue = columnsSelect.value
+		columnsSelect.innerHTML = ''
+		for (let i = 1; i <= maxColumns; i++) {
+			const option = document.createElement('option')
+			option.value = i
+			option.textContent = i
+			columnsSelect.appendChild(option)
+		}
+		if (savedValue && parseInt(savedValue, 10) <= maxColumns) {
+			columnsSelect.value = savedValue
+		} else {
+			columnsSelect.value = maxColumns
 		}
 	}
 
@@ -73,8 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		allGames = []
 		pgn = pgn.trim()
 
-		// Ukrywamy obszar do załadowania pliku, gdy plansze są już widoczne
-		fileDropArea.style.display = 'none'
+		fileDropArea.style.display = 'none' // Pokazujemy cały kontener, który zawiera przyciski i etykietę pliku
+		if (headerRight) {
+			headerRight.style.display = 'flex' // Używamy flex, aby przyciski ułożyły się poprawnie
+		}
 
 		try {
 			const gamesArray = pgn.split('[Event ').filter(Boolean)
@@ -94,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
 				alert('Nie znaleziono żadnej partii w pliku PGN.')
 				gameSelect.style.display = 'none'
 				return
-			}
+			} // Elementy, które zawsze są w header-right nie muszą być osobno pokazywane // printBtn.style.display = 'inline-block'; // settingsBtn.style.display = 'inline-block';
 
-			// Pokazujemy przyciski po załadowaniu pliku
-			printBtn.style.display = 'inline-block'
-			settingsBtn.style.display = 'inline-block'
+			if (columnsSelect) {
+				columnsSelect.style.display = 'inline-block'
+			}
 
 			populateGameSelect()
 			renderGame(allGames[0].pgn)
@@ -178,11 +199,30 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	function calculateBoardSize() {
+		if (!columnsSelect) return 400
+		const columns = parseInt(columnsSelect.value, 10)
+		const containerWidth = boardContainer.clientWidth - 20
+		const minBoardSize = 150
+		const maxBoardSize = 750
+		const gap = 10
+		let boardSize = (containerWidth - (columns - 1) * gap) / columns
+		boardSize = Math.max(minBoardSize, Math.min(boardSize, maxBoardSize))
+		return Math.floor(boardSize)
+	}
+
+	function updateBoardLayout() {
+		if (columnsSelect) {
+			const columns = columnsSelect.value
+			boardContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
+		}
+	}
+
 	function generateBoards() {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
 		const orientation = orientationSelect.value
-		const currentSize = sizeSlider.value
+		const currentSize = calculateBoardSize()
 		positions.forEach((pos) => {
 			const boardWrapper = document.createElement('div')
 			boardWrapper.className = 'board-wrapper'
@@ -219,6 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 		changeBoardColors()
 		highlightLastMoves()
+		updateBoardLayout()
 	}
 
 	function changeBoardColors() {
@@ -267,7 +308,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		return '#' + r + g + b
 	}
 
-	// Funkcja do przetwarzania wczytanego pliku
 	function handleFile(file) {
 		if (!file) return
 		const reader = new FileReader()
@@ -276,17 +316,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			processPgn(pgnString)
 		}
 		reader.readAsText(file)
-	}
+	} // === OBSŁUGA ZDARZEŃ ===
 
-	// === OBSŁUGA ZDARZEŃ ===
 	loadSettings()
 
-	// 1. Obsługa kliknięcia na ikonę folderu
 	fileDropArea.addEventListener('click', () => {
 		fileInput.click()
 	})
 
-	// 2. Obsługa przeciągania pliku nad obszar
 	fileDropArea.addEventListener('dragover', (e) => {
 		e.preventDefault()
 		fileDropArea.classList.add('drag-over')
@@ -296,7 +333,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		fileDropArea.classList.remove('drag-over')
 	})
 
-	// 3. Obsługa upuszczenia pliku
 	fileDropArea.addEventListener('drop', (e) => {
 		e.preventDefault()
 		fileDropArea.classList.remove('drag-over')
@@ -304,15 +340,22 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleFile(file)
 	})
 
-	// 4. Obsługa wyboru pliku przez standardowy input
 	fileInput.addEventListener('change', (event) => {
 		const file = event.target.files[0]
 		handleFile(file)
 	})
 
-	// --- NOWA FUNKCJA PRZEWIJANIA ---
+	if (columnsSelect) {
+		columnsSelect.addEventListener('change', () => {
+			if (pgnString) {
+				renderGame(allGames[gameSelect.value].pgn)
+			}
+			updateBoardLayout()
+			saveSettings()
+		})
+	}
 	gameSelect.addEventListener('wheel', (event) => {
-		event.preventDefault() // Zapobiega przewijaniu całej strony
+		event.preventDefault()
 
 		if (allGames.length === 0) return
 
@@ -320,10 +363,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		let newIndex = currentIndex
 
 		if (event.deltaY > 0) {
-			// Przewijanie w dół
 			newIndex = Math.min(currentIndex + 1, allGames.length - 1)
 		} else {
-			// Przewijanie w górę
 			newIndex = Math.max(currentIndex - 1, 0)
 		}
 
@@ -333,7 +374,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	})
 
-	// --- Reszta istniejących nasłuchiwaczy zdarzeń pozostaje bez zmian ---
 	gameSelect.addEventListener('change', (event) => {
 		const selectedIndex = event.target.value
 		if (selectedIndex !== '') {
@@ -342,21 +382,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			boardContainer.innerHTML = ''
 		}
 	})
-
-	sizeSlider.addEventListener('input', () => {
-		const newSize = sizeSlider.value
-		document.querySelectorAll('.board-wrapper').forEach((wrapper) => {
-			wrapper.style.width = `${newSize}px`
-		})
-		boardContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(${newSize}px, 1fr))`
-		chessboards.forEach(({ board }) => {
-			board.resize()
-		})
-		changeBoardColors()
-		highlightLastMoves()
-		saveSettings()
-	})
-
 	orientationSelect.addEventListener('change', () => {
 		if (pgnString) generateBoards()
 		saveSettings()
@@ -420,21 +445,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (footer) footer.style.display = 'none'
 
 		window.print()
-
-		const element = document.getElementById('board-container')
-		const options = {
-			filename: fileName,
-			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 2 },
-			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-			pagebreak: { mode: 'avoid-all' },
-		}
-
-		html2pdf().from(element).set(options).save()
 	})
 
 	window.addEventListener('afterprint', () => {
 		if (header) header.style.display = 'flex'
 		if (footer) footer.style.display = 'block'
 	})
+
+	window.onresize = () => {
+		updateColumnsSelect()
+		if (pgnString && allGames.length > 0) {
+			renderGame(allGames[gameSelect.value].pgn)
+		}
+	}
 })

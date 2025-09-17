@@ -9,7 +9,7 @@ Jest to idealne narzędzie dla analityków, trenerów i miłośników szachów, 
 * **Wczytywanie plików PGN:** Proste przeciągnij i upuść lub wybierz plik z komputera. Aplikacja obsługuje pliki z wieloma partiami, umożliwiając łatwe przełączanie się między nimi.
 * **Wizualizacja:** Każdy ruch w partii jest renderowany na osobnej planszy, co tworzy widok "siatki" postępu gry.
 * **Konfigurowalne ustawienia:**
-    * **Rozmiar planszy:** Możliwość zmiany rozmiaru plansz za pomocą suwaka.
+    * **Rozmiar:** Możliwość dostosowania wielkości planszy poprzez zmianę ilości kolumn.
     * **Orientacja:** Wybór, czy plansze mają być oglądane z perspektywy białych, czy czarnych.
     * **Kolory:** Dostosowywanie kolorów ciemnych pól oraz koloru podświetlenia ostatniego ruchu.
 * **Intuicyjna nawigacja:** Łatwe przełączanie się między partiami za pomocą listy rozwijanej lub przewijania kółkiem myszy.
