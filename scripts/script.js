@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 	// === Selektory elementów DOM ===
-	// Pobieranie referencji do wszystkich kluczowych elementów HTML,
-	// aby unikać wielokrotnego przeszukiwania drzewa DOM.
 	const boardContainer = document.getElementById('board-container')
 	const columnsSelect = document.getElementById('board-columns')
 	const darkColorPicker = document.getElementById('dark-color-picker')
@@ -19,22 +17,26 @@ document.addEventListener('DOMContentLoaded', function () {
 	const modal = document.getElementById('settings-modal')
 	const closeBtn = document.querySelector('.close-btn')
 
+	const boardModal = document.getElementById('board-modal')
+	const prevMoveBtn = document.getElementById('prev-move-btn')
+	const nextMoveBtn = document.getElementById('next-move-btn')
+	const bigBoardDiv = document.getElementById('big-board')
+	const closeBtnBoard = document.querySelector('.close-btn-board')
+
+	if (headerRight) {
+		headerRight.style.display = 'none'
+	}
+
 	// === Zmienne stanu aplikacji ===
-	// Zmienne przechowujące aktualny stan danych, takie jak wczytany PGN
-	// i informacje o partiach. Ułatwia to zarządzanie danymi.
 	const chessboards = []
 	let pgnString = ''
 	let positions = []
 	let allGames = []
+	let currentBoardIndex = 0
+	let bigBoard = null
 
 	// === Funkcje pomocnicze ===
-	// Zestaw funkcji, które wykonują konkretne zadania, takie jak zapisywanie
-	// ustawień, renderowanie plansz czy obsługa plików.
 
-	/**
-	 * Zapisuje aktualne ustawienia użytkownika do pamięci przeglądarki (LocalStorage).
-	 * Dzięki temu ustawienia są zapamiętywane po odświeżeniu strony.
-	 */
 	function saveSettings() {
 		const settings = {
 			columns: columnsSelect.value,
@@ -45,15 +47,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 	}
 
-	/**
-	 * Wczytuje zapisane ustawienia z pamięci przeglądarki i aktualizuje
-	 * wartości selektorów i pól wyboru kolorów.
-	 */
 	function loadSettings() {
 		const savedSettings = localStorage.getItem('chessboardSettings')
 		if (savedSettings) {
 			const settings = JSON.parse(savedSettings)
-			updateColumnsSelect() // Upewniamy się, że opcje kolumn są aktualne
+			updateColumnsSelect()
 			if (columnsSelect) {
 				columnsSelect.value = settings.columns || 3
 			}
@@ -64,10 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	/**
-	 * Dynamicznie generuje opcje dla selektora kolumn na podstawie
-	 * aktualnej szerokości okna, aby plansze miały sensowny rozmiar.
-	 */
 	function updateColumnsSelect() {
 		if (!columnsSelect) return
 		const containerWidth = boardContainer.clientWidth
@@ -90,12 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	/**
-	 * Wyodrębnia nagłówki (np. Event, White, Black) z pliku PGN
-	 * przy użyciu wyrażeń regularnych.
-	 * @param {string} pgn - Ciąg znaków PGN partii.
-	 * @returns {object} Obiekt z nagłówkami i ich wartościami.
-	 */
 	function getHeadersFromPgnString(pgn) {
 		const headers = {}
 		const headerRegex = /\[(\w+)\s+"(.*?)"\]/g
@@ -106,11 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		return headers
 	}
 
-	/**
-	 * Przetwarza wczytany plik PGN, parsuje go na pojedyncze partie,
-	 * a następnie wywołuje funkcje odpowiedzialne za renderowanie.
-	 * @param {string} pgn - Cała zawartość pliku PGN.
-	 */
 	function processPgn(pgn) {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
@@ -152,13 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			renderGame(allGames[0].pgn)
 		} catch (error) {
 			console.error('Błąd podczas przetwarzania PGN:', error)
-			alert('Wystąpił błąd podczas przetwarzania pliku PGN.')
 		}
 	}
 
-	/**
-	 * Wypełnia selektor partii listą dostępnych gier z pliku PGN.
-	 */
 	function populateGameSelect() {
 		gameSelect.innerHTML = ''
 		allGames.forEach((game, index) => {
@@ -176,11 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	/**
-	 * Renderuje plansze dla wybranej partii, tworząc osobne plansze
-	 * dla każdego ruchu.
-	 * @param {string} pgnToRender - PGN partii do wyświetlenia.
-	 */
 	function renderGame(pgnToRender) {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
@@ -218,14 +192,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			generateBoards()
 		} catch (error) {
 			console.error('Błąd podczas renderowania partii:', error)
-			alert('Wystąpił błąd podczas wyświetlania wybranej partii.')
 		}
 	}
 
-	/**
-	 * Oblicza optymalny rozmiar plansz na podstawie liczby kolumn
-	 * i szerokości kontenera.
-	 */
 	function calculateBoardSize() {
 		if (!columnsSelect) return 400
 		const columns = parseInt(columnsSelect.value, 10)
@@ -238,9 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		return Math.floor(boardSize)
 	}
 
-	/**
-	 * Aktualizuje układ siatki CSS dla kontenera plansz.
-	 */
 	function updateBoardLayout() {
 		if (columnsSelect) {
 			const columns = columnsSelect.value
@@ -248,16 +214,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	/**
-	 * Generuje i wyświetla wszystkie plansze szachowe na stronie
-	 * w oparciu o pozycje zapisane w tablicy `positions`.
-	 */
 	function generateBoards() {
 		boardContainer.innerHTML = ''
 		chessboards.length = 0
 		const orientation = orientationSelect.value
 		const currentSize = calculateBoardSize()
-		positions.forEach((pos) => {
+		positions.forEach((pos, index) => {
 			const boardWrapper = document.createElement('div')
 			boardWrapper.className = 'board-wrapper'
 			boardWrapper.style.width = `${currentSize}px`
@@ -290,15 +252,16 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			const board = new Chessboard(boardId, config)
 			chessboards.push({ board, boardId })
+
+			boardWrapper.addEventListener('click', () => {
+				showBoardModal(index)
+			})
 		})
 		changeBoardColors()
 		highlightLastMoves()
 		updateBoardLayout()
 	}
 
-	/**
-	 * Zmienia kolory plansz w oparciu o wartości z selektorów kolorów.
-	 */
 	function changeBoardColors() {
 		const darkColor = darkColorPicker.value
 		const lightColor = lightenColor(darkColor, 0.5)
@@ -311,9 +274,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	}
 
-	/**
-	 * Podświetla ostatnie ruchy na planszach, dodając do nich cień.
-	 */
 	function highlightLastMoves() {
 		const highlightColor = highlightColorPicker.value
 		document.querySelectorAll('.square-55d63').forEach((square) => {
@@ -330,14 +290,19 @@ document.addEventListener('DOMContentLoaded', function () {
 				toSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
 			}
 		})
+		if (bigBoard) {
+			const pos = positions[currentBoardIndex]
+			const fromSquare = document.querySelector(
+				`#big-board .square-${pos.from}`
+			)
+			const toSquare = document.querySelector(`#big-board .square-${pos.to}`)
+			if (fromSquare && toSquare) {
+				fromSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
+				toSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
+			}
+		}
 	}
 
-	/**
-	 * Rozjaśnia podany kolor HEX o określony procent.
-	 * @param {string} hex - Kod koloru w formacie HEX (np. '#333333').
-	 * @param {number} percent - Procent rozjaśnienia (np. 0.5 dla 50%).
-	 * @returns {string} Rozjaśniony kolor w formacie HEX.
-	 */
 	function lightenColor(hex, percent) {
 		let r = parseInt(hex.substring(1, 3), 16)
 		let g = parseInt(hex.substring(3, 5), 16)
@@ -351,10 +316,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		return '#' + r + g + b
 	}
 
-	/**
-	 * Obsługuje wczytywanie pliku przez FileReader.
-	 * @param {File} file - Obiekt pliku do przetworzenia.
-	 */
 	function handleFile(file) {
 		if (!file) return
 		const reader = new FileReader()
@@ -365,12 +326,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		reader.readAsText(file)
 	}
 
-	/**
-	 * Dodaje uniwersalne nasłuchiwanie na zdarzenie "wheel" dla danego selektora,
-	 * umożliwiając zmianę wartości za pomocą kółka myszy.
-	 * @param {HTMLSelectElement} selectElement - Element <select> do nasłuchiwania.
-	 * @param {Function} callback - Funkcja wywoływana po zmianie wartości.
-	 */
 	function addWheelListener(selectElement, callback) {
 		if (!selectElement) return
 
@@ -394,12 +349,95 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	}
 
+	// Nowa funkcja do obsługi przewijania kółkiem na dużej planszy
+	function handleWheelNavigation(event) {
+		event.preventDefault() // Zapobiega przewijaniu całej strony
+		if (event.deltaY > 0) {
+			// Przewijanie w dół, przejdź do następnego ruchu
+			if (currentBoardIndex < positions.length - 1) {
+				currentBoardIndex++
+				renderBigBoard()
+			}
+		} else {
+			// Przewijanie w górę, przejdź do poprzedniego ruchu
+			if (currentBoardIndex > 0) {
+				currentBoardIndex--
+				renderBigBoard()
+			}
+		}
+	}
+
+	// === Poprawiona funkcja wywołująca modal ===
+	function showBoardModal(index) {
+		currentBoardIndex = index
+		boardModal.classList.add('show-modal')
+		renderBigBoard()
+		// Dodajemy nasłuch zdarzenia "wheel" do elementu modalnego
+		boardModal.addEventListener('wheel', handleWheelNavigation, {
+			passive: false,
+		})
+	}
+
+	function renderBigBoard() {
+		const position = positions[currentBoardIndex]
+		if (!position) return
+
+		if (bigBoard) {
+			bigBoard.destroy()
+		}
+
+		// Upewnij się, że element DOM istnieje przed inicjalizacją
+		if (bigBoardDiv) {
+			const config = {
+				position: position.fen,
+				draggable: false,
+				pieceTheme: 'images/{piece}.png',
+				showNotation: true,
+				orientation: orientationSelect.value,
+			}
+
+			bigBoard = new Chessboard('big-board', config)
+
+			const darkColor = darkColorPicker.value
+			const lightColor = lightenColor(darkColor, 0.5)
+
+			document
+				.querySelectorAll('#big-board .square-55d63')
+				.forEach((square) => {
+					if (square.classList.contains('black-3c85d')) {
+						square.style.backgroundColor = darkColor
+					} else if (square.classList.contains('white-1e1d7')) {
+						square.style.backgroundColor = lightColor
+					}
+				})
+
+			const highlightColor = highlightColorPicker.value
+			const fromSquare = document.querySelector(
+				`#big-board .square-${position.from}`
+			)
+			const toSquare = document.querySelector(
+				`#big-board .square-${position.to}`
+			)
+			if (fromSquare && toSquare) {
+				fromSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
+				toSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
+			}
+		} else {
+			console.error('Element #big-board not found!')
+		}
+
+		if (prevMoveBtn) {
+			prevMoveBtn.disabled = currentBoardIndex === 0
+		}
+		if (nextMoveBtn) {
+			nextMoveBtn.disabled = currentBoardIndex >= positions.length - 1
+		}
+	}
+
 	// === Obsługa zdarzeń ===
-	// Główne miejsce, gdzie definiujemy reakcje na działania użytkownika.
 
 	loadSettings()
 
-	// Zdarzenia dla przeciągania i upuszczania plików
 	fileDropArea.addEventListener('click', () => {
 		fileInput.click()
 	})
@@ -421,7 +459,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleFile(file)
 	})
 
-	// Zdarzenia dla selektorów
 	if (columnsSelect) {
 		columnsSelect.addEventListener('change', () => {
 			if (pgnString) {
@@ -440,7 +477,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	})
 
-	// Wywołanie uniwersalnej funkcji do przewijania dla obu selektorów
 	addWheelListener(gameSelect, () => {
 		const selectedIndex = gameSelect.value
 		if (selectedIndex !== '') {
@@ -463,7 +499,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		saveSettings()
 	})
 
-	// Zdarzenia dla pól wyboru ustawień
 	orientationSelect.addEventListener('change', () => {
 		if (pgnString) generateBoards()
 		saveSettings()
@@ -473,16 +508,21 @@ document.addEventListener('DOMContentLoaded', function () {
 			changeBoardColors()
 			highlightLastMoves()
 		}
+		if (boardModal.classList.contains('show-modal')) {
+			renderBigBoard()
+		}
 		saveSettings()
 	})
 	highlightColorPicker.addEventListener('input', () => {
 		if (pgnString) {
 			highlightLastMoves()
 		}
+		if (boardModal.classList.contains('show-modal')) {
+			renderBigBoard()
+		}
 		saveSettings()
 	})
 
-	// Zdarzenia dla okna modalnego (ustawienia)
 	settingsBtn.addEventListener('click', () => {
 		modal.classList.add('show-modal')
 	})
@@ -495,10 +535,52 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	})
 
-	// Obsługa drukowania
+	closeBtnBoard.addEventListener('click', () => {
+		boardModal.classList.remove('show-modal')
+		// Usuwamy nasłuch zdarzenia "wheel" po zamknięciu modala
+		boardModal.removeEventListener('wheel', handleWheelNavigation)
+	})
+
+	window.addEventListener('click', (event) => {
+		if (event.target === boardModal) {
+			boardModal.classList.remove('show-modal')
+			// Usuwamy nasłuch zdarzenia "wheel" po kliknięciu poza modalem
+			boardModal.removeEventListener('wheel', handleWheelNavigation)
+		}
+	})
+
+	prevMoveBtn.addEventListener('click', () => {
+		if (currentBoardIndex > 0) {
+			currentBoardIndex--
+			renderBigBoard()
+		}
+	})
+
+	nextMoveBtn.addEventListener('click', () => {
+		if (currentBoardIndex < positions.length - 1) {
+			currentBoardIndex++
+			renderBigBoard()
+		}
+	})
+
+	document.addEventListener('keydown', (event) => {
+		if (boardModal.classList.contains('show-modal')) {
+			if (event.key === 'ArrowLeft') {
+				if (currentBoardIndex > 0) {
+					currentBoardIndex--
+					renderBigBoard()
+				}
+			} else if (event.key === 'ArrowRight') {
+				if (currentBoardIndex < positions.length - 1) {
+					currentBoardIndex++
+					renderBigBoard()
+				}
+			}
+		}
+	})
+
 	printBtn.addEventListener('click', () => {
 		if (chessboards.length === 0) {
-			alert('Brak plansz do wydrukowania. Proszę wczytać plik PGN.')
 			return
 		}
 		const selectedIndex = gameSelect.value
@@ -528,11 +610,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (footer) footer.style.display = 'block'
 	})
 
-	// Obsługa zmiany rozmiaru okna
 	window.onresize = () => {
 		updateColumnsSelect()
 		if (pgnString && allGames.length > 0) {
 			renderGame(allGames[gameSelect.value].pgn)
+		}
+		if (boardModal.classList.contains('show-modal')) {
+			renderBigBoard()
 		}
 	}
 })

@@ -45,7 +45,7 @@
 		<div id="board-container"></div>
 
 		<div id="settings-modal" class="modal">
-			<div class="modal-content">
+			<div class="modal-content-settings">
 				<div class="modal-header">
 					<h2>Ustawienia</h2>
 					<span class="close-btn">&times;</span>
@@ -67,6 +67,23 @@
 
 					<label for="highlight-color-picker">Kolor podświetlenia:</label>
 					<input type="color" id="highlight-color-picker" value="#3399dd" />
+				</div>
+			</div>
+		</div>
+
+		<div id="board-modal" class="modal">
+			<div class="modal-content-board">
+				<span class="close-btn-board">&times;</span>
+				<div id="big-board-wrapper" class="big-board-wrapper">
+					<div id="big-board"></div>
+					<div class="navigation-buttons">
+						<button id="prev-move-btn" class="nav-btn left">
+							<i class="fa-solid fa-angle-left"></i>
+						</button>
+						<button id="next-move-btn" class="nav-btn right">
+							<i class="fa-solid fa-angle-right"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

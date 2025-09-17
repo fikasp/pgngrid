@@ -1,5 +1,7 @@
 /*
+  ========================================
   OGÓLNE
+  ========================================
 */
 * {
 	box-sizing: border-box;
@@ -7,8 +9,8 @@
 	padding: 0;
 }
 
-body,
-html {
+html,
+body {
 	width: 100%;
 	height: 100%;
 	overflow-y: scroll;
@@ -25,9 +27,6 @@ body {
 	min-height: 100vh;
 }
 
-/*
-  SUWAK
-*/
 * {
 	scrollbar-width: thin;
 	scrollbar-color: #222 #333;
@@ -45,22 +44,24 @@ body {
 }
 
 /*
+  ========================================
   NAGŁÓWEK
+  ========================================
 */
 .header {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	height: 60px;
 	background-color: #000;
 	color: white;
-	height: 60px;
 	padding: 0 20px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	z-index: 1000;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
 }
 
 .header-top {
@@ -86,7 +87,7 @@ body {
 }
 
 .header-right {
-	display: flex;
+	display: none;
 	align-items: center;
 	gap: 15px;
 }
@@ -120,12 +121,6 @@ body {
 	transition: color 0.3s;
 }
 
-.header-right {
-	display: none;
-	align-items: center;
-	gap: 15px;
-}
-
 .settings-btn:hover,
 .print-btn:hover,
 .file-label:hover {
@@ -150,6 +145,7 @@ body {
 	font-family: inherit;
 	font-size: 1em;
 	transition: all 0.3s ease;
+	max-width: 1000px;
 }
 
 #game-select:hover {
@@ -163,46 +159,13 @@ body {
 }
 
 /*
-  RESPONSYWNY UKŁAD
-*/
-@media screen and (max-width: 1000px) {
-	.header {
-		height: auto;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding-top: 15px;
-		padding-bottom: 15px;
-	}
-
-	.header-top {
-		width: 100%;
-	}
-
-	.header-center {
-		display: none;
-		position: static;
-		transform: none;
-		margin-top: 15px;
-		width: 100%;
-	}
-
-	#game-select {
-		max-width: none;
-		width: 100%;
-	}
-
-	#board-container {
-		margin-top: 52px;
-	}
-}
-
-/*
+  ========================================
   KONTENER PLANSZ
+  ========================================
 */
 #board-container {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* Domyślnie 3 kolumny */
+	grid-template-columns: repeat(3, 1fr);
 	gap: 10px;
 	justify-items: center;
 	padding: 10px;
@@ -217,6 +180,12 @@ body {
 	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
 	position: relative;
+	cursor: pointer;
+}
+
+.board-wrapper:hover {
+	transform: scale(1.02);
+	transition: transform 0.2s ease-in-out;
 }
 
 .board-wrapper .chessboard-63f36 {
@@ -237,7 +206,9 @@ body {
 }
 
 /*
-  OKNO MODALNE (USTAWIENIA)
+  ========================================
+  OKNO MODALNE - BAZOWE
+  ========================================
 */
 .modal {
 	position: fixed;
@@ -246,6 +217,7 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(5px);
 	z-index: 2000;
 	visibility: hidden;
 	opacity: 0;
@@ -261,8 +233,26 @@ body {
 	opacity: 1;
 }
 
-.modal-content {
-	padding: 20px;
+.close-btn {
+	color: #aaa;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.close-btn:hover,
+.close-btn:focus {
+	color: #000;
+	text-decoration: none;
+}
+
+/*
+  ========================================
+  MODAL - USTAWIENIA
+  ========================================
+*/
+.modal-content-settings {
+	padding: 20px 20px 20px;
 	padding-top: 12px;
 	max-width: 400px;
 	width: calc(100% - 30px);
@@ -276,7 +266,7 @@ body {
 	transition: transform 0.3s ease-in-out;
 }
 
-.modal.show-modal .modal-content {
+.modal.show-modal .modal-content-settings {
 	transform: scale(1);
 }
 
@@ -289,18 +279,10 @@ body {
 	margin-bottom: 20px;
 }
 
-.close-btn {
-	color: #aaa;
-	font-size: 30px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-	color: #000;
-	text-decoration: none;
-	transition: all 0.3s ease;
+.modal-content-settings h2 {
+	margin: 0;
+	text-align: left;
+	color: #333;
 }
 
 .modal-grid {
@@ -310,18 +292,12 @@ body {
 	gap: 10px;
 }
 
-.modal-content h2 {
-	margin: 0;
-	text-align: left;
-	color: #333;
-}
-
 #orientation-select,
 #board-columns,
 input[type='color'] {
+	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	appearance: none;
 	width: 100%;
 	padding: 8px 12px;
 	border: 1px solid #ccc;
@@ -332,7 +308,6 @@ input[type='color'] {
 	transition: border-color 0.3s;
 	height: 38px;
 }
-
 #orientation-select:hover,
 input[type='color']:hover {
 	border-color: #333;
@@ -341,64 +316,92 @@ input[type='color']:hover {
 input[type='color'] {
 	padding: 0;
 }
-
 input[type='color']::-webkit-color-swatch-wrapper {
 	padding: 2px;
 }
-
-input[type='color']::-webkit-color-swatch {
-	border: none;
-	border-radius: 2px;
-}
-
+input[type='color']::-webkit-color-swatch,
 input[type='color']::-moz-color-swatch {
 	border: none;
 	border-radius: 2px;
 }
 
 /*
-  DRUKOWANIE
+  ========================================
+  MODAL - DUŻA PLANSZA
+  ========================================
 */
-@media print {
-	body {
-		background-color: #fff;
-		margin: 0;
-		text-align: center;
-		display: flex;
-		overflow-y: hidden;
-		flex-direction: column;
-		align-items: center;
-		height: auto;
-		width: auto;
-	}
+.modal-content-board {
+	position: relative;
+	width: min(95vw, 95vh);
+	height: min(95vw, 95vh);
+	background-color: rgba(50, 50, 50, 0.5);
+	backdrop-filter: blur(5px);
+	padding: 25px;
+	border-radius: 8px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
 
-	.header,
-	.footer,
-	.modal,
-	#file-drop-area {
-		display: none !important;
-	}
+#big-board-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 
-	#board-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: 10mm;
-		padding: 5mm;
-		width: 100%;
-		padding-top: 0;
-		padding-bottom: 0;
-	}
+/* Strzałki po bokach planszy */
+.nav-btn {
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+	background: transparent;
+	color: #fff;
+	border: none;
+	padding: 20px;
+	cursor: pointer;
+	font-size: 2em;
+	transition: color 0.3s;
+	z-index: 10;
+}
 
-	.board-wrapper {
-		width: 100% !important;
-		break-inside: avoid;
-		page-break-inside: avoid;
-		box-shadow: none;
-	}
+.nav-btn:hover:enabled {
+	color: #aaa;
+}
+
+.nav-btn:disabled {
+	color: transparent;
+}
+
+.nav-btn.left {
+	left: -50px;
+}
+
+.nav-btn.right {
+	right: -50px;
+}
+
+.close-btn-board {
+	position: absolute;
+	top: -5px;
+	right: 5px;
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: color 0.3s;
+	z-index: 1001;
+}
+.close-btn-board:hover {
+	color: #aaa;
 }
 
 /*
+  ========================================
   DROP-AREA
+  ========================================
 */
 #file-drop-area {
 	display: flex;
@@ -437,7 +440,9 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  STOPKA
+  ========================================
+  STOPKA
+  ========================================
 */
 .footer {
 	width: 100%;
@@ -449,4 +454,85 @@ input[type='color']::-moz-color-swatch {
 	text-align: center;
 	line-height: 40px;
 	z-index: 1000;
+}
+
+/*
+  ========================================
+  RESPONSYWNY UKŁAD
+  ========================================
+*/
+@media screen and (max-width: 1500px) {
+	#game-select {
+		max-width: 600px;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.header {
+		height: auto;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 15px 20px;
+	}
+	.header-top {
+		width: 100%;
+	}
+	.header-center {
+		display: none;
+		position: static;
+		transform: none;
+		margin-top: 15px;
+		width: 100%;
+	}
+	#game-select {
+		max-width: none;
+		width: 100%;
+	}
+	#board-container {
+		margin-top: 52px;
+	}
+}
+
+/*
+  ========================================
+  DRUKOWANIE
+  ========================================
+*/
+@media print {
+	body {
+		background-color: #fff;
+		margin: 0;
+		text-align: center;
+		display: flex;
+		overflow-y: hidden;
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		width: auto;
+	}
+
+	.header,
+	.footer,
+	.modal,
+	#file-drop-area {
+		display: none !important;
+	}
+
+	#board-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: 10mm;
+		padding: 5mm;
+		width: 100%;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.board-wrapper {
+		width: 100% !important;
+		break-inside: avoid;
+		page-break-inside: avoid;
+		box-shadow: none;
+	}
 }
