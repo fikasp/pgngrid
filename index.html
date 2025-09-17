@@ -3,20 +3,14 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-		/>
-		<link rel="stylesheet" href="style.css" />
-		<title>PGN Viewer</title>
+		<link rel="stylesheet" href="css/chessboard.css" />
+		<link rel="stylesheet" href="css/fontawesome.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>PGNgrid</title>
 	</head>
 	<body>
 		<div class="fixed-header">
-			<h1>PGN Viewer</h1>
+			<h1>PGNgrid</h1>
 			<div class="controls">
 				<input type="file" id="pgn-file" accept=".pgn" />
 				<label for="pgn-file" class="file-label" title="Wczytaj plik PGN">
@@ -68,9 +62,9 @@
 
 		<div class="fixed-footer">2025 © Przemysław Fikas</div>
 
-		<script src="cloudflare/jquery-3.5.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
-		<script src="script.js"></script>
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/chess.js"></script>
+		<script src="scripts/chessboard.js"></script>
+		<script src="scripts/script.js"></script>
 	</body>
 </html>

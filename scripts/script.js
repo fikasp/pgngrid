@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				position: pos.fen,
 				draggable: false,
 				pieceTheme:
-					'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+					'png/{piece}.png',
 				showNotation: false,
 				orientation: orientation,
 				lightSquareColor: '#f0d9b5',
