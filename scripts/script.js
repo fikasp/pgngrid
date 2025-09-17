@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-	// === Selektory elementów DOM ===
+	// Selektory
 	const boardContainer = document.getElementById('board-container')
 	const columnsSelect = document.getElementById('board-columns')
 	const darkColorPicker = document.getElementById('dark-color-picker')
@@ -23,11 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const bigBoardDiv = document.getElementById('big-board')
 	const closeBtnBoard = document.querySelector('.close-btn-board')
 
-	if (headerRight) {
-		headerRight.style.display = 'none'
-	}
-
-	// === Zmienne stanu aplikacji ===
+	// Zmienne stanu aplikacji
 	const chessboards = []
 	let pgnString = ''
 	let positions = []
@@ -35,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let currentBoardIndex = 0
 	let bigBoard = null
 
-	// === Funkcje pomocnicze ===
-
+	// Funkcje pomocnicze
 	function saveSettings() {
 		const settings = {
 			columns: columnsSelect.value,
@@ -135,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			renderGame(allGames[0].pgn)
 		} catch (error) {
 			console.error('Błąd podczas przetwarzania PGN:', error)
+			alert('Wystąpił błąd podczas przetwarzania pliku PGN.')
 		}
 	}
 
@@ -192,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			generateBoards()
 		} catch (error) {
 			console.error('Błąd podczas renderowania partii:', error)
+			alert('Wystąpił błąd podczas wyświetlania wybranej partii.')
 		}
 	}
 
@@ -253,9 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const board = new Chessboard(boardId, config)
 			chessboards.push({ board, boardId })
 
-			boardWrapper.addEventListener('click', () => {
-				showBoardModal(index)
-			})
+			boardWrapper.addEventListener('click', () => handleBoardClick(index))
 		})
 		changeBoardColors()
 		highlightLastMoves()
@@ -349,33 +344,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	}
 
-	// Nowa funkcja do obsługi przewijania kółkiem na dużej planszy
+	// Handlers
+	function handleBoardClick(index) {
+		currentBoardIndex = index
+		boardModal.classList.add('show-modal')
+		renderBigBoard()
+		boardModal.addEventListener('wheel', handleWheelNavigation, {
+			passive: false,
+		})
+	}
+
 	function handleWheelNavigation(event) {
-		event.preventDefault() // Zapobiega przewijaniu całej strony
+		event.preventDefault()
 		if (event.deltaY > 0) {
-			// Przewijanie w dół, przejdź do następnego ruchu
 			if (currentBoardIndex < positions.length - 1) {
 				currentBoardIndex++
 				renderBigBoard()
 			}
 		} else {
-			// Przewijanie w górę, przejdź do poprzedniego ruchu
 			if (currentBoardIndex > 0) {
 				currentBoardIndex--
 				renderBigBoard()
 			}
 		}
-	}
-
-	// === Poprawiona funkcja wywołująca modal ===
-	function showBoardModal(index) {
-		currentBoardIndex = index
-		boardModal.classList.add('show-modal')
-		renderBigBoard()
-		// Dodajemy nasłuch zdarzenia "wheel" do elementu modalnego
-		boardModal.addEventListener('wheel', handleWheelNavigation, {
-			passive: false,
-		})
 	}
 
 	function renderBigBoard() {
@@ -386,7 +377,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			bigBoard.destroy()
 		}
 
-		// Upewnij się, że element DOM istnieje przed inicjalizacją
 		if (bigBoardDiv) {
 			const config = {
 				position: position.fen,
@@ -434,76 +424,54 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	// === Obsługa zdarzeń ===
-
-	loadSettings()
-
-	fileDropArea.addEventListener('click', () => {
+	function handleFileDropClick() {
 		fileInput.click()
-	})
-	fileDropArea.addEventListener('dragover', (e) => {
+	}
+
+	function handleFileDragOver(e) {
 		e.preventDefault()
 		fileDropArea.classList.add('drag-over')
-	})
-	fileDropArea.addEventListener('dragleave', () => {
+	}
+
+	function handleFileDragLeave() {
 		fileDropArea.classList.remove('drag-over')
-	})
-	fileDropArea.addEventListener('drop', (e) => {
+	}
+
+	function handleFileDrop(e) {
 		e.preventDefault()
 		fileDropArea.classList.remove('drag-over')
 		const file = e.dataTransfer.files[0]
 		handleFile(file)
-	})
-	fileInput.addEventListener('change', (event) => {
+	}
+
+	function handleFileChange(event) {
 		const file = event.target.files[0]
 		handleFile(file)
-	})
-
-	if (columnsSelect) {
-		columnsSelect.addEventListener('change', () => {
-			if (pgnString) {
-				renderGame(allGames[gameSelect.value].pgn)
-			}
-			updateBoardLayout()
-			saveSettings()
-		})
 	}
-	gameSelect.addEventListener('change', (event) => {
-		const selectedIndex = event.target.value
-		if (selectedIndex !== '') {
-			renderGame(allGames[selectedIndex].pgn)
-		} else {
-			boardContainer.innerHTML = ''
-		}
-	})
 
-	addWheelListener(gameSelect, () => {
+	function handleColumnsSelectChange() {
+		if (pgnString) {
+			renderGame(allGames[gameSelect.value].pgn)
+		}
+		updateBoardLayout()
+		saveSettings()
+	}
+
+	function handleGameSelectChange() {
 		const selectedIndex = gameSelect.value
 		if (selectedIndex !== '') {
 			renderGame(allGames[selectedIndex].pgn)
 		} else {
 			boardContainer.innerHTML = ''
 		}
-	})
+	}
 
-	addWheelListener(columnsSelect, () => {
-		if (pgnString) {
-			renderGame(allGames[gameSelect.value].pgn)
-		}
-		updateBoardLayout()
-		saveSettings()
-	})
-
-	addWheelListener(orientationSelect, () => {
+	function handleOrientationSelectChange() {
 		if (pgnString) generateBoards()
 		saveSettings()
-	})
+	}
 
-	orientationSelect.addEventListener('change', () => {
-		if (pgnString) generateBoards()
-		saveSettings()
-	})
-	darkColorPicker.addEventListener('input', () => {
+	function handleColorPickerInput() {
 		if (pgnString) {
 			changeBoardColors()
 			highlightLastMoves()
@@ -512,58 +480,49 @@ document.addEventListener('DOMContentLoaded', function () {
 			renderBigBoard()
 		}
 		saveSettings()
-	})
-	highlightColorPicker.addEventListener('input', () => {
-		if (pgnString) {
-			highlightLastMoves()
-		}
-		if (boardModal.classList.contains('show-modal')) {
-			renderBigBoard()
-		}
-		saveSettings()
-	})
+	}
 
-	settingsBtn.addEventListener('click', () => {
+	function handleSettingsBtnClick() {
 		modal.classList.add('show-modal')
-	})
-	closeBtn.addEventListener('click', () => {
+	}
+
+	function handleCloseBtnClick() {
 		modal.classList.remove('show-modal')
-	})
-	window.addEventListener('click', (event) => {
+	}
+
+	function handleWindowClick(event) {
 		if (event.target === modal) {
 			modal.classList.remove('show-modal')
 		}
-	})
+	}
 
-	closeBtnBoard.addEventListener('click', () => {
+	function handleCloseBtnBoardClick() {
 		boardModal.classList.remove('show-modal')
-		// Usuwamy nasłuch zdarzenia "wheel" po zamknięciu modala
 		boardModal.removeEventListener('wheel', handleWheelNavigation)
-	})
+	}
 
-	window.addEventListener('click', (event) => {
+	function handleWindowBoardClick(event) {
 		if (event.target === boardModal) {
 			boardModal.classList.remove('show-modal')
-			// Usuwamy nasłuch zdarzenia "wheel" po kliknięciu poza modalem
 			boardModal.removeEventListener('wheel', handleWheelNavigation)
 		}
-	})
+	}
 
-	prevMoveBtn.addEventListener('click', () => {
+	function handlePrevMoveClick() {
 		if (currentBoardIndex > 0) {
 			currentBoardIndex--
 			renderBigBoard()
 		}
-	})
+	}
 
-	nextMoveBtn.addEventListener('click', () => {
+	function handleNextMoveClick() {
 		if (currentBoardIndex < positions.length - 1) {
 			currentBoardIndex++
 			renderBigBoard()
 		}
-	})
+	}
 
-	document.addEventListener('keydown', (event) => {
+	function handleKeyDown(event) {
 		if (boardModal.classList.contains('show-modal')) {
 			if (event.key === 'ArrowLeft') {
 				if (currentBoardIndex > 0) {
@@ -577,38 +536,127 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 		}
-	})
+	}
 
-	printBtn.addEventListener('click', () => {
+	// === Ostatnia działająca funkcja do drukowania ===
+	async function printBoards() {
 		if (chessboards.length === 0) {
+			alert('Brak plansz do wydrukowania. Proszę wczytać plik PGN.')
 			return
 		}
-		const selectedIndex = gameSelect.value
-		let fileName = 'PGNgrid.pdf'
-		if (
-			selectedIndex !== '' &&
-			allGames[selectedIndex] &&
-			allGames[selectedIndex].header
-		) {
-			const header = allGames[selectedIndex].header
-			const whitePlayer = header.White || 'Biały'
-			const blackPlayer = header.Black || 'Czarny'
-			const eventName = header.Event || 'Partia'
 
-			fileName = `${whitePlayer}_vs_${blackPlayer}_${eventName}.pdf`.replace(
+		const selectedIndex = gameSelect.value
+		const selectedGame = allGames[selectedIndex]
+		const whitePlayer = selectedGame.header.White || 'Biały'
+		const blackPlayer = selectedGame.header.Black || 'Czarny'
+		const eventName = selectedGame.header.Event || 'Partia'
+		const fileName =
+			`${whitePlayer}_vs_${blackPlayer}_${eventName}.pdf`.replace(
 				/[\/\\?%*:|"<>]/g,
 				'_'
 			)
+
+		// Ustawienia formatu A4
+		const a4Width = 210 // mm
+		const a4Height = 297 // mm
+		const margin = 10 // mm
+		const availableWidth = a4Width - 2 * margin // mm
+
+		// Obliczenia dla kolumn
+		const columns = parseInt(columnsSelect.value, 10)
+		const gap = 5 // mm
+		const totalGap = (columns - 1) * gap
+		const boardWidthMM = (availableWidth - totalGap) / columns
+
+		// Utwórz tymczasowy kontener o stałych wymiarach A4
+		const tempContainer = document.createElement('div')
+		tempContainer.style.width = `${a4Width}mm`
+		tempContainer.style.padding = `${margin}mm`
+		tempContainer.style.boxSizing = 'border-box'
+		document.body.appendChild(tempContainer)
+
+		// Dodaj tytuł do tymczasowego kontenera
+		const title = document.createElement('h1')
+		title.style.textAlign = 'center'
+		title.style.marginBottom = '15mm'
+		title.style.fontSize = '18px'
+		title.innerText = `${whitePlayer} vs. ${blackPlayer} (${eventName})`
+		tempContainer.appendChild(title)
+
+		// Utwórz grid container wewnątrz kontenera tymczasowego
+		const tempGrid = document.createElement('div')
+		tempGrid.style.display = 'grid'
+		tempGrid.style.gap = `${gap}mm`
+		tempGrid.style.gridTemplateColumns = `repeat(${columns}, ${boardWidthMM}mm)`
+		tempContainer.appendChild(tempGrid)
+
+		// Sklonuj plansze i umieść je w tymczasowym gridzie
+		document.querySelectorAll('.board-wrapper').forEach((wrapper) => {
+			const clonedWrapper = wrapper.cloneNode(true)
+			tempGrid.appendChild(clonedWrapper)
+		})
+
+		const opt = {
+			margin: 0,
+			filename: fileName,
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { scale: 2, useCORS: true },
+			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
 		}
+
+		// Ukrywamy header i footer na czas generowania PDF
 		if (header) header.style.display = 'none'
 		if (footer) footer.style.display = 'none'
-		window.print()
-	})
 
-	window.addEventListener('afterprint', () => {
-		if (header) header.style.display = 'flex'
-		if (footer) footer.style.display = 'block'
-	})
+		try {
+			await html2pdf().set(opt).from(tempContainer).save()
+		} catch (e) {
+			console.error('Błąd generowania PDF:', e)
+			alert('Nie udało się wygenerować PDF. Sprawdź konsolę.')
+		} finally {
+			// Usuń tymczasowy kontener
+			document.body.removeChild(tempContainer)
+
+			// Przywracamy header i footer
+			if (header) header.style.display = ''
+			if (footer) footer.style.display = ''
+		}
+	}
+
+	// === Inicjalizacja i nasłuch zdarzeń ===
+	loadSettings()
+
+	fileDropArea.addEventListener('click', handleFileDropClick)
+	fileDropArea.addEventListener('dragover', handleFileDragOver)
+	fileDropArea.addEventListener('dragleave', handleFileDragLeave)
+	fileDropArea.addEventListener('drop', handleFileDrop)
+	fileInput.addEventListener('change', handleFileChange)
+
+	columnsSelect.addEventListener('change', handleColumnsSelectChange)
+	addWheelListener(columnsSelect, handleColumnsSelectChange)
+
+	gameSelect.addEventListener('change', handleGameSelectChange)
+	addWheelListener(gameSelect, handleGameSelectChange)
+
+	orientationSelect.addEventListener('change', handleOrientationSelectChange)
+	addWheelListener(orientationSelect, handleOrientationSelectChange)
+
+	darkColorPicker.addEventListener('input', handleColorPickerInput)
+	highlightColorPicker.addEventListener('input', handleColorPickerInput)
+
+	settingsBtn.addEventListener('click', handleSettingsBtnClick)
+	closeBtn.addEventListener('click', handleCloseBtnClick)
+
+	closeBtnBoard.addEventListener('click', handleCloseBtnBoardClick)
+
+	prevMoveBtn.addEventListener('click', handlePrevMoveClick)
+	nextMoveBtn.addEventListener('click', handleNextMoveClick)
+
+	printBtn.addEventListener('click', printBoards)
+
+	document.addEventListener('keydown', handleKeyDown)
+	window.addEventListener('click', handleWindowBoardClick)
+	window.addEventListener('click', handleWindowClick)
 
 	window.onresize = () => {
 		updateColumnsSelect()

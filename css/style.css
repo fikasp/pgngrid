@@ -1,8 +1,4 @@
-/*
-  ========================================
-  OGÓLNE
-  ========================================
-*/
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -43,11 +39,7 @@ body {
 	border-radius: 20px;
 }
 
-/*
-  ========================================
-  NAGŁÓWEK
-  ========================================
-*/
+
 .header {
 	position: fixed;
 	top: 0;
@@ -494,45 +486,3 @@ input[type='color']::-moz-color-swatch {
 	}
 }
 
-/*
-  ========================================
-  DRUKOWANIE
-  ========================================
-*/
-@media print {
-	body {
-		background-color: #fff;
-		margin: 0;
-		text-align: center;
-		display: flex;
-		overflow-y: hidden;
-		flex-direction: column;
-		align-items: center;
-		height: auto;
-		width: auto;
-	}
-
-	.header,
-	.footer,
-	.modal,
-	#file-drop-area {
-		display: none !important;
-	}
-
-	#board-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: 10mm;
-		padding: 5mm;
-		width: 100%;
-		padding-top: 0;
-		padding-bottom: 0;
-	}
-
-	.board-wrapper {
-		width: 100% !important;
-		break-inside: avoid;
-		page-break-inside: avoid;
-		box-shadow: none;
-	}
-}

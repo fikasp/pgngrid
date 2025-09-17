@@ -4,6 +4,8 @@ PGNgrid to prosta i intuicyjna aplikacja webowa, która pozwala na wizualizację
 
 Jest to idealne narzędzie dla analityków, trenerów i miłośników szachów, którzy chcą szybko przeanalizować kluczowe momenty partii, wzorce pozycyjne lub błędy taktyczne.
 
+Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid](https://fikasp.github.io/pgngrid)**
+
 ## Główne funkcje
 
 * **Wczytywanie plików PGN:** Proste przeciągnij i upuść lub wybierz plik z komputera. Aplikacja obsługuje pliki z wieloma partiami, umożliwiając łatwe przełączanie się między nimi.
@@ -33,6 +35,8 @@ Jest to idealne narzędzie dla analityków, trenerów i miłośników szachów, 
 * **`html2pdf.js`:** Biblioteka do konwersji HTML do PDF.
 * **`Font Awesome`:** Biblioteka ikon.
 
-## Autor
+## Kontakt
 
-**Przemysław Fikas**
+Jeśli masz pytania lub sugestie skontaktuj się ze mną pod adresem [fikasp@gmail.com](mailto:fikasp@gmail.com).
+
+Dziękuję za korzystanie z mojej interaktywnej aplikacji!
