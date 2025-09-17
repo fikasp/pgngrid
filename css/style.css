@@ -1,5 +1,5 @@
-/*  
-	OGÓLNE STYLE 
+/*
+  OGÓLNE STYLE
 */
 * {
 	box-sizing: border-box;
@@ -19,10 +19,13 @@ body {
 	color: #333;
 	text-align: center;
 	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 /*
-  NAGŁÓWEK
+  NAGŁÓWEK
 */
 .header {
 	position: fixed;
@@ -31,7 +34,8 @@ body {
 	width: 100%;
 	background-color: #000;
 	color: white;
-	padding: 15px 20px;
+	height: 60px; /* NOWA WŁAŚCIWOŚĆ: Stała wysokość */
+	padding: 0 20px; /* Zaktualizowane dopełnienie */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	z-index: 1000;
 	display: flex;
@@ -93,10 +97,36 @@ body {
 
 #game-select {
 	display: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding: 8px 30px 8px 12px;
+	background-color: #000;
+	color: #fff;
+	border: 1px solid #444;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 1em;
+	transition: all 0.3s ease;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ffffff'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 20px;
+}
+
+#game-select:hover {
+	background-color: #111;
+	border-color: #666;
+}
+
+#game-select option {
+	background-color: #111;
+	color: #fff;
 }
 
 /*
-  KONTENER PLANSZ
+  KONTENER PLANSZ
 */
 #board-container {
 	display: grid;
@@ -104,7 +134,7 @@ body {
 	gap: 10px;
 	justify-items: center;
 	padding: 10px;
-	padding-top: 75px;
+	padding-top: 70px; /* Zaktualizowane dopełnienie, aby uniknąć nakładania się na nagłówek */
 	padding-bottom: 50px;
 }
 
@@ -135,7 +165,7 @@ body {
 }
 
 /*
-  OKNO MODALNE (USTAWIENIA)
+  OKNO MODALNE (USTAWIENIA)
 */
 .modal {
 	position: fixed;
@@ -299,17 +329,24 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  DRUKOWANIE
+  DRUKOWANIE
 */
 @media print {
 	body {
 		background-color: #fff;
 		margin: 0;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		width: auto;
 	}
 
-	.fixed-header,
-	.fixed-footer,
-	.modal {
+	.header,
+	.footer,
+	.modal,
+	#file-drop-area {
 		display: none !important;
 	}
 
@@ -331,8 +368,8 @@ input[type='color']::-moz-color-swatch {
 	}
 }
 
-/* 
-	DROP-AREA
+/*
+  DROP-AREA
 */
 #file-drop-area {
 	display: flex;
@@ -371,7 +408,7 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  STOPKA
+  STOPKA
 */
 .footer {
 	position: fixed;

@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function changeBoardColors() {
 		const darkColor = darkColorPicker.value
-		const lightColor = lightenColor(darkColor, 0.4)
+		const lightColor = lightenColor(darkColor, 0.5)
 		document.querySelectorAll('.square-55d63').forEach((square) => {
 			if (square.classList.contains('black-3c85d')) {
 				square.style.backgroundColor = darkColor
