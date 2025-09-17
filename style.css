@@ -1,0 +1,302 @@
+/* GLOBALNY RESET STYLÓW */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body,
+html {
+	width: 100%;
+	height: 100%;
+}
+
+/* GŁÓWNE STYLE APLIKACJI */
+body {
+	font-family: Verdana, sans-serif;
+	background-color: #f0f0f0;
+	color: #333;
+	text-align: center;
+	overflow-x: hidden;
+}
+
+.fixed-header {
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #000;
+	color: white;
+	padding: 15px 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.fixed-header h1 {
+	margin: 0;
+	font-size: 1.5em;
+	color: white;
+}
+
+.fixed-header .controls {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.settings-btn {
+	background: none;
+	border: none;
+	color: white;
+	font-size: 1em;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.settings-btn:hover {
+	color: #ccc;
+}
+
+#pgn-file {
+	display: none;
+}
+
+.file-label {
+	background: none;
+	color: white;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.file-label:hover {
+	color: #ccc;
+	background: none;
+}
+
+#board-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 10px;
+	justify-items: center;
+	padding: 10px;
+	padding-bottom: 50px;
+}
+
+.board-wrapper {
+	width: 250px;
+	padding: 10px;
+	box-sizing: border-box;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	position: relative;
+}
+
+.board-wrapper .chessboard-63f36 {
+	width: 100%;
+	height: auto;
+}
+
+/* Usuwamy domyślne style, aby nie blokować kolorów */
+.board-wrapper .notation-32e16 {
+	display: none !important;
+}
+
+.move-info {
+	margin-bottom: 5px;
+}
+
+.bold-move {
+	font-weight: bold;
+}
+
+/* Style dla okna modalnego */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(5px);
+	z-index: 2000;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 0.3s, opacity 0.3s ease-in-out;
+}
+
+.modal.show-modal {
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+	background-color: #fefefe;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 400px;
+	border-radius: 10px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	text-align: left;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.9);
+	transition: transform 0.3s ease-in-out;
+}
+
+.modal.show-modal .modal-content {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+.close-btn {
+	color: #aaa;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Nowe style dla wyrównania elementów w siatce */
+.modal-grid {
+	display: grid;
+	grid-template-columns: minmax(100px, 1fr) 2fr;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.modal-content h2 {
+	margin: 0;
+	text-align: left;
+	color: #333;
+}
+
+/* Style dla suwaka */
+#size-slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 8px; /* Domyślna wysokość suwaka */
+	background: #ccc;
+	border-radius: 5px;
+	outline: none;
+	opacity: 0.7;
+	transition: opacity 0.2s;
+	margin: 10px 0; /* Dodanie marginesów */
+}
+
+#size-slider:hover {
+	opacity: 1;
+}
+
+#size-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background: #333;
+	border: 2px solid white;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#size-slider::-moz-range-thumb {
+	width: 20px;
+	height: 20px;
+	background: #333;
+	border: 2px solid white;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#size-slider::-moz-range-track {
+	width: 100%;
+	height: 8px;
+	background: #ccc;
+	border-radius: 5px;
+	border: none;
+}
+
+/* Style dla pola wyboru orientacji i koloru, ujednolicone */
+#orientation-select,
+input[type='color'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: white;
+	padding: 8px 12px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	font-size: 1em;
+	outline: none;
+	transition: border-color 0.3s;
+	height: 38px; /* Nowa, jednolita wysokość */
+}
+
+#orientation-select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+
+#orientation-select:hover {
+	border-color: #333;
+}
+
+input[type='color'] {
+	padding: 0;
+	width: 100%;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+	padding: 2px;
+}
+
+input[type='color']::-webkit-color-swatch {
+	border: none;
+	border-radius: 4px;
+}
+
+input[type='color']::-moz-color-swatch {
+	border: none;
+	border-radius: 4px;
+}
+
+/* Style dla stopki */
+.fixed-footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(5px);
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	z-index: 1000;
+}
