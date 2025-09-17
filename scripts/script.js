@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	const printBtn = document.getElementById('print-btn')
 	const gameSelect = document.getElementById('game-select')
 	const fileDropArea = document.getElementById('file-drop-area')
+	const header = document.querySelector('.header')
+	const footer = document.querySelector('.footer')
 
 	// === Przyciski i elementy okna modalnego ===
 	const settingsBtn = document.getElementById('settings-btn')
 	const modal = document.getElementById('settings-modal')
 	const closeBtn = document.querySelector('.close-btn')
 
-	// *** KLUCZOWA ZMIANA 1: Ukrywamy przyciski na starcie ***
+	// Ukrywamy przyciski na starcie
 	printBtn.style.display = 'none'
 	settingsBtn.style.display = 'none'
 
@@ -94,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				return
 			}
 
-			// *** KLUCZOWA ZMIANA 2: Pokazujemy przyciski po załadowaniu pliku ***
+			// Pokazujemy przyciski po załadowaniu pliku
 			printBtn.style.display = 'inline-block'
 			settingsBtn.style.display = 'inline-block'
 
@@ -308,6 +310,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleFile(file)
 	})
 
+	// --- NOWA FUNKCJA PRZEWIJANIA ---
+	gameSelect.addEventListener('wheel', (event) => {
+		event.preventDefault() // Zapobiega przewijaniu całej strony
+
+		if (allGames.length === 0) return
+
+		let currentIndex = gameSelect.selectedIndex
+		let newIndex = currentIndex
+
+		if (event.deltaY > 0) {
+			// Przewijanie w dół
+			newIndex = Math.min(currentIndex + 1, allGames.length - 1)
+		} else {
+			// Przewijanie w górę
+			newIndex = Math.max(currentIndex - 1, 0)
+		}
+
+		if (newIndex !== currentIndex) {
+			gameSelect.value = newIndex
+			renderGame(allGames[newIndex].pgn)
+		}
+	})
+
 	// --- Reszta istniejących nasłuchiwaczy zdarzeń pozostaje bez zmian ---
 	gameSelect.addEventListener('change', (event) => {
 		const selectedIndex = event.target.value
@@ -391,11 +416,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			)
 		}
 
-		const fixedHeader = document.querySelector('.fixed-header')
-		const fixedFooter = document.querySelector('.fixed-footer')
-
-		if (fixedHeader) fixedHeader.style.display = 'none'
-		if (fixedFooter) fixedFooter.style.display = 'block'
+		if (header) header.style.display = 'none'
+		if (footer) footer.style.display = 'none'
 
 		window.print()
 
@@ -412,9 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 
 	window.addEventListener('afterprint', () => {
-		const fixedHeader = document.querySelector('.fixed-header')
-		const fixedFooter = document.querySelector('.fixed-footer')
-		if (fixedHeader) fixedHeader.style.display = 'flex'
-		if (fixedFooter) fixedFooter.style.display = 'block'
+		if (header) header.style.display = 'flex'
+		if (footer) footer.style.display = 'block'
 	})
 })
