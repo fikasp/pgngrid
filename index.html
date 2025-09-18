@@ -1,15 +1,14 @@
-<!----------------------
-========================
+<!------------------------
+==========================
   @p PGNgrid
-========================
------------------------>
+==========================
+------------------------->
+
 <!DOCTYPE html>
 <html lang="pl">
-	<!--
-	========================
+	<!--====================
 		@r HEAD
-	========================
-	-->
+	=====================-->
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,22 +19,19 @@
 		<title>PGN Grid</title>
 	</head>
 
-	<!--
-	========================
+	<!--====================
 		@r BODY
-	========================
-	-->
+	=====================-->
 	<body>
 		<!----------------------
 			@g HEADER
 		----------------------->
 		<div class="header">
 			<div class="header-top">
-
 				<!-- @b Header left
 				----------------------->
 				<div class="header-left">
-					<a href="#" class="header-link" onclick="location.reload();">
+					<a href="#" class="header-link" onclick="location.reload()">
 						<img src="images/logo.png" alt="Logo" class="header-logo" />
 						<h1 class="header-title">PGN Grid</h1>
 					</a>
@@ -76,6 +72,13 @@
 		----------------------->
 		<div id="file-drop-area">
 			<i class="fa-solid fa-folder-open"></i>
+			<h3 id="drop-area-title">
+				Przeciągnij plik, kliknij <br />lub wklej tekst:
+			</h3>
+			<textarea
+				id="pgn-paste-area"
+				placeholder="Wklej tekst PGN tutaj..."
+			></textarea>
 		</div>
 
 		<!----------------------
@@ -147,15 +150,15 @@
 		----------------------->
 		<div class="footer">2025 © Przemysław Fikas</div>
 
-		<!--
-		========================
+		<!--====================
 			@r SCRIPTS
-		========================
-		-->
+		=====================-->
 		<script src="scripts/jquery.js"></script>
+		<script src="scripts/html2canvas.js"></script>
 		<script src="scripts/html2pdf.js"></script>
-		<script src="scripts/chess.js"></script>
+		<script src="scripts/chesspieces.js"></script>
 		<script src="scripts/chessboard.js"></script>
+		<script src="scripts/chess.js"></script>
 		<script src="scripts/pgn-parser.js"></script>
 		<script src="scripts/script.js"></script>
 	</body>
