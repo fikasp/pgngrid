@@ -13,7 +13,6 @@ html,
 body {
 	width: 100%;
 	height: 100%;
-	overflow-y: scroll;
 }
 
 body {
@@ -25,6 +24,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	overflow-y: scroll;
 }
 
 * {
@@ -201,6 +201,17 @@ body {
 	font-weight: bold;
 }
 
+#print-title {
+	display: none;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	font-size: 24px;
+	font-weight: bold;
+	z-index: 1001;
+}
 /*
 ========================
   OKNO MODALNE - BAZOWE
@@ -518,5 +529,35 @@ input[type='color']::-moz-color-swatch {
 	}
 	#board-container {
 		margin-top: 52px;
+	}
+}
+
+/*
+========================
+  DRUKOWANIE
+========================
+*/
+
+@media print {
+	body {
+		background-color: #fff !important;
+		color: #000 !important;
+	}
+
+	.header,
+	.footer {
+		display: none !important;
+	}
+
+	#board-container {
+		margin-top: 50px !important; /* Daj górny margines dla kontenera plansz */
+		padding-top: 0 !important; /* Usuń oryginalny padding, jeśli istnieje */
+	}
+
+	.board-wrapper {
+		box-shadow: none !important;
+	}
+	#print-title {
+		display: block;
 	}
 }

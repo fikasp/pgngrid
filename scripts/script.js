@@ -16,13 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	// @b Layout
 	// ------------------------
 	const $divBigBoard = document.getElementById('big-board')
-	const $divSmallBoards = document.getElementById('board-container')
-	const $footer = document.querySelector('.footer')
-	const $header = document.querySelector('.header')
+	const $divBoards = document.getElementById('board-container')
 	const $headerCenter = document.querySelector('.header-center')
 	const $headerRight = document.querySelector('.header-right')
 	const $modalBoard = document.getElementById('board-modal')
 	const $modalSettings = document.getElementById('settings-modal')
+	const $printTitle = document.getElementById('print-title')
 
 	// @b Buttons
 	// ------------------------
@@ -93,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	// @r HANDLERS
 	// ========================
 
+	// @b Handle file
+	// ------------------------
 	function handleFile(file) {
 		if (!file) return
 		const reader = new FileReader()
@@ -103,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		reader.readAsText(file)
 	}
 
+	// @b Handle paste area input
+	// ------------------------
 	function handlePasteAreaInput(event) {
 		const pgnText = event.target.value.trim()
 		if (pgnText.length > 0) {
@@ -146,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (selectedIndex !== '') {
 			renderGame(allGames[selectedIndex].pgn)
 		} else {
-			$divSmallBoards.innerHTML = ''
+			$divBoards.innerHTML = ''
 		}
 	}
 
@@ -321,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// ------------------------
 	function updateColumnsSelect() {
 		if (!$selectColumns) return
-		const containerWidth = $divSmallBoards.clientWidth
+		const containerWidth = $divBoards.clientWidth
 		const minBoardSize = 150
 		const gap = 10
 		let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
@@ -361,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// ------------------------
 	function processPgn(pgn) {
 		// Wyczyść dotychczasowe dane
-		$divSmallBoards.innerHTML = ''
+		$divBoards.innerHTML = ''
 		chessboards.length = 0
 		positions.length = 0
 		allGames.length = 0
@@ -463,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 	function renderGame(pgnToRender) {
-		$divSmallBoards.innerHTML = ''
+		$divBoards.innerHTML = ''
 		chessboards.length = 0
 		positions = []
 		try {
@@ -506,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function calculateBoardSize() {
 		if (!$selectColumns) return 400
 		const columns = parseInt($selectColumns.value, 10)
-		const containerWidth = $divSmallBoards.clientWidth - 20
+		const containerWidth = $divBoards.clientWidth - 20
 		const minBoardSize = 150
 		const maxBoardSize = 750
 		const gap = 10
@@ -518,12 +521,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	function updateBoardLayout() {
 		if ($selectColumns) {
 			const columns = $selectColumns.value
-			$divSmallBoards.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
+			$divBoards.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
 		}
 	}
 
 	function generateBoards() {
-		$divSmallBoards.innerHTML = ''
+		$divBoards.innerHTML = ''
 		chessboards.length = 0
 		const orientation = $selectOrientation.value
 		const currentSize = calculateBoardSize()
@@ -550,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				boardWrapper.appendChild(moveInfo)
 			}
 			boardWrapper.appendChild(boardDiv)
-			$divSmallBoards.appendChild(boardWrapper)
+			$divBoards.appendChild(boardWrapper)
 
 			const config = {
 				position: pos.fen,
@@ -580,6 +583,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
+	// @b Highlight Last
+	// ------------------------
 	function highlightLastMoves() {
 		const highlightColor = $pickerHighlightColor.value
 		document.querySelectorAll('.square-55d63').forEach((square) => {
@@ -609,6 +614,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// @b Render Big Board
+	// ------------------------
 	function renderBigBoard() {
 		const position = positions[currentBoardIndex]
 		if (!position) return
@@ -652,105 +659,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			$btnNextMove.disabled = currentBoardIndex >= positions.length - 1
 	}
 
-	async function printBoards() {
-		if (chessboards.length === 0) {
-			alert('Brak plansz do wydrukowania. Proszę wczytać plik PGN.')
-			return
-		}
-
+	// @b Print boards
+	// ------------------------
+	function printBoards() {
 		const selectedIndex = $selectGame.value
 		const selectedGame = allGames[selectedIndex]
-		const eventName = selectedGame.header.Event || 'Partia'
-		const fileName = `${eventName}.pdf`.replace(/[\/\\?%*:|"<>]/g, '_')
-
-		const a4Width = 210
-		const margin = 10
-		const availableWidth = a4Width - 2 * margin
-		const columns = parseInt($selectColumns.value, 10)
-		const gap = 5
-		const totalGap = (columns - 1) * gap
-
-		// Obliczamy tylko jedną zmienną, która będzie używana do szerokości i wysokości
-		const boardSizeMM = (availableWidth - totalGap) / columns
-
-		const tempContainer = document.createElement('div')
-		tempContainer.style.width = `${a4Width}mm`
-		tempContainer.style.padding = `${margin}mm`
-		tempContainer.style.boxSizing = 'border-box'
-		document.body.appendChild(tempContainer)
-
-		const title = document.createElement('h1')
-		title.style.textAlign = 'center'
-		title.style.marginBottom = '15mm'
-		title.style.fontSize = '18px'
-		title.innerText = eventName
-		tempContainer.appendChild(title)
-
-		const tempGrid = document.createElement('div')
-		tempGrid.style.display = 'grid'
-		tempGrid.style.gap = `${gap}mm`
-		tempGrid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
-		tempContainer.appendChild(tempGrid)
-
-		const boardWrappers = document.querySelectorAll('.board-wrapper')
-
-		// Zmienna do przechowywania oryginalnych cieni
-		const originalShadows = {}
-
-		// Pętla do tymczasowego usuwania cieni i generowania canvas
-		for (const wrapper of boardWrappers) {
-			// Zapisz oryginalny styl cienia
-			originalShadows[wrapper] = wrapper.style.boxShadow
-			// Tymczasowo usuń cień
-			wrapper.style.boxShadow = 'none'
-
-			// Upewnij się, że oryginalny element ma kwadratowe proporcje
-			wrapper.style.aspectRatio = '8 / 5'
-
-			const canvas = await html2canvas(wrapper, {
-				useCORS: true,
-				allowTaint: true,
-			})
-
-			// Wymuszamy kwadratowe proporcje na generowanym obrazie
-			canvas.style.width = `${boardSizeMM}mm`
-			canvas.style.height = `${boardSizeMM}mm`
-			tempGrid.appendChild(canvas)
-		}
-
-		await new Promise((resolve) => setTimeout(resolve, 500))
-
-		const opt = {
-			margin: 0,
-			filename: fileName,
-			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 2 },
-			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-		}
-
-		if ($header) $header.style.display = 'none'
-		if ($footer) $footer.style.display = 'none'
-
-		try {
-			await html2pdf().set(opt).from(tempContainer).save()
-		} catch (e) {
-			console.error('Błąd generowania PDF:', e)
-			alert('Nie udało się wygenerować PDF. Sprawdź konsolę.')
-		} finally {
-			for (const wrapper of boardWrappers) {
-				if (originalShadows[wrapper]) {
-					wrapper.style.boxShadow = originalShadows[wrapper]
-				} else {
-					wrapper.style.removeProperty('box-shadow')
-				}
-				// Przywracamy oryginalne proporcje
-				wrapper.style.removeProperty('aspect-ratio')
-			}
-
-			document.body.removeChild(tempContainer)
-			if ($header) $header.style.display = ''
-			if ($footer) $footer.style.display = ''
-		}
+		const eventName = selectedGame.header.Event
+		$printTitle.innerText = eventName
+		window.print()
 	}
 
 	// ========================
