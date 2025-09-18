@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const $modalBoard = document.getElementById('board-modal')
 	const $modalSettings = document.getElementById('settings-modal')
 	const $printTitle = document.getElementById('print-title')
-
+	
 	// @b Buttons
 	// ------------------------
-	const $btnCloseBoard = document.querySelector('.btn-close-board')
+	const $btnCloseBoard = document.getElementById('btn-close-board')
 	const $btnCloseSettings = document.querySelector('.btn-close-settings')
 	const $btnNextMove = document.getElementById('btn-next-move')
 	const $btnPrevMove = document.getElementById('btn-prev-move')

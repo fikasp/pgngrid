@@ -91,19 +91,21 @@
 			@g BIG BOARD MODAL
 		----------------------->
 		<div id="board-modal" class="modal">
+			<button id="btn-close-board" class="btn-nav close">
+				<i class="fa-solid fa-close"></i>
+			</button>
 			<div class="modal-content-board">
-				<span class="btn-close-board">&times;</span>
 				<div id="big-board-wrapper" class="big-board-wrapper">
 					<!--Big board -->
 					<div id="big-board"></div>
 					<div class="navigation-buttons">
 						<!-- Prev -->
-						<button id="btn-prev-move" class="nav-btn left">
+						<button id="btn-prev-move" class="btn-nav left">
 							<i class="fa-solid fa-angle-left"></i>
 						</button>
 
 						<!-- Next -->
-						<button id="btn-next-move" class="nav-btn right">
+						<button id="btn-next-move" class="btn-nav right">
 							<i class="fa-solid fa-angle-right"></i>
 						</button>
 					</div>
@@ -127,7 +129,6 @@
 					<select id="board-columns">
 						<option value="1">3</option>
 					</select>
-
 					<!-- Orientation -->
 					<label for="orientation-select">Orientacja figur:</label>
 					<select id="orientation-select">

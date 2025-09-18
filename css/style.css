@@ -154,6 +154,39 @@ body {
 	color: #fff;
 }
 
+@media screen and (max-width: 1500px) {
+	#game-select {
+		max-width: 600px;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.header {
+		height: auto;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 15px 20px;
+	}
+	.header-top {
+		width: 100%;
+	}
+	.header-center {
+		display: none;
+		position: static;
+		transform: none;
+		margin-top: 15px;
+		width: 100%;
+	}
+	#game-select {
+		max-width: none;
+		width: 100%;
+	}
+	#board-container {
+		margin-top: 52px;
+	}
+}
+
 /*
 ========================
   KONTENER PLANSZ
@@ -339,18 +372,9 @@ input[type='color']::-moz-color-swatch {
 */
 .modal-content-board {
 	position: relative;
-	width: min(95vw, 95vh);
-	height: min(95vw, 95vh);
-	background-color: rgba(50, 50, 50, 0.5);
-	backdrop-filter: blur(5px);
-	padding: 25px;
-	border-radius: 8px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
+	width: min(calc(100vw - 50px), calc(100vh - 50px));
+	height: min(calc(100vw - 50px), calc(100vh - 50px));
+	box-shadow: 0 0 10px 10px rgba(0,0,0,0.5);
 }
 
 #big-board-wrapper {
@@ -360,48 +384,52 @@ input[type='color']::-moz-color-swatch {
 }
 
 /* Strzałki po bokach planszy */
-.nav-btn {
+.btn-nav {
 	position: absolute;
-	transform: translateY(-50%);
-	top: 50%;
 	background: transparent;
-	color: #fff;
+	text-shadow: 0 0 5px #000;
+	color: #ccc;
 	border: none;
-	padding: 20px;
 	cursor: pointer;
 	font-size: 2em;
 	transition: color 0.3s;
 	z-index: 10;
 }
 
-.nav-btn:hover:enabled {
+.btn-nav:hover:enabled {
 	color: #aaa;
 }
 
-.nav-btn:disabled {
-	color: transparent;
+.btn-nav:disabled {
+	display: none;
 }
 
-.nav-btn.left {
-	left: -50px;
+.btn-nav.left {
+	left: -48px;
+	padding: 18px;
+	transform: translateY(-50%);
+	top: 50%;
 }
 
-.nav-btn.right {
-	right: -50px;
+.btn-nav.right {
+	right: -48px;
+	padding: 18px;
+	transform: translateY(-50%);
+	top: 50%;
 }
 
-.btn-close-board {
+.btn-nav.close {
 	position: absolute;
-	top: -5px;
-	right: 5px;
-	color: #fff;
-	font-size: 30px;
+	padding: 2px;
+	top: 0px;
+	right: 0px;
+	font-size: 25px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: color 0.3s;
 	z-index: 1001;
 }
-.btn-close-board:hover {
+.btn-nav.close:hover {
 	color: #aaa;
 }
 
@@ -499,38 +527,6 @@ input[type='color']::-moz-color-swatch {
   RESPONSYWNY UKŁAD
 ========================
 */
-@media screen and (max-width: 1500px) {
-	#game-select {
-		max-width: 600px;
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	.header {
-		height: auto;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 15px 20px;
-	}
-	.header-top {
-		width: 100%;
-	}
-	.header-center {
-		display: none;
-		position: static;
-		transform: none;
-		margin-top: 15px;
-		width: 100%;
-	}
-	#game-select {
-		max-width: none;
-		width: 100%;
-	}
-	#board-container {
-		margin-top: 52px;
-	}
-}
 
 /*
 ========================
