@@ -1,10 +1,15 @@
+<!----------------------
+========================
+  @p PGNgrid
+========================
+----------------------->
 <!DOCTYPE html>
 <html lang="pl">
-	<!----------------------
+	<!--
 	========================
 		@r HEAD
 	========================
-	----------------------->
+	-->
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,18 +19,19 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<title>PGN Grid</title>
 	</head>
-	<!----------------------
+
+	<!--
 	========================
 		@r BODY
 	========================
-	----------------------->
-
+	-->
 	<body>
-		<!--------------------
+		<!----------------------
 			@g HEADER
-		--------------------->
+		----------------------->
 		<div class="header">
 			<div class="header-top">
+
 				<!-- @b Header left
 				----------------------->
 				<div class="header-left">
@@ -35,16 +41,16 @@
 					</a>
 				</div>
 
-				<!--- @b Header right
+				<!-- @b Header right
 				----------------------->
 				<div class="header-right">
 					<!-- Settings -->
-					<button id="settings-btn" class="settings-btn" title="Ustawienia">
+					<button id="btn-settings" class="btn-settings" title="Ustawienia">
 						<i class="fa-solid fa-gear fa-2x"></i>
 					</button>
 
 					<!-- Print -->
-					<button id="print-btn" class="print-btn" title="Drukuj">
+					<button id="btn-print" class="btn-print" title="Drukuj">
 						<i class="fa-solid fa-print fa-2x"></i>
 					</button>
 
@@ -75,27 +81,25 @@
 		<!----------------------
 			@g SMALL BOARDS
 		----------------------->
-
 		<div id="board-container"></div>
 
 		<!----------------------
-			@g BIG BOARD
+			@g BIG BOARD MODAL
 		----------------------->
-
 		<div id="board-modal" class="modal">
 			<div class="modal-content-board">
-				<span class="close-btn-board">&times;</span>
+				<span class="btn-close-board">&times;</span>
 				<div id="big-board-wrapper" class="big-board-wrapper">
 					<!--Big board -->
 					<div id="big-board"></div>
 					<div class="navigation-buttons">
 						<!-- Prev -->
-						<button id="prev-move-btn" class="nav-btn left">
+						<button id="btn-prev-move" class="nav-btn left">
 							<i class="fa-solid fa-angle-left"></i>
 						</button>
 
 						<!-- Next -->
-						<button id="next-move-btn" class="nav-btn right">
+						<button id="btn-next-move" class="nav-btn right">
 							<i class="fa-solid fa-angle-right"></i>
 						</button>
 					</div>
@@ -104,14 +108,14 @@
 		</div>
 
 		<!----------------------
-			@g SETTINGS
+			@g SETTINGS MODAL
 		----------------------->
 		<div id="settings-modal" class="modal">
 			<div class="modal-content-settings">
 				<!-- Header -->
 				<div class="modal-header">
 					<h2>Ustawienia</h2>
-					<span class="close-btn">&times;</span>
+					<span class="btn-close-settings">&times;</span>
 				</div>
 				<div class="modal-grid">
 					<!-- Board columns -->
@@ -143,11 +147,11 @@
 		----------------------->
 		<div class="footer">2025 © Przemysław Fikas</div>
 
-		<!--====================
+		<!--
 		========================
 			@r SCRIPTS
 		========================
-		=====================-->
+		-->
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/html2pdf.js"></script>
 		<script src="scripts/chess.js"></script>

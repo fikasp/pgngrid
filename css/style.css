@@ -1,4 +1,8 @@
-
+/*
+========================
+  OGÓLNE
+========================
+*/
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -38,7 +42,6 @@ body {
 	background-color: #222;
 	border-radius: 20px;
 }
-
 
 .header {
 	position: fixed;
@@ -102,8 +105,8 @@ body {
 	height: auto;
 }
 
-.settings-btn,
-.print-btn,
+.btn-print,
+.btn-settings,
 .file-label {
 	background: none;
 	border: none;
@@ -113,8 +116,8 @@ body {
 	transition: color 0.3s;
 }
 
-.settings-btn:hover,
-.print-btn:hover,
+.btn-print:hover,
+.btn-settings:hover,
 .file-label:hover {
 	color: #ccc;
 }
@@ -151,9 +154,9 @@ body {
 }
 
 /*
-  ========================================
+========================
   KONTENER PLANSZ
-  ========================================
+========================
 */
 #board-container {
 	display: grid;
@@ -198,9 +201,9 @@ body {
 }
 
 /*
-  ========================================
+========================
   OKNO MODALNE - BAZOWE
-  ========================================
+========================
 */
 .modal {
 	position: fixed;
@@ -225,23 +228,10 @@ body {
 	opacity: 1;
 }
 
-.close-btn {
-	color: #aaa;
-	font-size: 30px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: all 0.3s ease;
-}
-.close-btn:hover,
-.close-btn:focus {
-	color: #000;
-	text-decoration: none;
-}
-
 /*
-  ========================================
+========================
   MODAL - USTAWIENIA
-  ========================================
+========================
 */
 .modal-content-settings {
 	padding: 20px 20px 20px;
@@ -284,6 +274,19 @@ body {
 	gap: 10px;
 }
 
+.btn-close-settings {
+	color: #aaa;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.btn-close-settings:hover,
+.btn-close-settings:focus {
+	color: #000;
+	text-decoration: none;
+}
+
 #orientation-select,
 #board-columns,
 input[type='color'] {
@@ -318,9 +321,9 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  ========================================
-  MODAL - DUŻA PLANSZA
-  ========================================
+========================
+	MODAL - DUŻA PLANSZA
+========================
 */
 .modal-content-board {
 	position: relative;
@@ -375,7 +378,7 @@ input[type='color']::-moz-color-swatch {
 	right: -50px;
 }
 
-.close-btn-board {
+.btn-close-board {
 	position: absolute;
 	top: -5px;
 	right: 5px;
@@ -386,14 +389,14 @@ input[type='color']::-moz-color-swatch {
 	transition: color 0.3s;
 	z-index: 1001;
 }
-.close-btn-board:hover {
+.btn-close-board:hover {
 	color: #aaa;
 }
 
 /*
-  ========================================
+========================
   DROP-AREA
-  ========================================
+========================
 */
 #file-drop-area {
 	display: flex;
@@ -432,9 +435,9 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  ========================================
+========================
   STOPKA
-  ========================================
+=========================
 */
 .footer {
 	width: 100%;
@@ -449,9 +452,9 @@ input[type='color']::-moz-color-swatch {
 }
 
 /*
-  ========================================
+========================
   RESPONSYWNY UKŁAD
-  ========================================
+========================
 */
 @media screen and (max-width: 1500px) {
 	#game-select {
@@ -485,4 +488,3 @@ input[type='color']::-moz-color-swatch {
 		margin-top: 52px;
 	}
 }
-
