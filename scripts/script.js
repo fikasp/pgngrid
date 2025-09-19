@@ -727,8 +727,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				`#big-board .square-${position.to}`
 			)
 			if (fromSquare && toSquare) {
-				fromSquare.style.boxShadow = `inset 0 0 0 6px ${highlightColor}`
-				toSquare.style.boxShadow = `inset 0 0 0 6px ${highlightColor}`
+				fromSquare.style.boxShadow = `inset 0 0 0 4px ${highlightColor}`
+				toSquare.style.boxShadow = `inset 0 0 0 4px ${highlightColor}`
 			}
 		} else {
 			console.error('Element #big-board not found!')
