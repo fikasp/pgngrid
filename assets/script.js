@@ -16,23 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// @b Layout
 	// ------------------------
+	const $divBoards = document.getElementById('boards')
 	const $divBigBoard = document.getElementById('big-board')
-	const $divBoards = document.getElementById('board-container')
 	const $headerCenter = document.querySelector('.header-center')
 	const $headerRight = document.querySelector('.header-right')
-	const $modalBoard = document.getElementById('board-modal')
+	const $modalBigBoard = document.getElementById('big-board-modal')
 	const $modalSettings = document.getElementById('settings-modal')
-	const $printTitle = document.getElementById('print-title')
 
 	// @b Buttons
 	// ------------------------
-	const $btnCloseBoard = document.getElementById('btn-close-board')
+	const $btnCloseBigBoard = document.getElementById('btn-close-board')
 	const $btnCloseSettings = document.querySelector('.btn-close-settings')
 	const $btnOrientation = document.getElementById('btn-orientation')
 	const $btnNextMove = document.getElementById('btn-next-move')
 	const $btnPrevMove = document.getElementById('btn-prev-move')
 	const $btnSettings = document.getElementById('btn-settings')
 	const $btnPrint = document.getElementById('btn-print')
+	const $btnFile = document.getElementById('btn-file')
 
 	// @b Selects
 	// ------------------------
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// ------------------------
 		document.addEventListener('keydown', handleKeyDown)
 		window.addEventListener('click', handleWindowBoardClick)
-		window.addEventListener('click', handleWindowClick)
+		window.addEventListener('click', handleWindowSettingsClick)
 		window.onresize = handleResize
 
 		// @b Drop area
@@ -66,17 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		$fileDropArea.addEventListener('dragover', handleFileDragOver)
 		$fileDropArea.addEventListener('dragleave', handleFileDragLeave)
 		$fileDropArea.addEventListener('drop', handleFileDrop)
-		$fileInput.addEventListener('change', handleFileChange)
 
 		// @b Buttons
 		// ------------------------
-		$btnCloseSettings.addEventListener('click', handleCloseBtnClick)
-		$btnCloseBoard.addEventListener('click', handleCloseBtnBoardClick)
+		$btnCloseSettings.addEventListener('click', handleCloseBtnSettingsClick)
+		$btnCloseBigBoard.addEventListener('click', handleCloseBtnBoardClick)
 		$btnNextMove.addEventListener('click', handleNextMoveClick)
 		$btnPrevMove.addEventListener('click', handlePrevMoveClick)
 		$btnOrientation.addEventListener('click', handleOrientationToggle)
 		$btnSettings.addEventListener('click', handleSettingsClick)
 		$btnPrint.addEventListener('click', printBoards)
+		$btnFile.addEventListener('dragover', handleFileDragOverOnButton)
+		$btnFile.addEventListener('dragleave', handleFileDragLeaveOnButton)
+		$btnFile.addEventListener('drop', handleFileDropOnButton)
+		$fileInput.addEventListener('change', handleFileChange)
 
 		// @b Selects
 		// ------------------------
@@ -92,31 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	// @r HANDLERS
 	// ========================
 
-	// @b Handle file
+	// @b Drop area
 	// ------------------------
-	function handleFile(file) {
-		if (!file) return
-		const reader = new FileReader()
-		reader.onload = function (e) {
-			pgnString = e.target.result
-			processPgn(pgnString)
-		}
-		reader.readAsText(file)
-	}
-
-	// @b Handle paste area input
-	// ------------------------
-	function handlePasteAreaInput(event) {
-		pgnString = event.target.value.trim()
-		if (pgnString.length > 0) {
-			processPgn(pgnString)
-		}
-	}
-
-	function handlePasteAreaClick(event) {
-		event.stopPropagation()
-	}
-
 	function handleFileDropClick() {
 		$fileInput.click()
 	}
@@ -133,96 +113,134 @@ document.addEventListener('DOMContentLoaded', () => {
 		const file = e.dataTransfer.files[0]
 		handleFile(file)
 	}
+
+	function handlePasteAreaInput(event) {
+		pgnString = event.target.value.trim()
+		if (pgnString.length > 0) {
+			processPgn(pgnString)
+		}
+	}
+	function handlePasteAreaClick(event) {
+		event.stopPropagation()
+	}
+
+	// @b File picker
+	// ------------------------
+	function handleFile(file) {
+		if (!file) return
+		const reader = new FileReader()
+		reader.onload = function (e) {
+			pgnString = e.target.result
+			processPgn(pgnString)
+		}
+		reader.readAsText(file)
+	}
 	function handleFileChange(event) {
 		const file = event.target.files[0]
 		handleFile(file)
 	}
 
-	// @r HANDLERS
-	// ========================
+	function handleFileDragOverOnButton(e) {
+		e.preventDefault()
+		e.stopPropagation()
+		$btnFile.classList.add('drag-over')
+	}
+	function handleFileDragLeaveOnButton(e) {
+		e.preventDefault()
+		e.stopPropagation()
+		$btnFile.classList.remove('drag-over')
+	}
+	function handleFileDropOnButton(e) {
+		e.preventDefault()
+		e.stopPropagation()
+		$btnFile.classList.remove('drag-over')
+		const file = e.dataTransfer.files[0]
+		handleFile(file)
+	}
 
-	// ... (Twój obecny kod) ...
-
-	// @b Handle orientation toggle
+	// @b Orientation
 	// ------------------------
 	function handleOrientationToggle() {
-		// Zmieniamy wartość globalnej zmiennej
 		currentOrientation = currentOrientation === 'white' ? 'black' : 'white'
 
-		// Zapisujemy nową wartość do localStorage
 		let settings = JSON.parse(localStorage.getItem('chessboardSettings')) || {}
 		settings.orientation = currentOrientation
 		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 
-		// Jeśli gra jest załadowana, generujemy plansze ponownie
 		if (pgnString) {
 			generateBoards()
 		}
 	}
 
+	// @b Game select
+	// ------------------------
+	function handleGameSelectChange() {
+		const selectedIndex = $selectGame.value
+		if (selectedIndex !== '') {
+			const selectedGame = allGames[selectedIndex]
+			const gameTitle = selectedGame.header.Event
+			renderGame(allGames[selectedIndex].pgn)
+			setTitle(gameTitle)
+		} else {
+			$divBoards.innerHTML = ''
+		}
+	}
+
+	// @b Columns select
+	// ------------------------
 	function handleColumnsSelectChange() {
 		if (pgnString) renderGame(allGames[$selectGame.value].pgn)
 		updateBoardLayout()
 		saveSettings()
 	}
 
-	function handleGameSelectChange() {
-		const selectedIndex = $selectGame.value
-		if (selectedIndex !== '') {
-			const selectedGame = allGames[selectedIndex]
-			const gameTitle = selectedGame.header.Event
-			document.title = 'PGN Grid - ' + gameTitle
-			renderGame(allGames[selectedIndex].pgn)
-		} else {
-			$divBoards.innerHTML = ''
-		}
-	}
-
-	function handleOrientationSelectChange() {
-		if (pgnString) generateBoards()
-		saveSettings()
-	}
-
+	// @b Color picker
+	// ------------------------
 	function handleColorPickerInput() {
 		if (pgnString) {
 			changeBoardColors()
 			highlightLastMoves()
 		}
-		if ($modalBoard.classList.contains('show-modal')) renderBigBoard()
 		saveSettings()
 	}
 
+	// @b Settings modal
+	// ------------------------
 	function handleSettingsClick() {
 		$modalSettings.classList.add('show-modal')
 	}
-	function handleCloseBtnClick() {
+	function handleCloseBtnSettingsClick() {
 		$modalSettings.classList.remove('show-modal')
 	}
-	function handleWindowClick(event) {
+	function handleWindowSettingsClick(event) {
 		if (event.target === $modalSettings)
 			$modalSettings.classList.remove('show-modal')
 	}
 
-	function handleCloseBtnBoardClick() {
-		$modalBoard.classList.remove('show-modal')
-		$modalBoard.removeEventListener('wheel', handleWheelNavigation)
-	}
-	function handleWindowBoardClick(event) {
-		if (event.target === $modalBoard) {
-			$modalBoard.classList.remove('show-modal')
-			$modalBoard.removeEventListener('wheel', handleWheelNavigation)
-		}
-	}
-
+	// @b Big board modal
+	// ------------------------
 	function handleBoardClick(index) {
 		currentBoardIndex = index
-		$modalBoard.classList.add('show-modal')
+		$modalBigBoard.classList.add('show-modal')
 		renderBigBoard()
-		$modalBoard.addEventListener('wheel', handleWheelNavigation, {
+		$modalBigBoard.addEventListener('wheel', handleWheelNavigation, {
 			passive: false,
 		})
 	}
+	function handleCloseBtnBoardClick() {
+		$modalBigBoard.classList.remove('show-modal')
+		$modalBigBoard.removeEventListener('wheel', handleWheelNavigation)
+	}
 
+	function handleWindowBoardClick(event) {
+		if (event.target === $modalBigBoard) {
+			$modalBigBoard.classList.remove('show-modal')
+			$modalBigBoard.removeEventListener('wheel', handleWheelNavigation)
+		}
+	}
+
+	// @b Big board navitagion
+	// ------------------------
 	function handleWheelNavigation(event) {
 		event.preventDefault()
 		if (event.deltaY > 0) {
@@ -237,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	}
-
 	function handlePrevMoveClick() {
 		if (currentBoardIndex > 0) {
 			currentBoardIndex--
@@ -250,8 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			renderBigBoard()
 		}
 	}
+
+	// @b Keyboard
+	// ------------------------
 	function handleKeyDown(event) {
-		if ($modalBoard.classList.contains('show-modal')) {
+		if ($modalBigBoard.classList.contains('show-modal')) {
 			if (event.key === 'ArrowLeft') {
 				if (currentBoardIndex > 0) {
 					currentBoardIndex--
@@ -262,38 +282,42 @@ document.addEventListener('DOMContentLoaded', () => {
 					currentBoardIndex++
 					renderBigBoard()
 				}
+			} else if (event.key === 'Escape') {
+				$modalBigBoard.classList.remove('show-modal')
+				$modalBigBoard.removeEventListener('wheel', handleWheelNavigation)
 			}
+		} else if (
+			$modalSettings.classList.contains('show-modal') &&
+			event.key === 'Escape'
+		) {
+			$modalSettings.classList.remove('show-modal')
 		}
 	}
 
+	// @b Window
+	// ------------------------
 	function handleResize() {
-		// 1. Zapisz aktualnie wybraną wartość kolumn.
 		const currentColumns = $selectColumns.value
 
-		// 2. Zaktualizuj opcje na liście (spowoduje to ich reset do 1).
 		updateColumnsSelect()
 
-		// 3. Sprawdź, czy zapisana wartość jest nadal dostępna.
 		const optionExists = Array.from($selectColumns.options).some(
 			(option) => option.value === currentColumns
 		)
 
-		// 4. Jeśli opcja istnieje, przywróć ją.
 		if (optionExists) {
 			$selectColumns.value = currentColumns
 		} else {
-			// W przeciwnym razie, ustaw wartość na największą dostępną opcję.
 			const maxColumnsValue =
 				$selectColumns.options[$selectColumns.options.length - 1].value
 			$selectColumns.value = maxColumnsValue
-			saveSettings() // Zapisz nową wartość
+			saveSettings()
 		}
 
-		// 5. Zaktualizuj układ plansz na podstawie nowej wartości.
 		if (pgnString && allGames.length > 0) {
 			renderGame(allGames[$selectGame.value].pgn)
 		}
-		if ($modalBoard.classList.contains('show-modal')) {
+		if ($modalBigBoard.classList.contains('show-modal')) {
 			renderBigBoard()
 		}
 	}
@@ -327,25 +351,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				columns: 3,
 				orientation: 'white',
 				darkColor: '#998877',
-				highlightColor: '#3399dd',
+				highlightColor: '#ffaa66',
 			}
 			localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 		}
 
-		// Najpierw zaktualizuj opcje na podstawie szerokości okna
 		updateColumnsSelect()
 
-		// Teraz ustaw wartość z localStorage
 		if ($selectColumns && settings.columns) {
 			const savedColumns = parseInt(settings.columns, 10)
-			// Sprawdź, czy zapisana wartość jest w zakresie dostępnych opcji
 			const optionExists = Array.from($selectColumns.options).some(
 				(opt) => parseInt(opt.value, 10) === savedColumns
 			)
 			if (optionExists) {
 				$selectColumns.value = savedColumns
 			} else {
-				// Jeśli wartość jest nieprawidłowa (np. ekran jest za mały), wybierz ostatnią opcję
 				$selectColumns.value =
 					$selectColumns.options[$selectColumns.options.length - 1].value
 			}
@@ -403,23 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
-	// @b Update colums select
+	// @b Set title
 	// ------------------------
-	function updateColumnsSelect() {
-		if (!$selectColumns) return
-		const containerWidth = $divBoards.clientWidth - 20
-		const minBoardSize = 150
-		const gap = 10
-		let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
-		maxColumns = Math.max(1, maxColumns)
-
-		$selectColumns.innerHTML = ''
-		for (let i = 1; i <= maxColumns; i++) {
-			const option = document.createElement('option')
-			option.value = i
-			option.textContent = i
-			$selectColumns.appendChild(option)
-		}
+	function setTitle(title) {
+		document.title = 'PGNgrid - ' + title
 	}
 
 	// ========================
@@ -450,7 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			return
 		}
 
-		// Ukryj początkowe okno po wczytaniu partii
 		$fileDropArea.style.display = 'none'
 		if ($headerRight) $headerRight.style.display = 'flex'
 		if ($headerCenter) $headerCenter.style.display = 'flex'
@@ -458,16 +464,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		try {
 			let gamesArray = []
 
-			// Sprawdź, czy w pliku znajdują się nagłówki (np. [Event)
-			// To pozwoli odróżnić pliki z nagłówkami od plików z samymi ruchami
 			if (pgnString.includes('[Event')) {
-				// Jeśli nagłówki są, podziel tekst na podstawie '[Event '
 				gamesArray = pgnString
 					.split('[Event ')
 					.filter(Boolean)
 					.map((gamePgn) => `[Event ${gamePgn}`)
 			} else {
-				// Jeśli nagłówków brak, podziel tekst na podstawie podwójnej pustej linii
 				gamesArray = pgnString
 					.split(/\n\s*\n/)
 					.filter((line) => line.trim().length > 0)
@@ -479,12 +481,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			gamesArray.forEach((gamePgn, index) => {
 				const game = new Chess()
-				// Usuń adnotacje i komentarze
 				let cleanPgn = gamePgn
 					.replace(/{[^}]*}/g, '')
 					.replace(/\[%[^\]]*]/g, '')
 
-				// Dodaj puste nagłówki, jeśli ich brakuje
 				const finalPgn = cleanPgn.startsWith('[Event')
 					? cleanPgn
 					: `[Event "Partia ${
@@ -510,9 +510,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const firstGame = allGames[0]
 			const firstGameTitle = firstGame.header.Event
-			document.title = 'PGN Grid - ' + firstGameTitle
-
 			renderGame(allGames[0].pgn)
+			setTitle(firstGameTitle)
 		} catch (error) {
 			console.error('Błąd podczas przetwarzania PGN:', error)
 			alert(
@@ -521,23 +520,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// @b Populate game select
+	// ------------------------
 	function populateGameSelect() {
 		$selectGame.innerHTML = ''
 		$selectGame.style.display = 'block'
 
 		allGames.forEach((game, index) => {
-			// const white = game.header.White
-			// const black = game.header.Black
 			const event = game.header.Event || `Partia ${index + 1}`
 
-			// Tworzenie tekstu opcji
-			// let optionText = `${index + 1}. ${event}`
 			let optionText = event
-
-			// Dodaj nawias tylko, jeśli są dostępne dane graczy
-			// if (white && black && white !== '?' && black !== '?') {
-			// 	optionText += ` (${white} vs. ${black})`
-			// }
 
 			const option = document.createElement('option')
 			option.value = index
@@ -545,6 +537,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			$selectGame.appendChild(option)
 		})
 	}
+
+	// @b Update colums select
+	// ------------------------
+	function updateColumnsSelect() {
+		if (!$selectColumns) return
+		const containerWidth = $divBoards.clientWidth - 20
+		const minBoardSize = 150
+		const gap = 10
+		let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
+		maxColumns = Math.max(1, maxColumns)
+
+		$selectColumns.innerHTML = ''
+		for (let i = 1; i <= maxColumns; i++) {
+			const option = document.createElement('option')
+			option.value = i
+			option.textContent = i
+			$selectColumns.appendChild(option)
+		}
+	}
+
+	// @b Render game
+	// ------------------------
 	function renderGame(pgnToRender) {
 		$divBoards.innerHTML = ''
 		chessboards.length = 0
@@ -585,6 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// @b Calculate board size
+	// ------------------------
 	function calculateBoardSize() {
 		if (!$selectColumns) return 400
 		const columns = parseInt($selectColumns.value, 10)
@@ -597,6 +613,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		return Math.floor(boardSize)
 	}
 
+	// @b Update board layout
+	// ------------------------
 	function updateBoardLayout() {
 		if ($selectColumns) {
 			const columns = $selectColumns.value
@@ -604,6 +622,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// @b Generate boards
+	// ------------------------
 	function generateBoards() {
 		$divBoards.innerHTML = ''
 		chessboards.length = 0
@@ -650,6 +670,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		updateBoardLayout()
 	}
 
+	// @b Change board colors
+	// ------------------------
 	function changeBoardColors() {
 		const darkColor = $pickerBoardColor.value
 		const lightColor = lightenColor(darkColor, 0.5)
@@ -662,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
-	// @b Highlight Last
+	// @b Highlight last move
 	// ------------------------
 	function highlightLastMoves() {
 		const highlightColor = $pickerHighlightColor.value
@@ -738,13 +760,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			$btnNextMove.disabled = currentBoardIndex >= positions.length - 1
 	}
 
-	// @b Print boards
+	// @b Print Boards
 	// ------------------------
 	function printBoards() {
-		const selectedIndex = $selectGame.value
-		const selectedGame = allGames[selectedIndex]
-		const eventName = selectedGame.header.Event
-		$printTitle.innerText = eventName
 		window.print()
 	}
 

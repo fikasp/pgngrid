@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="vendor/css/chessboard.css" />
 		<link rel="stylesheet" href="vendor/css/fontawesome.css" />
 		<link rel="stylesheet" href="assets/style.css" />
-		<title>PGN Grid</title>
+		<title>PGNgrid</title>
 	</head>
 
 	<!--====================
@@ -33,7 +33,7 @@
 				<div class="header-left">
 					<a href="#" class="header-link" onclick="location.reload()">
 						<img src="assets/logo/logo.png" alt="Logo" class="header-logo" />
-						<h1 class="header-title">PGN Grid</h1>
+						<h1 class="header-title">PGNgrid</h1>
 					</a>
 				</div>
 
@@ -41,7 +41,11 @@
 				----------------------->
 				<div class="header-right">
 					<!-- Orientation -->
-					<button id="btn-orientation" class="btn-orientation" title="Obróć orientację">
+					<button
+						id="btn-orientation"
+						class="btn-orientation"
+						title="Obróć orientację"
+					>
 						<i class="fa-solid fa-rotate fa-2x"></i>
 					</button>
 
@@ -57,7 +61,12 @@
 
 					<!-- File -->
 					<input type="file" id="pgn-file" />
-					<label for="pgn-file" class="file-label" title="Wczytaj plik PGN">
+					<label
+						for="pgn-file"
+						id="btn-file"
+						class="file-label"
+						title="Wczytaj plik PGN"
+					>
 						<i class="fa-solid fa-folder-open fa-2x"></i>
 					</label>
 				</div>
@@ -84,15 +93,14 @@
 		</div>
 
 		<!----------------------
-			@g SMALL BOARDS
+			@g BOARDS
 		----------------------->
-		<div id="print-title">Tytuł</div>
-		<div id="board-container"></div>
+		<div id="boards"></div>
 
 		<!----------------------
 			@g BIG BOARD MODAL
 		----------------------->
-		<div id="board-modal" class="modal">
+		<div id="big-board-modal" class="modal">
 			<button id="btn-close-board" class="btn-nav close">
 				<i class="fa-solid fa-close"></i>
 			</button>
@@ -128,8 +136,7 @@
 				<div class="modal-grid">
 					<!-- Board columns -->
 					<label for="board-columns">Liczba kolumn:</label>
-					<select id="board-columns">
-					</select>
+					<select id="board-columns"></select>
 
 					<!-- Dark color picker -->
 					<label for="dark-color-picker">Kolor ciemnych pól:</label>
