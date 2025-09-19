@@ -387,6 +387,7 @@ input[type='color']::-moz-color-swatch {
 
 /* Strzałki po bokach planszy */
 .btn-nav {
+	-webkit-tap-highlight-color: transparent;
 	position: absolute;
 	background: transparent;
 	text-shadow: 0 0 5px #000;
@@ -407,15 +408,15 @@ input[type='color']::-moz-color-swatch {
 }
 
 .btn-nav.left {
-	left: -48px;
-	padding: 18px;
+	left: -45px;
+	padding: 15px;
 	transform: translateY(-50%);
 	top: 50%;
 }
 
 .btn-nav.right {
-	right: -48px;
-	padding: 18px;
+	right: -45px;
+	padding: 15px;
 	transform: translateY(-50%);
 	top: 50%;
 }
