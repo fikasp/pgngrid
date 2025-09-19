@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			settings = {
 				columns: 3,
 				orientation: 'white',
-				darkColor: '#887766',
+				darkColor: '#998877',
 				highlightColor: '#3399dd',
 			}
 			localStorage.setItem('chessboardSettings', JSON.stringify(settings))
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const config = {
 				position: pos.fen,
 				draggable: false,
-				pieceTheme: 'images/{piece}.png',
+				pieceTheme: 'assets/img/{piece}.png',
 				orientation: currentOrientation,
 				showNotation: false,
 			}
@@ -703,7 +703,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const config = {
 				position: position.fen,
 				draggable: false,
-				pieceTheme: 'images/{piece}.png',
+				pieceTheme: 'assets/img/{piece}.png',
 				showNotation: false,
 				orientation: currentOrientation,
 			}

@@ -202,6 +202,21 @@ body {
 }
 
 /*======================
+	@r FOOTER
+======================*/
+.footer {
+	width: 100%;
+	height: 40px;
+	margin-top: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(5px);
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	z-index: 1000;
+}
+
+/*======================
 	@r BOARD
 ======================*/
 #board-container {
@@ -498,21 +513,6 @@ input[type='color']::-moz-color-swatch {
 #pgn-paste-area:focus {
 	border-color: #3399dd;
 	outline: none;
-}
-
-/*======================
-	@r FOOTER
-======================*/
-.footer {
-	width: 100%;
-	height: 40px;
-	margin-top: auto;
-	background-color: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(5px);
-	color: white;
-	text-align: center;
-	line-height: 40px;
-	z-index: 1000;
 }
 
 /*======================
