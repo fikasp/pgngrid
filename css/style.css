@@ -376,7 +376,7 @@ input[type='color']::-moz-color-swatch {
 	position: relative;
 	width: min(calc(100vw - 50px), calc(100vh - 50px));
 	height: min(calc(100vw - 50px), calc(100vh - 50px));
-	box-shadow: 0 0 10px 10px rgba(0,0,0,0.5);
+	box-shadow: 0 0 20px 20px rgba(0,0,0,0.5);
 }
 
 #big-board-wrapper {
@@ -477,29 +477,34 @@ input[type='color']::-moz-color-swatch {
 
 #file-drop-area i {
 	font-size: 50px;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 #drop-area-title {
 	font-size: 1em;
 	font-weight: normal;
-	margin-bottom: 15px;
-	color: #ccc;
+	margin-bottom: 30px;
+	color: #888;
 }
 
 #pgn-paste-area {
-	width: 90%;
-	height: 100px;
-	margin-top: 15px;
+	width: 220px;
+	height: 60px;
 	padding: 10px;
-	border: 1px solid #444;
+	border: 1px solid #222;
 	border-radius: 8px;
 	font-family: inherit;
 	font-size: 0.9em;
 	resize: vertical;
 	background-color: #111;
-	color: #ccc;
+	color: #aaa;
 	transition: all 0.3s ease;
+	text-align: center;
+}
+
+#pgn-paste-area:hover {
+	border-color: #444;
+	outline: none;
 }
 
 #pgn-paste-area:focus {
