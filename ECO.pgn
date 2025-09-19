@@ -1,0 +1,3506 @@
+[Event "A00 - Irregular Openings: Anderssen's Opening"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. a3
+
+[Event "A00 - Irregular Openings: Ware Opening"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. a4
+
+[Event "A01 - Réti Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3
+
+[Event "A02 - Bird's Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. f4
+
+[Event "A03 - Bird's Opening: From's Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. f4 e5
+
+[Event "A04 - Réti Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 Nf6
+
+[Event "A05 - Réti Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 Nf6 2. g3
+
+[Event "A06 - Réti Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 d5
+
+[Event "A07 - King's Indian Attack: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 d5 2. g3 Nf6
+
+[Event "A08 - King's Indian Attack: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 d5 2. g3 Nf6 3. Bg2
+
+[Event "A09 - Réti Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. Nf3 d5 2. c4
+
+[Event "A10 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4
+
+[Event "A11 - English Opening: Caro-Kann Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c6
+
+[Event "A12 - English Opening: Caro-Kann Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c6 2. Nf3 d5
+
+[Event "A13 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e6
+
+[Event "A14 - English Opening: Neo-Catalan Declined"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e6 2. Nf3 d5 3. g3 Nf6 4. Bg2 Be7
+
+[Event "A15 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 Nf6
+
+[Event "A16 - English Opening: Anglo-Indian Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 Nf6 2. Nc3
+
+[Event "A17 - English Opening: Queen's Indian Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 Nf6 2. Nc3 e6
+
+[Event "A18 - English Opening: Mikenas-Carls Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 Nf6 2. Nc3 e6 3. e4
+
+[Event "A19 - English Opening: Mikenas-Carls Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 Nf6 2. Nc3 e6 3. e4 c5
+
+[Event "A20 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5
+
+[Event "A21 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3
+
+[Event "A22 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nf6
+
+[Event "A23 - English Opening: Bremen System, Keres Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nf6 3. g3 c6
+
+[Event "A24 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nf6 3. g3 g6
+
+[Event "A25 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nc6
+
+[Event "A26 - English Opening: Botvinnik System"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. d3
+
+[Event "A27 - English Opening: Three Knights System"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nc6 3. Nf3
+
+[Event "A28 - English Opening: Four Knights System"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nc6 3. Nf3 Nf6
+
+[Event "A29 - English Opening: Four Knights System, Fianchetto"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 e5 2. Nc3 Nc6 3. Nf3 Nf6 4. g3
+
+[Event "A30 - English Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5
+
+[Event "A31 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nf3 Nf6 3. d4
+
+[Event "A32 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nf3 Nf6 3. d4 cxd4 4. Nxd4 e6
+
+[Event "A33 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nf3 Nf6 3. d4 cxd4 4. Nxd4 e6 5. Nc3 Nc6
+
+[Event "A34 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3
+
+[Event "A35 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3 Nc6
+
+[Event "A36 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3 Nc6 3. g3
+
+[Event "A37 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. Nf3
+
+[Event "A38 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. Nf3 Nf6
+
+[Event "A39 - English Opening: Symmetrical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. c4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. Nf3 Nf6 6. O-O O-O 7. d4
+
+[Event "A40 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4
+
+[Event "A41 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d6
+
+[Event "A42 - Modern Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 g6 2. c4 Bg7 3. Nc3 d6
+
+[Event "A43 - Old Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 c5
+
+[Event "A44 - Old Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 c5 2. d5 e5
+
+[Event "A45 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6
+
+[Event "A46 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 e6
+
+[Event "A47 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 e6 3. e3 b6
+
+[Event "A48 - King's Indian Defence: East Indian Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 g6
+
+[Event "A49 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 g6 3. g3
+
+[Event "A50 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4
+
+[Event "A51 - Budapest Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e5
+
+[Event "A52 - Budapest Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e5 3. dxe5 Ng4
+
+[Event "A53 - Old Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 d6
+
+[Event "A54 - Old Indian Defence: Ukrainian Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 d6 3. Nc3 e5
+
+[Event "A55 - Old Indian Defence: Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 d6 3. Nc3 e5 4. Nf3 Nbd7 5. e4
+
+[Event "A56 - Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5
+
+[Event "A57 - Benoni Defence: Benko Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 b5
+
+[Event "A58 - Benoni Defence: Benko Gambit Accepted"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6 5. bxa6
+
+[Event "A59 - Benoni Defence: Benko Gambit Accepted"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6 5. bxa6 Bxa6 6. Nc3 g6
+
+[Event "A60 - Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6
+
+[Event "A61 - Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. Nf3 g6
+
+[Event "A62 - Benoni Defence: Fianchetto Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. g3
+
+[Event "A63 - Benoni Defence: Fianchetto Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. g3 g6 7. Bg2 Bg7 8. O-O O-O 9. Nf3
+
+[Event "A64 - Benoni Defence: Fianchetto Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. g3 g6 7. Bg2 Bg7 8. O-O O-O 9. Nf3 a6 10. a4
+
+[Event "A65 - Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4
+
+[Event "A66 - Benoni Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. f4
+
+[Event "A67 - Benoni Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. f4 Bg7 8. Nf3 O-O 9. Be2 Re8
+
+[Event "A68 - Benoni Defence: Four Pawns Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. f4 Bg7 8. Nf3 O-O 9. a4
+
+[Event "A69 - Benoni Defence: Four Pawns Attack, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. f4 Bg7 8. Nf3 O-O 9. a4 Re8 10. Be2 a6
+
+[Event "A70 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3
+
+[Event "A71 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Bg5
+
+[Event "A72 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O
+
+[Event "A73 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O a6
+
+[Event "A74 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O a6 10. a4
+
+[Event "A75 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O a6 10. a4 Nbd7 11. h3
+
+[Event "A76 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8
+
+[Event "A77 - Benoni Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8 10. Nd2
+
+[Event "A78 - Benoni Defence: Classical Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8 10. Nd2 Na6
+
+[Event "A79 - Benoni Defence: Classical Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8 10. Nd2 Na6 11. f3
+
+[Event "A80 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5
+
+[Event "A81 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. g3
+
+[Event "A82 - Dutch Defence: Staunton Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. e4
+
+[Event "A83 - Dutch Defence: Staunton Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. e4 fxe4 3. Nc3 Nf6 4. Bg5
+
+[Event "A84 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4
+
+[Event "A85 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. Nc3
+
+[Event "A86 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3
+
+[Event "A87 - Dutch Defence: Leningrad Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 g6 4. Bg2 Bg7 5. Nf3 O-O 6. O-O d6
+
+[Event "A88 - Dutch Defence: Leningrad Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 g6 4. Bg2 Bg7 5. Nf3 O-O 6. O-O d6 7. Nc3 c6
+
+[Event "A89 - Dutch Defence: Leningrad Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 g6 4. Bg2 Bg7 5. Nf3 O-O 6. O-O d6 7. Nc3 Nc6
+
+[Event "A90 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 c6 5. Nf3 d5
+
+[Event "A91 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 d5
+
+[Event "A92 - Dutch Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7
+
+[Event "A93 - Dutch Defence: Stonewall Variation, Botvinnik System"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. b3
+
+[Event "A94 - Dutch Defence: Stonewall Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. b3 c6
+
+[Event "A95 - Dutch Defence: Stonewall Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. Nc3 c6 8. Ne5
+
+[Event "A96 - Dutch Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. Nc3 Ne4
+
+[Event "A97 - Dutch Defence: Classical Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. Nc3 Ne4 8. a4
+
+[Event "A98 - Dutch Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. Nc3 Ne4 8. Bf4
+
+[Event "A99 - Dutch Defence: Classical Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d5 7. Nc3 Ne4 8. Qc2
+
+[Event "B00 - King's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4
+
+[Event "B01 - Scandinavian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 d5
+
+[Event "B02 - Alekhine's Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 Nf6
+
+[Event "B03 - Alekhine's Defence: Modern Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 Nf6 2. e5 Nd5 3. d4 d6
+
+[Event "B04 - Alekhine's Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3
+
+[Event "B05 - Alekhine's Defence: Modern Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3 Bg4 5. Be2
+
+[Event "B06 - Modern Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 g6
+
+[Event "B07 - Pirc Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 d6 2. d4 Nf6
+
+[Event "B08 - Pirc Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. Nf3 Bg7
+
+[Event "B09 - Pirc Defence: Austrian Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. f4
+
+[Event "B10 - Caro-Kann Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6
+
+[Event "B11 - Caro-Kann Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. Nc3 d5
+
+[Event "B12 - Caro-Kann Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4
+
+[Event "B13 - Caro-Kann Defence: Exchange Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5
+
+[Event "B14 - Caro-Kann Defence: Panov-Botvinnik Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4
+
+[Event "B15 - Caro-Kann Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. Nc3
+
+[Event "B16 - Caro-Kann Defence: Bronstein-Larsen Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nf6
+
+[Event "B17 - Caro-Kann Defence: Steinitz Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nd7 5. Nf3 Ngf6
+
+[Event "B18 - Caro-Kann Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5
+
+[Event "B19 - Caro-Kann Defence: Classical Variation, Spassky Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. h4 h6 7. Nf3 Nd7
+
+[Event "B20 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5
+
+[Event "B21 - Sicilian Defence: Smith-Morra Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. d4 cxd4 3. c3
+
+[Event "B22 - Sicilian Defence: Alapin Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. c3
+
+[Event "B23 - Sicilian Defence: Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nc3
+
+[Event "B24 - Sicilian Defence: Grand Prix Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nc3 Nc6 3. g3
+
+[Event "B25 - Sicilian Defence: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. d3
+
+[Event "B26 - Sicilian Defence: Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. d3 d6 6. Be3
+
+[Event "B27 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3
+
+[Event "B28 - Sicilian Defence: O'Kelly Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 a6
+
+[Event "B29 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nf6
+
+[Event "B30 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6
+
+[Event "B31 - Sicilian Defence: Rossolimo Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. Bb5
+
+[Event "B32 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4
+
+[Event "B33 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3
+
+[Event "B34 - Sicilian Defence: Accelerated Dragon, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6
+
+[Event "B35 - Sicilian Defence: Accelerated Dragon, Modern Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nc3 Bg7 6. Be3
+
+[Event "B36 - Sicilian Defence: Accelerated Dragon, Maróczy Bind"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4
+
+[Event "B37 - Sicilian Defence: Accelerated Dragon, Maróczy Bind"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Nc3
+
+[Event "B38 - Sicilian Defence: Accelerated Dragon, Maróczy Bind"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Be3 Nf6 7. Nc3
+
+[Event "B39 - Sicilian Defence: Accelerated Dragon, Breyer Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Be3 Nf6 7. Nc3 Ng4
+
+[Event "B40 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6
+
+[Event "B41 - Sicilian Defence: Kan Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6
+
+[Event "B42 - Sicilian Defence: Kan Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Bd3
+
+[Event "B43 - Sicilian Defence: Kan Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Nc3
+
+[Event "B44 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6
+
+[Event "B45 - Sicilian Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Nf6 6. Ndb5 Bb4
+
+[Event "B46 - Sicilian Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 a6
+
+[Event "B47 - Sicilian Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Qc7
+
+[Event "B48 - Sicilian Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Qc7 6. Be3
+
+[Event "B49 - Sicilian Defence: Taimanov Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Qc7 6. Be3 a6 7. Be2
+
+[Event "B50 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6
+
+[Event "B51 - Sicilian Defence: Canal-Sokolsky Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. Bb5+
+
+[Event "B52 - Sicilian Defence: Canal-Sokolsky Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. Bb5+ Bd7 4. Bxd7+
+
+[Event "B53 - Sicilian Defence: Modern Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Qxd4 Nc6 5. Bb5
+
+[Event "B54 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. f3
+
+[Event "B55 - Sicilian Defence: Prins Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. f3 e5
+
+[Event "B56 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6
+
+[Event "B57 - Sicilian Defence: Sozin Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bc4
+
+[Event "B58 - Sicilian Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Be2
+
+[Event "B59 - Sicilian Defence: Boleslavsky Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Be2 e5 7. Nde2
+
+[Event "B60 - Sicilian Defence: Richter-Rauzer Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5
+
+[Event "B61 - Sicilian Defence: Richter-Rauzer Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 Bd7 7. Qd2 Nxd4
+
+[Event "B62 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6
+
+[Event "B63 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2
+
+[Event "B64 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 Be7 8. O-O-O
+
+[Event "B65 - Sicilian Defence: Richter-Rauzer Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 Be7 8. O-O-O O-O 9. f4
+
+[Event "B66 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 a6
+
+[Event "B67 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 a6 8. O-O-O Bd7 9. f4 h6 10. Bh4 g5
+
+[Event "B68 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 a6 8. O-O-O Be7
+
+[Event "B69 - Sicilian Defence: Richter-Rauzer Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 a6 8. O-O-O Be7 9. f4 Bd7 10. e5 dxe5 11. fxe5 Nxd4
+
+[Event "B70 - Sicilian Defence: Dragon Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6
+
+[Event "B71 - Sicilian Defence: Dragon Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. f4
+
+[Event "B72 - Sicilian Defence: Dragon Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3
+
+[Event "B73 - Sicilian Defence: Dragon Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. Be2
+
+[Event "B74 - Sicilian Defence: Dragon Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. Be2 O-O 8. O-O
+
+[Event "B75 - Sicilian Defence: Dragon Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3
+
+[Event "B76 - Sicilian Defence: Dragon Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6 9. Bc4
+
+[Event "B77 - Sicilian Defence: Dragon Variation, Yugoslav Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6 9. Bc4 Bd7 10. h4
+
+[Event "B78 - Sicilian Defence: Dragon Variation, Yugoslav Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6 9. Bc4 Bd7 10. O-O-O Rc8
+
+[Event "B79 - Sicilian Defence: Dragon Variation, Yugoslav Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6 9. Bc4 Bd7 10. O-O-O Rc8 11. Bb3 Qa5 12. Kb1 Nxd4
+
+[Event "B80 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6
+
+[Event "B81 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. g4
+
+[Event "B82 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. f4
+
+[Event "B83 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Be2
+
+[Event "B84 - Sicilian Defence: Scheveningen Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Be2 a6
+
+[Event "B85 - Sicilian Defence: Scheveningen Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Be2 Be7 7. O-O O-O 8. Be3
+
+[Event "B86 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Bc4
+
+[Event "B87 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Bc4 a6 7. Bb3
+
+[Event "B88 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Be3 Nc6 7. Be2
+
+[Event "B89 - Sicilian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Be3 Nc6 7. Be2 Be7 8. O-O
+
+[Event "B90 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5
+
+[Event "B91 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. g3
+
+[Event "B92 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be2 e5 7. Nb3
+
+[Event "B93 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. f4
+
+[Event "B94 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be2 e5 7. Nb3
+
+[Event "B95 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. f4 e5 7. Nb3
+
+[Event "B96 - Sicilian Defence: Najdorf Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6
+
+[Event "B97 - Sicilian Defence: Najdorf Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4
+
+[Event "B98 - Sicilian Defence: Najdorf Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Be7
+
+[Event "B99 - Sicilian Defence: Najdorf Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Be7 8. Qf3 Qc7 9. O-O-O Nbd7
+
+[Event "C00 - French Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6
+
+[Event "C01 - French Defence: Exchange Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5
+
+[Event "C02 - French Defence: Advance Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. e5
+
+[Event "C03 - French Defence: Tarrasch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nd2
+
+[Event "C04 - French Defence: Tarrasch Variation, Guimard Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nd2 Nc6 4. Ngf3 Nf6
+
+[Event "C05 - French Defence: Tarrasch Variation, Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. e5 c5 4. c3
+
+[Event "C06 - French Defence: Tarrasch Variation, Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Bd7 6. Be2 Nge7
+
+[Event "C07 - French Defence: Tarrasch Variation, Open Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nd2 c5
+
+[Event "C08 - French Defence: Tarrasch Variation, Open Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nd2 c5 4. exd5 exd5 5. Ngf3
+
+[Event "C09 - French Defence: Tarrasch Variation, Open Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nd2 c5 4. exd5 exd5 5. Ngf3 Nc6
+
+[Event "C10 - French Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3
+
+[Event "C11 - French Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Nf6
+
+[Event "C12 - French Defence: MacCutcheon Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Bb4
+
+[Event "C13 - French Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Be7
+
+[Event "C14 - French Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Be7 5. e5 Nfd7 6. Bxe7 Qxe7 7. f4
+
+[Event "C15 - French Defence: Winawer (Nimzowitsch) Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4
+
+[Event "C16 - French Defence: Winawer (Nimzowitsch) Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5
+
+[Event "C17 - French Defence: Winawer (Nimzowitsch) Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. dxc5 Nc6
+
+[Event "C18 - French Defence: Winawer (Nimzowitsch) Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Ba5 6. b4
+
+[Event "C19 - French Defence: Winawer (Nimzowitsch) Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Bxc3+ 6. bxc3 Ne7 7. a4
+
+[Event "C20 - King's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5
+
+[Event "C21 - Center Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. d4
+
+[Event "C22 - Center Game: Paulsen Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. d4 exd4 3. Qxd4 Nc6
+
+[Event "C23 - Bishop's Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Bc4
+
+[Event "C24 - Bishop's Opening: Berlin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Bc4 Nf6
+
+[Event "C25 - Vienna Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nc3
+
+[Event "C26 - Vienna Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nc3 Nf6
+
+[Event "C27 - Vienna Game: Frankenstein-Dracula Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nc3 Nf6 3. Bc4 Nxe4
+
+[Event "C28 - Vienna Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nc3 Nc6 3. Bc4 Nf6 4. d3 Bc5
+
+[Event "C29 - Vienna Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nc3 Nf6 3. f4
+
+[Event "C30 - King's Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4
+
+[Event "C31 - Falkbeer Countergambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 d5 3. exd5 e4
+
+[Event "C32 - King's Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 d5 3. exd5 e4 4. d3 Nf6 5. dxe4 Nxe4
+
+[Event "C33 - King's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4
+
+[Event "C34 - King's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3
+
+[Event "C35 - King's Gambit Accepted: Cunningham Defense"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 Be7
+
+[Event "C36 - King's Gambit Accepted: Abbazia Defense"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 d5
+
+[Event "C37 - King's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ne5
+
+[Event "C38 - King's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 Bg7 5. O-O
+
+[Event "C39 - King's Gambit Accepted: Allgaier-Thorold Gambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ng5
+
+[Event "C40 - King's Knight Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3
+
+[Event "C41 - Philidor Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 d6
+
+[Event "C42 - Petrov's Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nf6
+
+[Event "C43 - Petrov's Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nf6 3. d4
+
+[Event "C44 - King's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4
+
+[Event "C45 - Scotch Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4
+
+[Event "C46 - Three Knights Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3
+
+[Event "C47 - Four Knights Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6
+
+[Event "C48 - Four Knights Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5
+
+[Event "C49 - Four Knights Game: Double Ruy Lopez"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Bb4
+
+[Event "C50 - Italian Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4
+
+[Event "C51 - Evans Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4
+
+[Event "C52 - Evans Gambit: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bxb4 5. c3 Ba5 6. O-O
+
+[Event "C53 - Italian Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3
+
+[Event "C54 - Italian Game: Giuoco Piano, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+
+
+[Event "C55 - Italian Game: Two Knights Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6
+
+[Event "C56 - Italian Game: Two Knights Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d4 exd4 5. O-O Nxe4 6. Re1
+
+[Event "C57 - Italian Game: Two Knights Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5
+
+[Event "C58 - Italian Game: Two Knights Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5
+
+[Event "C59 - Italian Game: Two Knights Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ c6 7. dxc6 bxc6
+
+[Event "C60 - Ruy Lopez: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5
+
+[Event "C61 - Ruy Lopez: Bird's Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nd4
+
+[Event "C62 - Ruy Lopez: Steinitz Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 d6
+
+[Event "C63 - Ruy Lopez: Schliemann Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 f5
+
+[Event "C64 - Ruy Lopez: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5
+
+[Event "C65 - Ruy Lopez: Berlin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6
+
+[Event "C66 - Ruy Lopez: Berlin Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Be7 5. Re1 d6 6. c3
+
+[Event "C67 - Ruy Lopez: Berlin Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4
+
+[Event "C68 - Ruy Lopez: Exchange Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Bxc6 dxc6
+
+[Event "C69 - Ruy Lopez: Exchange Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Bxc6 dxc6 5. O-O
+
+[Event "C70 - Ruy Lopez: Cozio Defense"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nge7
+
+[Event "C71 - Ruy Lopez: Steinitz Defence Deferred"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6
+
+[Event "C72 - Ruy Lopez: Morphy Defense, Modern Steinitz Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6 5. O-O Bd7 6. c3
+
+[Event "C73 - Ruy Lopez: Morphy Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6 5. Bxc6+ bxc6 6. d4
+
+[Event "C74 - Ruy Lopez: Morphy Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6 5. c3 f5
+
+[Event "C75 - Ruy Lopez: Morphy Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6 5. d4
+
+[Event "C76 - Ruy Lopez: Morphy Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6 5. d4 exd4 6. Nxd4 Bd7 7. Nc3 g6
+
+[Event "C77 - Ruy Lopez: Morphy Defense, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6
+
+[Event "C78 - Ruy Lopez: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O
+
+[Event "C79 - Ruy Lopez: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O d6
+
+[Event "C80 - Ruy Lopez: Open Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 exd4 7. Re1
+
+[Event "C81 - Ruy Lopez: Open Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6
+
+[Event "C82 - Ruy Lopez: Open Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6 9. Nbd2
+
+[Event "C83 - Ruy Lopez: Open Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6 9. c3
+
+[Event "C84 - Ruy Lopez: Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7
+
+[Event "C85 - Ruy Lopez: Exchange Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Bxc6 dxc6 7. Nc3
+
+[Event "C86 - Ruy Lopez: Worrall Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Qe2 b5 7. Bb3
+
+[Event "C87 - Ruy Lopez: Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1
+
+[Event "C88 - Ruy Lopez: Closed Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3
+
+[Event "C89 - Ruy Lopez: Marshall Attack"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 O-O 8. c3 d5
+
+[Event "C90 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3
+
+[Event "C91 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. d4
+
+[Event "C92 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3
+
+[Event "C93 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 h6
+
+[Event "C94 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8
+
+[Event "C95 - Ruy Lopez: Closed Variation, Breyer Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8 10. d4 Nbd7 11. a4
+
+[Event "C96 - Ruy Lopez: Closed Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Na5 10. Bc2
+
+[Event "C97 - Ruy Lopez: Closed Variation, Chigorin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Na5 10. Bc2 c5
+
+[Event "C98 - Ruy Lopez: Closed Variation, Chigorin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Na5 10. Bc2 c5 11. d4
+
+[Event "C99 - Ruy Lopez: Closed Variation, Chigorin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Na5 10. Bc2 c5 11. d4 cxd4 12. cxd4 exd4 13. Nxd4 Re8
+
+[Event "D00 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4
+
+[Event "D01 - Richter-Veresov Attack: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nc3 d5 3. Bg5
+
+[Event "D02 - Queen's Pawn Game: London System"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 d5 3. Bf4
+
+[Event "D03 - Richter-Veresov Attack: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 d5 3. Bg5
+
+[Event "D04 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. Nf3 d5 3. e3
+
+[Event "D05 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. Nf3 Nf6 3. e3 e6
+
+[Event "D06 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4
+
+[Event "D07 - Queen's Gambit Declined: Chigorin Defense"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 Nc6
+
+[Event "D08 - Queen's Gambit Declined: Albin Countergambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e5
+
+[Event "D09 - Queen's Gambit Declined: Albin Countergambit"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e5 3. dxe5 d4
+
+[Event "D10 - Queen's Gambit Declined: Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6
+
+[Event "D11 - Queen's Gambit Declined: Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3
+
+[Event "D12 - Queen's Gambit Declined: Slav Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. e3
+
+[Event "D13 - Queen's Gambit Declined: Slav Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. cxd5 cxd5 5. Nc3
+
+[Event "D14 - Queen's Gambit Declined: Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. cxd5 cxd5 5. Nc3 Nc6
+
+[Event "D15 - Queen's Gambit Declined: Slav Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3
+
+[Event "D16 - Queen's Gambit Declined: Slav Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4
+
+[Event "D17 - Queen's Gambit Declined: Slav Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3
+
+[Event "D18 - Queen's Gambit Declined: Slav Defence, Dutch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4
+
+[Event "D19 - Queen's Gambit Declined: Slav Defence, Dutch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4
+
+[Event "D20 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4
+
+[Event "D21 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3
+
+[Event "D22 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3
+
+[Event "D23 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. g3
+
+[Event "D24 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3
+
+[Event "D25 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3 a6
+
+[Event "D26 - Queen's Gambit Accepted: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3 a6 5. e3
+
+[Event "D27 - Queen's Gambit Accepted: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3 a6 5. e3 e6 6. Bxc4 c5 7. O-O
+
+[Event "D28 - Queen's Gambit Accepted: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3 a6 5. e3 e6 6. Bxc4 c5 7. O-O b5 8. Be2
+
+[Event "D29 - Queen's Gambit Accepted: Classical Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. Nc3 a6 5. e3 e6 6. Bxc4 c5 7. O-O b5 8. Be2 Bb7 9. a4
+
+[Event "D30 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6
+
+[Event "D31 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3
+
+[Event "D32 - Queen's Gambit Declined: Tarrasch Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 c5
+
+[Event "D33 - Queen's Gambit Declined: Tarrasch Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6
+
+[Event "D34 - Queen's Gambit Declined: Tarrasch Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6 7. Bg2 Be7 8. O-O O-O 9. b3
+
+[Event "D35 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5
+
+[Event "D36 - Queen's Gambit Declined: Exchange Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 Be7 6. e3 O-O 7. Qc2
+
+[Event "D37 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3
+
+[Event "D38 - Queen's Gambit Declined: Ragozin Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Bb4
+
+[Event "D39 - Queen's Gambit Declined: Ragozin Defense"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Bb4 5. Bg5 dxc4
+
+[Event "D40 - Queen's Gambit Declined: Semi-Tarrasch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c5
+
+[Event "D41 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c5 5. cxd5
+
+[Event "D42 - Queen's Gambit Declined: Semi-Tarrasch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c5 5. cxd5 Nxd5 6. e3 Nc6 7. a3
+
+[Event "D43 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6
+
+[Event "D44 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. Bg5 dxc4 6. e4 b5
+
+[Event "D45 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. e3 Nbd7 6. Bd3
+
+[Event "D46 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. e3 Nbd7 6. Bd3 g6 7. O-O Bg7
+
+[Event "D47 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. e3 Nbd7 6. Bd3 dxc4 7. Bxc4
+
+[Event "D48 - Queen's Gambit Declined: Semi-Slav Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. e3 Nbd7 6. Bd3 dxc4 7. Bxc4 Bb4 8. O-O
+
+[Event "D49 - Queen's Gambit Declined: Semi-Slav Defence, Meran Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 c6 5. e3 Nbd7 6. Bd3 dxc4 7. Bxc4 b5 8. Bd3
+
+[Event "D50 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5
+
+[Event "D51 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7
+
+[Event "D52 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Nbd7 5. e3 c6 6. Nf3 Be7
+
+[Event "D53 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7
+
+[Event "D54 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Rc1 c6 7. Nf3
+
+[Event "D55 - Queen's Gambit Declined: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3
+
+[Event "D56 - Queen's Gambit Declined: Lasker Defence"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 h6 7. Bh4
+
+[Event "D57 - Queen's Gambit Declined: Lasker Defence, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 h6 7. Bh4 Ne4
+
+[Event "D58 - Queen's Gambit Declined: Tartakower Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6
+
+[Event "D59 - Queen's Gambit Declined: Tartakower Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 8. cxd5 Nxd5
+
+[Event "D60 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1
+
+[Event "D61 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 c5
+
+[Event "D62 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 c6 8. Bd3
+
+[Event "D63 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 a6
+
+[Event "D64 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 a6 8. c5
+
+[Event "D65 - Queen's Gambit Declined: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 a6 8. cxd5 exd5 9. Bd3
+
+[Event "D66 - Queen's Gambit Declined: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 c6 8. Bd3 h6 9. Bh4
+
+[Event "D67 - Queen's Gambit Declined: Orthodox Variation, Main Line"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 a6 8. c5
+
+[Event "D68 - Queen's Gambit Declined: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 c6 8. Bd3 dxc4 9. Bxc4 Nd5
+
+[Event "D69 - Queen's Gambit Declined: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 O-O 6. e3 Nbd7 7. Rc1 c6 8. Bd3 dxc4 9. Bxc4 Nd5 10. Bxe7 Qxe7 11. O-O Nxc3 12. Rxc3 e5
+
+[Event "D70 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3
+
+[Event "D71 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5
+
+[Event "D72 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. e4
+
+[Event "D73 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3
+
+[Event "D74 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O
+
+[Event "D75 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O c5
+
+[Event "D76 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O c5 8. e4
+
+[Event "D77 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O c5 8. dxc5
+
+[Event "D78 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O c5 8. dxc5
+
+[Event "D79 - Neo-Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 d5 4. cxd5 Nxd5 5. Bg2 Bg7 6. Nf3 O-O 7. O-O c5 8. dxc5
+
+[Event "D80 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5
+
+[Event "D81 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Qb3
+
+[Event "D82 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O
+
+[Event "D83 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. cxd5 Nxd5 7. Nxd5 Qxd5
+
+[Event "D84 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. cxd5 Nxd5 7. Nxd5 Qxd5 8. Bxc7
+
+[Event "D85 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3
+
+[Event "D86 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4
+
+[Event "D87 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 c5
+
+[Event "D88 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 O-O 8. Ne2 c5 9. O-O cxd4 10. cxd4 Nc6
+
+[Event "D89 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 O-O 8. Ne2 c5 9. O-O cxd4 10. cxd4 Nc6 11. Be3 e6 12. Rc1
+
+[Event "D90 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3
+
+[Event "D91 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. g3
+
+[Event "D92 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bf4
+
+[Event "D93 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bf4 O-O 6. e3
+
+[Event "D94 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. cxd5
+
+[Event "D95 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3
+
+[Event "D96 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3 dxc4 7. Bxc4
+
+[Event "D97 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3 dxc4 7. Bxc4 a6
+
+[Event "D98 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3 dxc4 7. Bxc4 a6 8. a4 c5 9. O-O cxd4 10. exd4 Nc6
+
+[Event "D99 - Grünfeld Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3 dxc4 7. Bxc4 a6 8. a4 c5 9. O-O Nc6 10. dxc5
+
+[Event "E00 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6
+
+[Event "E01 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3
+
+[Event "E02 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2
+
+[Event "E03 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4
+
+[Event "E04 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4 5. Nf3
+
+[Event "E05 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4 5. Nf3 Be7 6. O-O O-O
+
+[Event "E06 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 Bb4+
+
+[Event "E07 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 Be7 5. Nf3 O-O 6. O-O Nbd7
+
+[Event "E08 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 Be7 5. Nf3 O-O 6. O-O Nbd7 7. Qc2
+
+[Event "E09 - Catalan Opening: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 Be7 5. Nf3 O-O 6. O-O Nbd7 7. Qc2 c6 8. Nbd2 b6 9. a4
+
+[Event "E10 - Queen's Pawn Game: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 c5
+
+[Event "E11 - Bogo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 Bb4+
+
+[Event "E12 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6
+
+[Event "E13 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. Nc3 Bb7 5. Bg5 Be7 6. e3
+
+[Event "E14 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. e3
+
+[Event "E15 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Ba6 5. b3
+
+[Event "E16 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Bb4+
+
+[Event "E17 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Be7 6. O-O O-O
+
+[Event "E18 - Queen's Indian Defence: Old Indian Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Be7 6. O-O O-O 7. Nc3 d5
+
+[Event "E19 - Queen's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Be7 6. O-O O-O 7. Nc3 Ne4
+
+[Event "E20 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4
+
+[Event "E21 - Nimzo-Indian Defence: Three Knights Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Nf3
+
+[Event "E22 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qb3
+
+[Event "E23 - Nimzo-Indian Defence: Spielmann Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qb3 c5
+
+[Event "E24 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3
+
+[Event "E25 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 d5 6. cxd5 exd5
+
+[Event "E26 - Nimzo-Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 c5 6. f3
+
+[Event "E27 - Nimzo-Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 O-O 6. f3
+
+[Event "E28 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 O-O 6. e3 d5 7. cxd5 exd5 8. Bd3
+
+[Event "E29 - Nimzo-Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 O-O 6. e3 c5 7. Bd3 Nc6 8. Ne2 b6
+
+[Event "E30 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Bg5
+
+[Event "E31 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Bg5 h6 5. Bh4
+
+[Event "E32 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2
+
+[Event "E33 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 Nc6
+
+[Event "E34 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5
+
+[Event "E35 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5 5. cxd5 exd5
+
+[Event "E36 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5 5. a3
+
+[Event "E37 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5 5. cxd5 exd5 6. Bg5 h6 7. Bh4 g5
+
+[Event "E38 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5 5. cxd5 exd5 6. a3 Bxc3+ 7. Qxc3
+
+[Event "E39 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 d5 5. cxd5 exd5 6. a3 Bxc3+ 7. Qxc3 Ne4 8. Qc2 Nc6
+
+[Event "E40 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3
+
+[Event "E41 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5
+
+[Event "E42 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5 5. Nge2
+
+[Event "E43 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 b6
+
+[Event "E44 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Ne2
+
+[Event "E45 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Ne2 c5
+
+[Event "E46 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Ne2 d5
+
+[Event "E47 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Ne2 d5 6. a3 Be7 7. cxd5 exd5 8. g3
+
+[Event "E48 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3
+
+[Event "E49 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3 d5 6. a3 Bxc3+ 7. bxc3 dxc4 8. Bxc4 c5
+
+[Event "E50 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5
+
+[Event "E51 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd2
+
+[Event "E52 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 b6
+
+[Event "E53 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5
+
+[Event "E54 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O
+
+[Event "E55 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O dxc4 8. Bxc4
+
+[Event "E56 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O Nc6 8. a3 Bxc3+ 9. bxc3
+
+[Event "E57 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O Nc6 8. a3 Ba5
+
+[Event "E58 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O Nc6 8. a3 Ba5 9. cxd5 exd5 10. dxc5
+
+[Event "E59 - Nimzo-Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. Bd3 c5 7. O-O Nc6 8. a3 Bxc3+ 9. bxc3 dxc4 10. Bxc4 Qc7 11. Ba2
+
+[Event "E60 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. g3 Bg7 4. Bg2 d6
+
+[Event "E61 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. e4
+
+[Event "E62 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2
+
+[Event "E63 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 Nc6
+
+[Event "E64 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 c5
+
+[Event "E65 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 c5 7. O-O Nc6 8. d5
+
+[Event "E66 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 c5 7. O-O Nc6 8. d5 Na5
+
+[Event "E67 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 Nbd7 7. O-O e5
+
+[Event "E68 - King's Indian Defence: Fianchetto Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 Nbd7 7. O-O e5 8. e4
+
+[Event "E69 - King's Indian Defence: Fianchetto Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 O-O 5. g3 d6 6. Bg2 Nbd7 7. O-O e5 8. e4 exd4 9. Nxd4 Re8
+
+[Event "E70 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4
+
+[Event "E71 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. h3
+
+[Event "E72 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. g3
+
+[Event "E73 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Be2 O-O 6. Bg5
+
+[Event "E74 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Be2 O-O 6. Bg5 c5
+
+[Event "E75 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Be2 O-O 6. Bg5 c5 7. d5 exd5 8. cxd5
+
+[Event "E76 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f4
+
+[Event "E77 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f4 O-O 6. Nf3
+
+[Event "E78 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f4 O-O 6. Nf3 c5
+
+[Event "E79 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f4 O-O 6. Nf3 c5 7. Be2 cxd4 8. Nxd4
+
+[Event "E80 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3
+
+[Event "E81 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Bg5
+
+[Event "E82 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5
+
+[Event "E83 - King's Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 c5 7. Nge2
+
+[Event "E84 - King's Indian Defence: Saemisch Variation, Panno Formation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 c5 7. Nge2 Nc6
+
+[Event "E85 - King's Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5
+
+[Event "E86 - King's Indian Defence: Saemisch Variation, Orthodox"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nbd7
+
+[Event "E87 - King's Indian Defence: Saemisch Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nbd7 8. Nh3
+
+[Event "E88 - King's Indian Defence: Saemisch Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nbd7 8. Qd2
+
+[Event "E89 - King's Indian Defence: Saemisch Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nbd7 8. Qd2 a5
+
+[Event "E90 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O
+
+[Event "E91 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 Nbd7
+
+[Event "E92 - King's Indian Defence: Classical Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. Be3
+
+[Event "E93 - King's Indian Defence: General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O
+
+[Event "E94 - King's Indian Defence: Orthodox Variation"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7
+
+[Event "E95 - King's Indian Defence: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7 8. d5
+
+[Event "E96 - King's Indian Defence: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7 8. d5 a5
+
+[Event "E97 - King's Indian Defence: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7 8. d5 Nc5
+
+[Event "E98 - King's Indian Defence: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7 8. d5 Nc5 9. Nd2 a5
+
+[Event "E99 - King's Indian Defence: Orthodox Variation, General"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nbd7 8. d5 Nc5 9. Nd2 a5 10. Be3 c6 11. a3

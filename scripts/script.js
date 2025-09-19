@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			settings = {
 				columns: 3,
 				orientation: 'white',
-				darkColor: '#446688',
+				darkColor: '#887766',
 				highlightColor: '#3399dd',
 			}
 			localStorage.setItem('chessboardSettings', JSON.stringify(settings))
