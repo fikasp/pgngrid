@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const chessboards = []
 	let allGames = []
 	let bigBoard = null
+	let currentOrientation = 'white'
 	let currentBoardIndex = 0
 	let pgnString = ''
 	let positions = []
@@ -22,11 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const $modalBoard = document.getElementById('board-modal')
 	const $modalSettings = document.getElementById('settings-modal')
 	const $printTitle = document.getElementById('print-title')
-	
+
 	// @b Buttons
 	// ------------------------
 	const $btnCloseBoard = document.getElementById('btn-close-board')
 	const $btnCloseSettings = document.querySelector('.btn-close-settings')
+	const $btnOrientation = document.getElementById('btn-orientation')
 	const $btnNextMove = document.getElementById('btn-next-move')
 	const $btnPrevMove = document.getElementById('btn-prev-move')
 	const $btnSettings = document.getElementById('btn-settings')
@@ -42,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		'highlight-color-picker'
 	)
 	const $selectColumns = document.getElementById('board-columns')
-	const $selectOrientation = document.getElementById('orientation-select')
 	const $selectGame = document.getElementById('game-select')
 
 	// ========================
@@ -73,19 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		$btnCloseBoard.addEventListener('click', handleCloseBtnBoardClick)
 		$btnNextMove.addEventListener('click', handleNextMoveClick)
 		$btnPrevMove.addEventListener('click', handlePrevMoveClick)
-		$btnSettings.addEventListener('click', handleSettingsBtnClick)
+		$btnOrientation.addEventListener('click', handleOrientationToggle)
+		$btnSettings.addEventListener('click', handleSettingsClick)
 		$btnPrint.addEventListener('click', printBoards)
 
 		// @b Selects
 		// ------------------------
 		$selectGame.addEventListener('change', handleGameSelectChange)
 		$selectColumns.addEventListener('change', handleColumnsSelectChange)
-		$selectOrientation.addEventListener('change', handleOrientationSelectChange)
 		$pickerBoardColor.addEventListener('input', handleColorPickerInput)
 		$pickerHighlightColor.addEventListener('input', handleColorPickerInput)
 		addWheelListener($selectColumns, handleColumnsSelectChange)
 		addWheelListener($selectGame, handleGameSelectChange)
-		addWheelListener($selectOrientation, handleOrientationSelectChange)
 	}
 
 	// ========================
@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	// @b Handle paste area input
 	// ------------------------
 	function handlePasteAreaInput(event) {
-		const pgnText = event.target.value.trim()
-		if (pgnText.length > 0) {
-			processPgn(pgnText)
+		pgnString = event.target.value.trim()
+		if (pgnString.length > 0) {
+			processPgn(pgnString)
 		}
 	}
 
@@ -138,6 +138,28 @@ document.addEventListener('DOMContentLoaded', () => {
 		handleFile(file)
 	}
 
+	// @r HANDLERS
+	// ========================
+
+	// ... (Twój obecny kod) ...
+
+	// @b Handle orientation toggle
+	// ------------------------
+	function handleOrientationToggle() {
+		// Zmieniamy wartość globalnej zmiennej
+		currentOrientation = currentOrientation === 'white' ? 'black' : 'white'
+
+		// Zapisujemy nową wartość do localStorage
+		let settings = JSON.parse(localStorage.getItem('chessboardSettings')) || {}
+		settings.orientation = currentOrientation
+		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
+
+		// Jeśli gra jest załadowana, generujemy plansze ponownie
+		if (pgnString) {
+			generateBoards()
+		}
+	}
+
 	function handleColumnsSelectChange() {
 		if (pgnString) renderGame(allGames[$selectGame.value].pgn)
 		updateBoardLayout()
@@ -147,6 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	function handleGameSelectChange() {
 		const selectedIndex = $selectGame.value
 		if (selectedIndex !== '') {
+			const selectedGame = allGames[selectedIndex]
+			const gameTitle = selectedGame.header.Event
+			document.title = 'PGN Grid - ' + gameTitle
 			renderGame(allGames[selectedIndex].pgn)
 		} else {
 			$divBoards.innerHTML = ''
@@ -167,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		saveSettings()
 	}
 
-	function handleSettingsBtnClick() {
+	function handleSettingsClick() {
 		$modalSettings.classList.add('show-modal')
 	}
 	function handleCloseBtnClick() {
@@ -242,7 +267,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function handleResize() {
+		// 1. Zapisz aktualnie wybraną wartość kolumn.
+		const currentColumns = $selectColumns.value
+
+		// 2. Zaktualizuj opcje na liście (spowoduje to ich reset do 1).
 		updateColumnsSelect()
+
+		// 3. Sprawdź, czy zapisana wartość jest nadal dostępna.
+		const optionExists = Array.from($selectColumns.options).some(
+			(option) => option.value === currentColumns
+		)
+
+		// 4. Jeśli opcja istnieje, przywróć ją.
+		if (optionExists) {
+			$selectColumns.value = currentColumns
+		} else {
+			// W przeciwnym razie, ustaw wartość na największą dostępną opcję.
+			const maxColumnsValue =
+				$selectColumns.options[$selectColumns.options.length - 1].value
+			$selectColumns.value = maxColumnsValue
+			saveSettings() // Zapisz nową wartość
+		}
+
+		// 5. Zaktualizuj układ plansz na podstawie nowej wartości.
 		if (pgnString && allGames.length > 0) {
 			renderGame(allGames[$selectGame.value].pgn)
 		}
@@ -260,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function saveSettings() {
 		const settings = {
 			columns: $selectColumns.value,
-			orientation: $selectOrientation.value,
+			orientation: currentOrientation,
 			darkColor: $pickerBoardColor.value,
 			highlightColor: $pickerHighlightColor.value,
 		}
@@ -271,17 +318,53 @@ document.addEventListener('DOMContentLoaded', () => {
 	// ------------------------
 	function loadSettings() {
 		const savedSettings = localStorage.getItem('chessboardSettings')
+		let settings = {}
+
 		if (savedSettings) {
-			const settings = JSON.parse(savedSettings)
-			updateColumnsSelect()
-			if ($selectColumns) {
-				$selectColumns.value = settings.columns || 3
+			settings = JSON.parse(savedSettings)
+		} else {
+			settings = {
+				columns: 3,
+				orientation: 'white',
+				darkColor: '#446688',
+				highlightColor: '#3399dd',
 			}
-			$selectOrientation.value = settings.orientation
-			$pickerBoardColor.value = settings.darkColor
-			$pickerHighlightColor.value = settings.highlightColor || '#ffc107'
-			updateBoardLayout()
+			localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 		}
+
+		// Najpierw zaktualizuj opcje na podstawie szerokości okna
+		updateColumnsSelect()
+
+		// Teraz ustaw wartość z localStorage
+		if ($selectColumns && settings.columns) {
+			const savedColumns = parseInt(settings.columns, 10)
+			// Sprawdź, czy zapisana wartość jest w zakresie dostępnych opcji
+			const optionExists = Array.from($selectColumns.options).some(
+				(opt) => parseInt(opt.value, 10) === savedColumns
+			)
+			if (optionExists) {
+				$selectColumns.value = savedColumns
+			} else {
+				// Jeśli wartość jest nieprawidłowa (np. ekran jest za mały), wybierz ostatnią opcję
+				$selectColumns.value =
+					$selectColumns.options[$selectColumns.options.length - 1].value
+			}
+		}
+
+		currentOrientation = settings.orientation
+
+		if ($pickerBoardColor) {
+			$pickerBoardColor.value = settings.darkColor
+		}
+		if ($pickerHighlightColor) {
+			$pickerHighlightColor.value = settings.highlightColor
+		}
+
+		if (pgnString && allGames.length > 0) {
+			generateBoards()
+		}
+
+		updateBoardLayout()
 	}
 
 	// @b Lighten color
@@ -324,23 +407,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	// ------------------------
 	function updateColumnsSelect() {
 		if (!$selectColumns) return
-		const containerWidth = $divBoards.clientWidth
+		const containerWidth = $divBoards.clientWidth - 20
 		const minBoardSize = 150
 		const gap = 10
 		let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
 		maxColumns = Math.max(1, maxColumns)
-		const savedValue = $selectColumns.value
+
 		$selectColumns.innerHTML = ''
 		for (let i = 1; i <= maxColumns; i++) {
 			const option = document.createElement('option')
 			option.value = i
 			option.textContent = i
 			$selectColumns.appendChild(option)
-		}
-		if (savedValue && parseInt(savedValue, 10) <= maxColumns) {
-			$selectColumns.value = savedValue
-		} else {
-			$selectColumns.value = maxColumns
 		}
 	}
 
@@ -363,14 +441,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	// @b Process PGN
 	// ------------------------
 	function processPgn(pgn) {
-		// Wyczyść dotychczasowe dane
 		$divBoards.innerHTML = ''
 		chessboards.length = 0
 		positions.length = 0
 		allGames.length = 0
-		let pgnString = pgn.trim()
 
-		// Sprawdź, czy coś zostało wklejone; jeśli nie, zakończ funkcję
 		if (pgnString.length === 0) {
 			return
 		}
@@ -432,6 +507,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if ($selectColumns) $selectColumns.style.display = 'inline-block'
 			populateGameSelect()
+
+			const firstGame = allGames[0]
+			const firstGameTitle = firstGame.header.Event
+			document.title = 'PGN Grid - ' + firstGameTitle
+
 			renderGame(allGames[0].pgn)
 		} catch (error) {
 			console.error('Błąd podczas przetwarzania PGN:', error)
@@ -502,7 +582,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			generateBoards()
 		} catch (error) {
 			console.error('Błąd podczas renderowania partii:', error)
-			alert('Wystąpił błąd podczas wyświetlania wybranej partii.')
 		}
 	}
 
@@ -528,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function generateBoards() {
 		$divBoards.innerHTML = ''
 		chessboards.length = 0
-		const orientation = $selectOrientation.value
+
 		const currentSize = calculateBoardSize()
 		positions.forEach((pos, index) => {
 			const boardWrapper = document.createElement('div')
@@ -543,8 +622,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				moveInfo.className = 'move-info'
 				if (pos.color !== null) {
 					if (
-						(orientation === 'white' && pos.color === 'w') ||
-						(orientation === 'black' && pos.color === 'b')
+						(currentOrientation === 'white' && pos.color === 'w') ||
+						(currentOrientation === 'black' && pos.color === 'b')
 					) {
 						moveInfo.classList.add('bold-move')
 					}
@@ -559,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				position: pos.fen,
 				draggable: false,
 				pieceTheme: 'images/{piece}.png',
-				orientation: orientation,
+				orientation: currentOrientation,
 				showNotation: false,
 			}
 			const board = new Chessboard(boardId, config)
@@ -625,8 +704,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				position: position.fen,
 				draggable: false,
 				pieceTheme: 'images/{piece}.png',
-				showNotation: true,
-				orientation: $selectOrientation.value,
+				showNotation: false,
+				orientation: currentOrientation,
 			}
 			bigBoard = new Chessboard('big-board', config)
 			const darkColor = $pickerBoardColor.value
@@ -648,8 +727,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				`#big-board .square-${position.to}`
 			)
 			if (fromSquare && toSquare) {
-				fromSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
-				toSquare.style.boxShadow = `inset 0 0 0 3px ${highlightColor}`
+				fromSquare.style.boxShadow = `inset 0 0 0 6px ${highlightColor}`
+				toSquare.style.boxShadow = `inset 0 0 0 6px ${highlightColor}`
 			}
 		} else {
 			console.error('Element #big-board not found!')
