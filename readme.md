@@ -1,4 +1,4 @@
-# ![Logo](assets/logo/logo.png) PGNgrid
+# ![Logo](src/logo/logo.png) PGNgrid
 
 PGNgrid to prosta i intuicyjna aplikacja webowa, która pozwala na wizualizację partii szachowych z plików PGN. Zamiast przeglądać ruchy jeden po drugim, aplikacja renderuje całą partię jako siatkę plansz szachowych, gdzie każda plansza przedstawia pozycję po kolejnym posunięciu.
 
@@ -6,7 +6,7 @@ Jest to idealne narzędzie dla analityków, trenerów i miłośników szachów, 
 
 Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid](https://fikasp.github.io/pgngrid)**
 
-## Główne funkcje
+## 🔗 Główne funkcje
 
 * **Wczytywanie plików PGN:** Proste przeciągnij i upuść lub wybierz plik z komputera. Aplikacja obsługuje pliki z wieloma partiami, umożliwiając łatwe przełączanie się między nimi.
 * **Wizualizacja:** Każdy ruch w partii jest renderowany na osobnej planszy, co tworzy widok "siatki" postępu gry.
@@ -18,7 +18,7 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 * **Intuicyjna nawigacja:** Łatwe przełączanie się między partiami za pomocą listy rozwijanej lub przewijania kółkiem myszy.
 * **Wydruk do PDF:** Opcja wydruku siatki plansz, idealna do tworzenia materiałów treningowych lub analiz offline.
 
-## Wskazówki użytkowania
+## 📄 Wskazówki użytkowania
 
 1.  **Wczytaj plik PGN:** Przeciągnij i upuść plik `.pgn` na centralny obszar strony, kliknij ikonę folderu lub wklej tekst.
 2.  **Przeglądaj partie:** Jeśli plik zawiera wiele partii, wybierz interesującą Cię grę z listy rozwijanej w nagłówku. Możesz również użyć kółka myszy na liście, aby szybko przechodzić do kolejnych partii.
@@ -27,7 +27,7 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 5.  **Dostosuj widok:** Kliknij ikonę odwróconych strzałek, aby zmienić orientację planszy, oraz ikonę koła zębatego, aby otworzyć ustawienia i spersonalizować wygląd plansz.
 6.  **Drukuj:** Użyj ikony drukarki, aby wydrukować siatkę plansz wybranej partii do pliku PDF lub bezpośrednio na papier. Dostosuj układ plansz za pomocą skali i marginesów wydruku.
 
-## Technologie 🛠️
+## ⚙️ Zastosowane technologie 
 
 * **HTML5:** Struktura.
 * **CSS3:** Stylizacja interfejsu.
@@ -36,10 +36,11 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 * **`chessboard.js`:** Biblioteka do renderowania interaktywnych plansz szachowych.
 * **`Font Awesome`:** Biblioteka ikon.
 
-## Historia wersji 📜
+## ⏱️ Historia wersji 
 
-* **v1.1 (2025-09-19):** Aktualizacja interfejsu.
+* **v1.1 (2025-09-20):** Aktualizacja interfejsu.
     * Możliwość przeciągania pliku na ikonkę folderu.
+    * Wyświetlanie nazw ruchów nad powiększoną planszą.
     * Zdefiniowanie loga i domyślnej kolorystyki.
 
 * **v1.0 (2025-09-18):** Pierwsza publiczna wersja aplikacji.
@@ -48,7 +49,7 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
     * Konfigurowalne ustawienia wyglądu.
     * Wydruk do PDF.
 
-## Kontakt ✉️
+## ✉️ Kontakt 
 
 Jeśli masz pytania lub sugestie skontaktuj się ze mną pod adresem [fikasp@gmail.com](mailto:fikasp@gmail.com).
 

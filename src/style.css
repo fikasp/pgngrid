@@ -1,41 +1,57 @@
+/* 
+  @p PGNgrid
+*/
 /*======================
-	@r GENERAL
+  @r GENERAL 
 ======================*/
+/*#region*/
 
-/* @b Reset
-----------------------*/
+:root {
+	--black: #000;
+	--gray1: #111;
+	--gray2: #222;
+	--gray3: #333;
+	--grayA: #aaa;
+	--grayC: #ccc;
+	--white: #fff;
+	--board-dark-color: #998877;
+	--board-light-color: #bebdbd;
+	--highlight-color: #dd8844;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
-/* @b Scrollbar
+/*----------------------
+	@g SCROLLBAR
 ----------------------*/
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #222 #333;
+	scrollbar-color: var(--gray2) var(--gray3);
 }
 *::-webkit-scrollbar {
 	width: 10px;
 }
 *::-webkit-scrollbar-track {
-	background-color: #333;
+	background-color: var(--gray3);
 	border-radius: 20px;
 }
 *::-webkit-scrollbar-thumb {
-	background-color: #222;
+	background-color: var(--gray2);
 	border-radius: 20px;
 }
-
-/* @b Body
+/*----------------------
+	@g BODY
 ----------------------*/
 body {
 	width: 100%;
 	height: 100%;
 	font-family: Verdana, sans-serif;
-	background-color: #111;
-	color: #ccc;
+	background-color:var(--gray1);
+	color: var(--grayC);
 	text-align: center;
 	overflow-x: hidden;
 	display: flex;
@@ -43,10 +59,11 @@ body {
 	min-height: 100vh;
 	overflow-y: scroll;
 }
-
+/* #endregion */
 /*======================
 	@r HEADER
 ======================*/
+/*#region*/
 .header {
 	position: fixed;
 	top: 0;
@@ -103,6 +120,7 @@ body {
 .header-title {
 	margin: 0;
 	font-size: 1.2em;
+	transition: color 0.3s;
 	color: white;
 }
 
@@ -130,10 +148,9 @@ body {
 		width: 100%;
 	}
 }
-
-/* @b Buttons
+/*----------------------
+	@g BUTTONS
 ----------------------*/
-
 .btn-print,
 .btn-settings,
 .btn-orientation,
@@ -149,6 +166,7 @@ body {
 .btn-print:hover,
 .btn-settings:hover,
 .btn-orientation:hover,
+.header-title:hover,
 .file-label:hover {
 	color: #ccc;
 }
@@ -162,7 +180,8 @@ body {
 	display: none;
 }
 
-/* @b Game select
+/*----------------------
+	@g GAME SELECT
 ----------------------*/
 
 #game-select {
@@ -205,25 +224,80 @@ body {
 		width: 100%;
 	}
 }
-
+/* #endregion */
 /*======================
-	@r FOOTER
-======================*/
-.footer {
-	width: 100%;
-	height: 40px;
-	margin-top: auto;
-	background-color: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(5px);
-	color: white;
+	@r DROP AREA
+/*====================*/
+/* #region */
+#file-drop-area {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.3s ease;
+	width: 300px;
+	height: auto;
+	min-height: 300px;
+	padding: 40px;
+	border: 3px dashed #ccc;
+	border-radius: 15px;
+	background-color: #222;
+	color: #ccc;
+	line-height: 1.5;
 	text-align: center;
-	line-height: 40px;
-	z-index: 1000;
+	cursor: pointer;
 }
 
+#file-drop-area:hover {
+	color: var(--highlight-color);
+	border-color: var(--highlight-color);
+	background-color: transparent;
+}
+
+#file-drop-area.drag-over {
+	border-color: #22cc88;
+	background-color: transparent;
+	color: #22cc88;
+}
+
+#file-drop-area i {
+	font-size: 50px;
+	margin-top: 70px;
+}
+
+/*----------------------
+	@g PASTE AREA
+----------------------*/
+#pgn-paste-area {
+	width: 220px;
+	height: 66px;
+	padding: 10px 20px;
+	border: 0px;
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 0.9em;
+	line-height: 1.5em;
+	resize: none;
+	background-color: #222;
+	color: #aaa;
+	transition: all 0.3s ease;
+	text-align: center;
+	outline: none;
+}
+
+#pgn-paste-area:focus::placeholder {
+	color: transparent;
+}
+
+/* #endregion */
 /*======================
 	@r BOARDS
-======================*/
+/*====================*/
+/* #region */
 #boards {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -263,41 +337,132 @@ body {
 	font-weight: bold;
 }
 
+.square-55d63.black-3c85d {
+	background-color: var(--board-dark-color);
+}
+
+.square-55d63.white-1e1d7 {
+	background-color: var(--board-light-color);
+}
+
+.square-55d63.highlight-from,
+.square-55d63.highlight-to {
+	box-shadow: inset 0 0 0 3px var(--highlight-color);
+}
+
 @media screen and (max-width: 1000px) {
 	#boards {
 		margin-top: 52px;
 	}
 }
-
+/* #endregion */
 /*======================
-	@r MODALS
-======================*/
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
+	@r BIG BOARD
+/*====================*/
+/* #region */
+.modal-content-board {
+	position: relative;
+	width: min(calc(100vw - 50px), calc(100vh - 100px));
+	height: min(calc(100vw - 50px), calc(100vh - 100px));
+	box-shadow: 0 0 15px 15px rgba(0, 0, 0, 1);
+}
+
+#big-board-wrapper {
+	position: relative;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.4);
-	backdrop-filter: blur(5px);
-	z-index: 2000;
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s 0.3s, opacity 0.3s ease-in-out;
+}
+
+#move-list-display {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	max-width: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	white-space: nowrap;
+	overflow-x: auto;
+	margin-bottom: 20px;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
-.modal.show-modal {
-	visibility: visible;
-	transition: opacity 0.3s ease-in-out;
-	opacity: 1;
+#move-list-display span {
+	font-size: 1.2rem;
+	padding: 5px 10px;
+	border-radius: 5px;
+	transition: 0.2s;
+	white-space: nowrap;
+	cursor: pointer;
 }
 
+#move-list-display span:hover {
+	color: #aaa;
+}
+
+#move-list-display span.active-move {
+	background-color: var(--highlight-color);
+	color: white;
+}
+
+/*----------------------
+	@g BUTTONS
+----------------------*/
+.btn-nav {
+	-webkit-tap-highlight-color: transparent;
+	position: absolute;
+	background: transparent;
+	text-shadow: 0 0 5px #000;
+	color: #ccc;
+	border: none;
+	cursor: pointer;
+	font-size: 2em;
+	transition: color 0.3s;
+	z-index: 10;
+}
+
+.btn-nav:hover:enabled {
+	color: #aaa;
+}
+
+.btn-nav:disabled {
+	display: none;
+}
+
+.btn-nav.left {
+	left: -45px;
+	padding: 15px;
+	transform: translateY(-50%);
+	top: 50%;
+}
+
+.btn-nav.right {
+	right: -45px;
+	padding: 15px;
+	transform: translateY(-50%);
+	top: 50%;
+}
+
+.btn-nav.close {
+	position: absolute;
+	padding: 4px;
+	top: 0px;
+	right: 0px;
+	font-size: 25px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: color 0.3s;
+	z-index: 1001;
+}
+.btn-nav.close:hover {
+	color: #aaa;
+}
+/* #endregion */
 /*======================
 	@r SETTINGS
-======================*/
+/*====================*/
+/* #region */
 .modal-content-settings {
 	padding: 20px 20px 20px;
 	padding-top: 12px;
@@ -328,7 +493,8 @@ body {
 	gap: 10px;
 }
 
-/* @b Buttons
+/*----------------------
+	@g BUTTONS
 ----------------------*/
 .btn-close-settings {
 	color: #aaa;
@@ -376,154 +542,54 @@ input[type='color']::-moz-color-swatch {
 	border-radius: 2px;
 	border: none;
 }
-
+/* #endregion */
 /*======================
-	@r BIG BOARD
-======================*/
-.modal-content-board {
-	position: relative;
-	width: min(calc(100vw - 50px), calc(100vh - 50px));
-	height: min(calc(100vw - 50px), calc(100vh - 50px));
-	box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.5);
-}
-
-#big-board-wrapper {
-	position: relative;
+	@r MODALS
+/*====================*/
+/* #region */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
-}
-
-/* @b Buttons
-----------------------*/
-.btn-nav {
-	-webkit-tap-highlight-color: transparent;
-	position: absolute;
-	background: transparent;
-	text-shadow: 0 0 5px #000;
-	color: #ccc;
-	border: none;
-	cursor: pointer;
-	font-size: 2em;
-	transition: color 0.3s;
-	z-index: 10;
-}
-
-.btn-nav:hover:enabled {
-	color: #aaa;
-}
-
-.btn-nav:disabled {
-	display: none;
-}
-
-.btn-nav.left {
-	left: -45px;
-	padding: 15px;
-	transform: translateY(-50%);
-	top: 50%;
-}
-
-.btn-nav.right {
-	right: -45px;
-	padding: 15px;
-	transform: translateY(-50%);
-	top: 50%;
-}
-
-.btn-nav.close {
-	position: absolute;
-	padding: 2px;
-	top: 0px;
-	right: 0px;
-	font-size: 25px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: color 0.3s;
-	z-index: 1001;
-}
-.btn-nav.close:hover {
-	color: #aaa;
-}
-
-/*======================
-	@r DROP AREA
-======================*/
-#file-drop-area {
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(5px);
+	z-index: 2000;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 0.3s, opacity 0.3s ease-in-out;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	transition: all 0.3s ease;
-	width: 300px;
-	height: auto;
-	min-height: 300px;
-	padding: 40px;
-	border: 3px dashed #ccc;
-	border-radius: 15px;
-	background-color: #222;
-	color: #ccc;
-	line-height: 1.5;
+}
+
+.modal.show-modal {
+	visibility: visible;
+	transition: opacity 0.3s ease-in-out;
+	opacity: 1;
+}
+/* #endregion */
+/*======================
+	@r FOOTER
+======================*/
+/*#region*/
+.footer {
+	width: 100%;
+	height: 40px;
+	margin-top: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(5px);
+	color: white;
 	text-align: center;
-	cursor: pointer;
+	line-height: 40px;
+	z-index: 1000;
 }
-
-#file-drop-area:hover {
-	color: #3399dd;
-	border-color: #3399dd;
-	background-color: transparent;
-}
-
-#file-drop-area.drag-over {
-	border-color: #22cc88;
-	background-color: transparent;
-	color: #22cc88;
-}
-
-#file-drop-area i {
-	font-size: 50px;
-	margin-top: 70px;
-}
-
-/* @b Paste area
-----------------------*/
-#pgn-paste-area {
-	width: 220px;
-	height: 66px;
-	padding: 10px 20px;
-	border: 0px;
-	border-radius: 8px;
-	font-family: inherit;
-	font-size: 0.9em;
-	line-height: 1.5em;
-	resize: none;
-	background-color: #222;
-	color: #aaa;
-	transition: all 0.3s ease;
-	text-align: center;
-}
-
-#pgn-paste-area:hover {
-	border-color: #444;
-	outline: none;
-}
-
-#pgn-paste-area:focus::placeholder {
-	color: transparent;
-}
-
-#pgn-paste-area:focus {
-	border-color: #3399dd;
-	outline: none;
-}
-
+/* #endregion */
 /*======================
 	@r PRINT
-======================*/
-
+/*====================*/
+/* #region */
 @media print {
 	body {
 		background-color: #fff !important;
@@ -541,3 +607,4 @@ input[type='color']::-moz-color-swatch {
 		gap: 5px;
 	}
 }
+/* #endregion */
