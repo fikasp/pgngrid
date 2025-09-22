@@ -1,11 +1,8 @@
-/* 
-  @p PGNgrid
-*/
-/*======================
-  @r GENERAL 
-======================*/
-/*#region*/
-
+/* #region @p PGNgrid */
+/* #endregion */
+/*======================*/
+/* #region @r GENERAL   */
+/*======================*/
 :root {
 	--black: #000;
 	--gray1: #111;
@@ -25,9 +22,9 @@
 	padding: 0;
 }
 
-/*----------------------
-	@g SCROLLBAR
-----------------------*/
+/*--------------------*/
+/* @g SCROLLBAR
+/*--------------------*/
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--gray2) var(--gray3);
@@ -43,9 +40,9 @@
 	background-color: var(--gray2);
 	border-radius: 20px;
 }
-/*----------------------
-	@g BODY
-----------------------*/
+/*--------------------*/
+/* @g BODY
+/*--------------------*/
 body {
 	width: 100%;
 	height: 100%;
@@ -60,10 +57,9 @@ body {
 	overflow-y: scroll;
 }
 /* #endregion */
-/*======================
-	@r HEADER
-======================*/
-/*#region*/
+/*======================*/
+/* #region @r HEADER    */
+/*======================*/
 .header {
 	position: fixed;
 	top: 0;
@@ -148,9 +144,9 @@ body {
 		width: 100%;
 	}
 }
-/*----------------------
-	@g BUTTONS
-----------------------*/
+/*--------------------*/
+/* @g BUTTONS
+/*--------------------*/
 .btn-print,
 .btn-settings,
 .btn-orientation,
@@ -180,10 +176,9 @@ body {
 	display: none;
 }
 
-/*----------------------
-	@g GAME SELECT
-----------------------*/
-
+/*--------------------*/
+/* @g GAME SELECT
+/*--------------------*/
 #game-select {
 	display: none;
 	appearance: none;
@@ -225,10 +220,9 @@ body {
 	}
 }
 /* #endregion */
-/*======================
-	@r DROP AREA
-/*====================*/
-/* #region */
+/*======================*/
+/* #region @r DROP AREA */
+/*======================*/
 #file-drop-area {
 	display: flex;
 	flex-direction: column;

@@ -40,7 +40,7 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 
 * **v1.1 (2025-09-20):** Aktualizacja interfejsu.
     * Możliwość przeciągania pliku na ikonkę folderu.
-    * Wyświetlanie nazw ruchów nad powiększoną planszą.
+    * Wyświetlanie listy ruchów nad powiększoną planszą.
     * Zdefiniowanie loga i domyślnej kolorystyki.
 
 * **v1.0 (2025-09-18):** Pierwsza publiczna wersja aplikacji.

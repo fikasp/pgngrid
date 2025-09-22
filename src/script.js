@@ -1,8 +1,8 @@
-// @p PGNgrid
-// ========================
-// @r GLOBALS
-// ========================
-// #region
+// #region @p PGNgrid
+// #endregion
+//========================
+// #region @r GLOBALS
+//========================
 const chessboards = []
 let allGames = []
 let bigBoard = null
@@ -12,12 +12,11 @@ let pgnString = ''
 let positions = []
 
 // #endregion
-// ========================
-// @r SELECTORS
-// ========================
-// #region
+//========================
+// #region @r SELECTORS
+//========================
 // @b Layout
-// ------------------------
+//------------------------
 const $root = document.documentElement
 const $divBoards = document.getElementById('boards')
 const $divBigBoard = document.getElementById('big-board')
@@ -28,7 +27,7 @@ const $modalBigBoard = document.getElementById('big-board-modal')
 const $modalSettings = document.getElementById('settings-modal')
 
 // @b Buttons
-// ------------------------
+//------------------------
 const $btnCloseBigBoard = document.getElementById('btn-close-board')
 const $btnCloseSettings = document.querySelector('.btn-close-settings')
 const $btnOrientation = document.getElementById('btn-orientation')
@@ -39,7 +38,7 @@ const $btnPrint = document.getElementById('btn-print')
 const $btnFile = document.getElementById('btn-file')
 
 // @b Selects
-// ------------------------
+//------------------------
 const $fileInput = document.getElementById('pgn-file')
 const $fileDropArea = document.getElementById('file-drop-area')
 const $pgnPasteArea = document.getElementById('pgn-paste-area')
@@ -49,19 +48,17 @@ const $selectColumns = document.getElementById('board-columns')
 const $selectGame = document.getElementById('game-select')
 
 // #endregion
-// ========================
-// @r UTILITIES
-// ========================
-// #region
+//========================
+// #region @r UTILITIES
+//========================
+// 
 
 // #endregion
-// ========================
-// @r HELPERS
-// ========================
-// #region
-
+//========================
+// #region @r HELPERS
+//========================
 // @b Save settings
-// ------------------------
+//------------------------
 function saveSettings() {
 	const settings = {
 		orientation: currentOrientation,
@@ -73,7 +70,7 @@ function saveSettings() {
 }
 
 // @b Load settings
-// ------------------------
+//------------------------
 function loadSettings() {
 	const savedSettings = localStorage.getItem('chessboardSettings')
 	let settings = {}
@@ -184,11 +181,9 @@ function setTitle(title) {
 	document.title = 'PGNgrid - ' + title
 }
 // #endregion
+//========================
+// #region @r HANDLERS
 // ========================
-// @r HANDLERS
-// ========================
-// #region
-
 // @b Drop area
 // ------------------------
 function handleFileDropClick() {
@@ -414,10 +409,9 @@ function handleResize() {
 	}
 }
 // #endregion
+//========================
+// #region @r LISTENERS
 // ========================
-// @r LISTENERS
-// ========================
-// #region
 const setupListeners = () => {
 	// @b Window
 	// ------------------------
@@ -459,10 +453,9 @@ const setupListeners = () => {
 	addWheelListener($selectGame, handleGameSelectChange)
 }
 // #endregion
+//========================
+// #region @r MAIN LOGIC
 // ========================
-// @r MAIN LOGIC
-// ========================
-// #region
 // @b Get headers from pgn
 // ------------------------
 function getHeadersFromPgnString(pgn) {
@@ -811,10 +804,10 @@ function printBoards() {
 }
 
 // #endregion
+//========================
+// #region @r APP INIT
 // ========================
-// @r APP INIT
-// ========================
-// #region
+
 function init() {
 	console.log('App started...')
 	loadSettings()
