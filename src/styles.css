@@ -1,8 +1,7 @@
-/* #region @p PGNgrid */
-/* #endregion */
-/*====================*/
+/* @p PGNgrid */
+/*========================*/
 /* #region @r GENERAL */
-/*====================*/
+/*========================*/
 :root {
 	--black: #000;
 	--gray1: #111;
@@ -11,9 +10,9 @@
 	--grayA: #aaa;
 	--grayC: #ccc;
 	--white: #fff;
-	--board-dark-color: ;
-	--board-light-color: ;
-	--highlight-color: ;
+	--board-dark-color: #888;
+	--board-light-color: #ccc;
+	--highlight-color: #666;
 }
 
 * {
@@ -22,9 +21,8 @@
 	padding: 0;
 }
 
-/*--------------------*/
-/* @g SCROLLBAR
-/*--------------------*/
+/* @b Scrollbar
+/*------------------------*/
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--gray2) var(--gray3);
@@ -40,9 +38,9 @@
 	background-color: var(--gray2);
 	border-radius: 20px;
 }
-/*--------------------*/
-/* @g BODY
-/*--------------------*/
+
+/* @b Body
+/*------------------------*/
 body {
 	width: 100%;
 	height: 100%;
@@ -57,9 +55,9 @@ body {
 	overflow-y: scroll;
 }
 /* #endregion */
-/*======================*/
-/* #region    @r HEADER */
-/*======================*/
+/*========================*/
+/* #region @r HEADER */
+/*========================*/
 .header {
 	position: fixed;
 	top: 0;
@@ -143,9 +141,9 @@ body {
 		width: 100%;
 	}
 }
-/*--------------------*/
-/* @g BUTTONS
-/*--------------------*/
+
+/* @b Buttons
+/*------------------------*/
 .btn-print,
 .btn-settings,
 .btn-orientation,
@@ -175,9 +173,8 @@ body {
 	display: none;
 }
 
-/*--------------------*/
-/* @g GAME SELECT
-/*--------------------*/
+/* @b Game select
+/*------------------------*/
 #game-select {
 	display: none;
 	appearance: none;
@@ -219,9 +216,9 @@ body {
 	}
 }
 /* #endregion */
-/*======================*/
-/* #region @r DROP AREA */
-/*======================*/
+/*========================*/
+/* #region @r DROPAREA */
+/*========================*/
 #file-drop-area {
 	display: flex;
 	flex-direction: column;
@@ -262,9 +259,8 @@ body {
 	margin-top: 70px;
 }
 
-/*----------------------
-	@g PASTE AREA
-----------------------*/
+/* @b Paste area
+/*------------------------*/
 #pgn-paste-area {
 	width: 220px;
 	height: 66px;
@@ -287,10 +283,10 @@ body {
 }
 
 /* #endregion */
-/*======================
-	@r BOARDS
-/*====================*/
-/* #region */
+/*========================*/
+/* #region @r BOARDS */
+/*========================*/
+
 #boards {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -299,6 +295,11 @@ body {
 	padding: 10px;
 	padding-top: 70px;
 	padding-bottom: 10px;
+}
+@media screen and (max-width: 1000px) {
+	#boards {
+		margin-top: 52px;
+	}
 }
 
 .board-wrapper {
@@ -330,7 +331,8 @@ body {
 	font-weight: bold;
 }
 
-/* Boards colors */
+/* @b Boards colors
+/*------------------------*/
 .square-55d63.black-3c85d {
 	background-color: var(--board-dark-color);
 }
@@ -338,7 +340,8 @@ body {
 	background-color: var(--board-light-color);
 }
 
-/* Notation colors */
+/* @b Notation colors
+/*------------------------*/
 .square-55d63.white-1e1d7 .notation-322f9 {
 	color: var(--board-dark-color);
 }
@@ -346,17 +349,10 @@ body {
 	color: var(--board-light-color);
 }
 
-/* Media margin top */
-@media screen and (max-width: 1000px) {
-	#boards {
-		margin-top: 52px;
-	}
-}
 /* #endregion */
-/*======================
-	@r BIG BOARD
-/*====================*/
-/* #region */
+/*========================*/
+/* #region @r BIG BOARD */
+/*========================*/
 .modal-content-board {
 	position: relative;
 	display: flex;
@@ -373,6 +369,8 @@ body {
 	height: 100%;
 }
 
+/* @b Move list
+/*------------------------*/
 #move-list-display {
 	position: absolute;
 	top: -40px;
@@ -411,9 +409,8 @@ body {
 	color: white;
 }
 
-/*----------------------
-	@g BUTTONS
-----------------------*/
+/* @b Buttons
+/*------------------------*/
 .btn-nav {
 	-webkit-tap-highlight-color: transparent;
 	position: absolute;
@@ -464,10 +461,10 @@ body {
 	color: #aaa;
 }
 /* #endregion */
-/*======================
-	@r SETTINGS
-/*====================*/
-/* #region */
+/*========================*/
+/* #region @r SETTINGS */
+/*========================*/
+
 .modal-content-settings {
 	padding: 20px 20px 20px;
 	padding-top: 12px;
@@ -497,9 +494,8 @@ body {
 	gap: 10px;
 }
 
-/*----------------------
-	@g BUTTONS
-----------------------*/
+/* @b Buttons
+/*------------------------*/
 .btn-close-settings {
 	color: #aaa;
 	font-size: 28px;
@@ -547,10 +543,9 @@ input[type='color']::-moz-color-swatch {
 	border: none;
 }
 /* #endregion */
-/*======================
-	@r MODALS
-/*====================*/
-/* #region */
+/*========================*/
+/* #region @r MODALS */
+/*========================*/
 .modal {
 	position: fixed;
 	top: 0;
@@ -574,10 +569,9 @@ input[type='color']::-moz-color-swatch {
 	opacity: 1;
 }
 /* #endregion */
-/*======================
-	@r FOOTER
-======================*/
-/*#region*/
+/*========================*/
+/* #region @r FOOTER */
+/*========================*/
 .footer {
 	width: 100%;
 	height: 40px;
@@ -590,10 +584,9 @@ input[type='color']::-moz-color-swatch {
 	z-index: 1000;
 }
 /* #endregion */
-/*======================
-	@r PRINT
-/*====================*/
-/* #region */
+/*========================*/
+/* #region @r PRINT */
+/*========================*/
 @media print {
 	body {
 		background-color: #fff !important;

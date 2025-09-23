@@ -1,9 +1,8 @@
-<!--#region @p PGNgrid -->
+<!-- @p PGNgrid -->
 <!DOCTYPE html>
 <html lang="pl">
-	<!-- #endregion -->
 	<!--====================-->
-	<!--#region     @r HEAD -->
+	<!-- #region @r HEAD -->
 	<!--====================-->
 	<head>
 		<meta charset="UTF-8" />
@@ -15,22 +14,22 @@
 		<!-- Chessboard -->
 		<link rel="stylesheet" href="src/vendor/chessboard.css" />
 		<!-- Styles -->
-		<link rel="stylesheet" href="src/style.css" />
+		<link rel="stylesheet" href="src/styles.css" />
 		<!-- Title -->
 		<title>PGNgrid</title>
 	</head>
-	<!-- #endregion -->
+	<!--#endregion-->
 	<!--====================-->
-	<!--#region     @r BODY -->
+	<!-- #region @r BODY -->
 	<!--====================-->
 	<body>
-		<!----------------------
-		 @g HEADER              
-		----------------------->
+		<!------------------------
+		 @g HEADER
+		------------------------->
 		<div class="header">
 			<div class="header-top">
 				<!-- @b Header left
-				----------------------->
+				------------------------->
 				<div class="header-left">
 					<a href="#" class="header-link" onclick="location.reload()">
 						<div class="header-logo">
@@ -41,7 +40,7 @@
 				</div>
 
 				<!-- @b Header right
-				----------------------->
+				------------------------->
 				<div class="header-right">
 					<!-- Orientation -->
 					<button
@@ -76,7 +75,7 @@
 			</div>
 
 			<!-- @b Header center
-			----------------------->
+			------------------------->
 			<div class="header-center">
 				<select id="game-select">
 					<option value="">Wybierz partię</option>
@@ -84,9 +83,9 @@
 			</div>
 		</div>
 
-		<!----------------------
+		<!------------------------
 			@g DROP AREA
-		----------------------->
+		------------------------->
 		<div id="file-drop-area">
 			<i class="fa-solid fa-folder-open"></i>
 			<textarea
@@ -95,14 +94,14 @@
 			></textarea>
 		</div>
 
-		<!----------------------
+		<!------------------------
 			@g BOARDS
-		----------------------->
+		------------------------->
 		<div id="boards"></div>
 
-		<!----------------------
+		<!------------------------
 			@g BIG BOARD MODAL
-		----------------------->
+		------------------------->
 		<div id="big-board-modal" class="modal">
 			<button id="btn-close-board" class="btn-nav close">
 				<i class="fa-solid fa-close"></i>
@@ -127,9 +126,9 @@
 			</div>
 		</div>
 
-		<!----------------------
+		<!------------------------
 			@g SETTINGS MODAL
-		----------------------->
+		------------------------->
 		<div id="settings-modal" class="modal">
 			<div class="modal-content-settings">
 				<!-- Header -->
@@ -153,15 +152,15 @@
 			</div>
 		</div>
 
-		<!----------------------
+		<!------------------------
 			@g FOOTER
-		----------------------->
+		------------------------->
 		<div class="footer">2025 © Przemysław Fikas</div>
 
 		<!-- #endregion -->
-		<!--====================-->
-		<!--#region  @r SCRIPTS -->
-		<!--====================-->
+	<!--====================-->
+	<!-- #region @r SCRIPTS -->
+	<!--====================-->
 		<script src="src/vendor/jquery.js"></script>
 		<script src="src/vendor/chesspieces.js"></script>
 		<script src="src/vendor/chessboard.js"></script>
@@ -169,4 +168,4 @@
 		<script src="src/script.js"></script>
 	</body>
 </html>
-<!-- #endregion -->
+<!--#endregion-->
