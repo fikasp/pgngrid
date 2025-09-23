@@ -11,9 +11,9 @@
 	--grayA: #aaa;
 	--grayC: #ccc;
 	--white: #fff;
-	--board-dark-color: #998877;
-	--board-light-color: #bebdbd;
-	--highlight-color: #2288dd;
+	--board-dark-color: ;
+	--board-light-color: ;
+	--highlight-color: ;
 }
 
 * {

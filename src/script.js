@@ -92,7 +92,7 @@ function loadSettings() {
 			columns: 3,
 			orientation: 'white',
 			darkColor: '#998877',
-			highlightColor: '#2288dd',
+			highlightColor: '#336699',
 		}
 		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 	}
