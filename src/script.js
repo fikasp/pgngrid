@@ -10,6 +10,8 @@ let currentBoardIndex = 0
 let currentOrientation = 'white'
 let pgnString = ''
 let positions = []
+let touchStartX = 0
+let touchEndX = 0
 
 // #endregion
 //========================
@@ -18,6 +20,7 @@ let positions = []
 // @b Layout
 //------------------------
 const $root = document.documentElement
+const $logo = document.getElementById('logo')
 const $divBoards = document.getElementById('boards')
 const $divBigBoard = document.getElementById('big-board')
 const $headerCenter = document.querySelector('.header-center')
@@ -51,7 +54,14 @@ const $selectGame = document.getElementById('game-select')
 //========================
 // #region @r UTILITIES
 //========================
-// 
+//
+// @b Clear content
+//------------------------
+function clearContent(element) {
+	if (element) {
+		element.innerHTML = ''
+	}
+}
 
 // #endregion
 //========================
@@ -82,7 +92,7 @@ function loadSettings() {
 			columns: 3,
 			orientation: 'white',
 			darkColor: '#998877',
-			highlightColor: '#ffaa66',
+			highlightColor: '#2288dd',
 		}
 		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
 	}
@@ -173,6 +183,38 @@ function addWheelListener(selectElement, callback) {
 			callback()
 		}
 	})
+}
+
+// @b Draw board on canvas
+//------------------------
+function drawBoardOnCanvas(canvas) {
+	const ctx = canvas.getContext('2d')
+	const size = canvas.width / 2
+
+	const darkColor = $pickerBoardColor.value
+	const lightColor = lightenColor($pickerBoardColor.value, 0.5)
+
+	ctx.fillStyle = lightColor
+	ctx.fillRect(0, 0, size, size)
+	ctx.fillRect(size, size, size, size)
+
+	ctx.fillStyle = darkColor
+	ctx.fillRect(size, 0, size, size)
+	ctx.fillRect(0, size, size, size)
+}
+
+// @b Update favicon
+//------------------------
+function updateFavicon() {
+	const canvas = document.createElement('canvas')
+	canvas.width = 16
+	canvas.height = 16
+	drawBoardOnCanvas(canvas)
+
+	const link = document.querySelector("link[rel~='icon']")
+	if (link) {
+		link.href = canvas.toDataURL()
+	}
 }
 
 // @b Set title
@@ -288,6 +330,8 @@ function handleColumnsSelectChange() {
 function handleColorPickerInput() {
 	changeBoardColors()
 	changeHighlightColor()
+	highlightLastMoves()
+	highlightBigBoardMoves()
 	saveSettings()
 }
 
@@ -309,20 +353,34 @@ function handleWindowSettingsClick(event) {
 function handleBoardClick(index) {
 	currentBoardIndex = index
 	$modalBigBoard.classList.add('show-modal')
-	renderBigBoard()
 	$modalBigBoard.addEventListener('wheel', handleWheelNavigation, {
 		passive: false,
 	})
+	$divBigBoard.addEventListener('touchstart', handleTouchStart, {
+		passive: false,
+	})
+	$divBigBoard.addEventListener('touchend', handleTouchEnd, {
+		passive: false,
+	})
+	renderBigBoard()
 }
 function handleCloseBtnBoardClick() {
 	$modalBigBoard.classList.remove('show-modal')
 	$modalBigBoard.removeEventListener('wheel', handleWheelNavigation)
+	$divBigBoard.removeEventListener('touchstart', handleTouchStart)
+	$divBigBoard.removeEventListener('touchend', handleTouchEnd)
 }
 
 function handleWindowBoardClick(event) {
 	if (event.target === $modalBigBoard) {
 		$modalBigBoard.classList.remove('show-modal')
 		$modalBigBoard.removeEventListener('wheel', handleWheelNavigation)
+		$divBigBoard.addEventListener('touchstart', handleTouchStart, {
+			passive: false,
+		})
+		$divBigBoard.addEventListener('touchend', handleTouchEnd, {
+			passive: false,
+		})
 	}
 }
 
@@ -336,6 +394,28 @@ function handleWheelNavigation(event) {
 			renderBigBoard()
 		}
 	} else {
+		if (currentBoardIndex > 0) {
+			currentBoardIndex--
+			renderBigBoard()
+		}
+	}
+}
+function handleTouchStart(event) {
+	touchStartX = event.changedTouches[0].screenX
+}
+
+function handleTouchEnd(event) {
+	touchEndX = event.changedTouches[0].screenX
+	handleSwipe()
+}
+
+function handleSwipe() {
+	if (touchEndX < touchStartX - 50) {
+		if (currentBoardIndex < positions.length - 1) {
+			currentBoardIndex++
+			renderBigBoard()
+		}
+	} else if (touchEndX > touchStartX + 50) {
 		if (currentBoardIndex > 0) {
 			currentBoardIndex--
 			renderBigBoard()
@@ -699,6 +779,8 @@ function changeBoardColors() {
 	const lightColor = lightenColor(darkColor, 0.5)
 	$root.style.setProperty('--board-dark-color', darkColor)
 	$root.style.setProperty('--board-light-color', lightColor)
+	drawBoardOnCanvas($logo)
+	updateFavicon()
 }
 
 // @b Change highlight color
@@ -711,28 +793,68 @@ function changeHighlightColor() {
 // @b Highlight last move
 // ------------------------
 function highlightLastMoves() {
-	document
-		.querySelectorAll('.highlight-from, .highlight-to')
-		.forEach((square) => {
-			square.classList.remove('highlight-from', 'highlight-to')
-		})
+	// Usuń wszystkie poprzednie podświetlenia
+	document.querySelectorAll('.square-55d63').forEach((square) => {
+		square.style.removeProperty('background-color')
+	})
 
+	// Iteruj przez wszystkie pozycje
 	positions.forEach((pos, index) => {
 		const { boardId } = chessboards[index]
 		const fromSquare = document.querySelector(`#${boardId} .square-${pos.from}`)
 		const toSquare = document.querySelector(`#${boardId} .square-${pos.to}`)
 
-		if (fromSquare) fromSquare.classList.add('highlight-from')
-		if (toSquare) toSquare.classList.add('highlight-to')
+		if (fromSquare && toSquare) {
+			const highlightColor = $pickerHighlightColor.value
+
+			const fromIsLight = fromSquare.classList.contains('white-1e1d7')
+			const fromColor = fromIsLight
+				? lightenColor(highlightColor, 0.5)
+				: highlightColor
+			fromSquare.style.backgroundColor = fromColor
+
+			const toIsLight = toSquare.classList.contains('white-1e1d7')
+			const toColor = toIsLight
+				? lightenColor(highlightColor, 0.5)
+				: highlightColor
+			toSquare.style.backgroundColor = toColor
+		}
+	})
+}
+
+// @b Highlight big board moves
+//------------------------
+function highlightBigBoardMoves() {
+	// Usuń poprzednie podświetlenia z dużej planszy
+	document.querySelectorAll('#big-board .square-55d63').forEach((square) => {
+		square.style.removeProperty('background-color')
 	})
 
-	if (bigBoard && positions[currentBoardIndex]) {
-		const pos = positions[currentBoardIndex]
-		const fromSquare = document.querySelector(`#big-board .square-${pos.from}`)
-		const toSquare = document.querySelector(`#big-board .square-${pos.to}`)
+	// Zakończ, jeśli duża plansza nie istnieje lub nie ma ruchów
+	if (!bigBoard || !positions[currentBoardIndex]) {
+		return
+	}
 
-		if (fromSquare) fromSquare.classList.add('highlight-from')
-		if (toSquare) toSquare.classList.add('highlight-to')
+	const pos = positions[currentBoardIndex]
+	const fromSquare = document.querySelector(`#big-board .square-${pos.from}`)
+	const toSquare = document.querySelector(`#big-board .square-${pos.to}`)
+
+	if (fromSquare && toSquare) {
+		const highlightColor = $pickerHighlightColor.value
+
+		// Oblicz kolor dla pola startowego
+		const fromIsLight = fromSquare.classList.contains('white-1e1d7')
+		const fromColor = fromIsLight
+			? lightenColor(highlightColor, 0.5)
+			: highlightColor
+		fromSquare.style.backgroundColor = fromColor
+
+		// Oblicz kolor dla pola docelowego
+		const toIsLight = toSquare.classList.contains('white-1e1d7')
+		const toColor = toIsLight
+			? lightenColor(highlightColor, 0.5)
+			: highlightColor
+		toSquare.style.backgroundColor = toColor
 	}
 }
 
@@ -760,39 +882,34 @@ function renderBigBoard() {
 	const position = positions[currentBoardIndex]
 	if (!position) return
 	if (bigBoard) bigBoard.destroy()
+
 	if ($divBigBoard) {
 		const config = {
 			position: position.fen,
 			draggable: false,
 			pieceTheme: 'src/img/{piece}.png',
-			showNotation: false,
+			showNotation: true,
 			orientation: currentOrientation,
 		}
 		bigBoard = new Chessboard('big-board', config)
-		const darkColor = $pickerBoardColor.value
-		const lightColor = lightenColor(darkColor, 0.5)
-		document.querySelectorAll('#big-board .square-55d63').forEach((square) => {
-			if (square.classList.contains('black-3c85d')) {
-				square.style.backgroundColor = darkColor
-			} else if (square.classList.contains('white-1e1d7')) {
-				square.style.backgroundColor = lightColor
-			}
+
+		const squares = document.querySelectorAll('#big-board .square-55d63')
+		squares.forEach((square) => {
+			square.classList.remove('highlight-3c678')
+			square.style.boxShadow = 'none'
 		})
-		const highlightColor = $pickerHighlightColor.value
-		const fromSquare = document.querySelector(
-			`#big-board .square-${position.from}`
-		)
-		const toSquare = document.querySelector(`#big-board .square-${position.to}`)
-		if (fromSquare && toSquare) {
-			fromSquare.style.boxShadow = `inset 0 0 0 4px ${highlightColor}`
-			toSquare.style.boxShadow = `inset 0 0 0 4px ${highlightColor}`
-		}
+
+		changeBoardColors()
+		highlightBigBoardMoves()
 	} else {
 		console.error('Element #big-board not found!')
 	}
+
 	if ($btnPrevMove) $btnPrevMove.disabled = currentBoardIndex === 0
 	if ($btnNextMove)
 		$btnNextMove.disabled = currentBoardIndex >= positions.length - 1
+
+	// Zaktualizuj listę ruchów
 	renderMoveList()
 	scrollToActiveMove()
 }

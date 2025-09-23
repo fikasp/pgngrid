@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="pl">
 	<!-- #endregion -->
-	<!--========================-->
-	<!--#region @r HEAD ---------->
-	<!--========================-->
+	<!--====================-->
+	<!--#region     @r HEAD -->
+	<!--====================-->
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Favicon -->
-		<link rel="icon" href="src/logo/logo.png" type="image/png" />
+		<link rel="icon" type="image/png" />
 		<!-- Font Avesome -->
 		<link rel="stylesheet" href="src/vendor/fontawesome.css" />
 		<!-- Chessboard -->
@@ -19,22 +19,23 @@
 		<!-- Title -->
 		<title>PGNgrid</title>
 	</head>
-  <!-- #endregion -->
-	<!--========================-->
-	<!--#region @r BODY ========-->
-	<!--========================-->
+	<!-- #endregion -->
+	<!--====================-->
+	<!--#region     @r BODY -->
+	<!--====================-->
 	<body>
-		<!-----------------------------
+		<!----------------------
 		 @g HEADER              
-		------------------------------>
+		----------------------->
 		<div class="header">
 			<div class="header-top">
-				
 				<!-- @b Header left
-				------------------------------>
+				----------------------->
 				<div class="header-left">
 					<a href="#" class="header-link" onclick="location.reload()">
-						<img src="src/logo/logo.png" alt="Logo" class="header-logo" />
+						<div class="header-logo">
+							<canvas id="logo" width="30" height="30"></canvas>
+						</div>
 						<h1 class="header-title">PGNgrid</h1>
 					</a>
 				</div>
@@ -158,18 +159,14 @@
 		<div class="footer">2025 © Przemysław Fikas</div>
 
 		<!-- #endregion -->
-	<!--========================-->
-	<!--#region @r SCRIPTS =====-->
-	<!--========================-->
-
-		<script src="src/tools.js"></script>
+		<!--====================-->
+		<!--#region  @r SCRIPTS -->
+		<!--====================-->
 		<script src="src/vendor/jquery.js"></script>
 		<script src="src/vendor/chesspieces.js"></script>
 		<script src="src/vendor/chessboard.js"></script>
 		<script src="src/vendor/chess.js"></script>
 		<script src="src/script.js"></script>
-		
 	</body>
-	
 </html>
 <!-- #endregion -->

@@ -1,4 +1,4 @@
-# ![Logo](src/logo/logo.png) PGNgrid
+# ![Logo](src/img/logo.png) PGNgrid
 
 PGNgrid to prosta i intuicyjna aplikacja webowa, która pozwala na wizualizację partii szachowych z plików PGN. Zamiast przeglądać ruchy jeden po drugim, aplikacja renderuje całą partię jako siatkę plansz szachowych, gdzie każda plansza przedstawia pozycję po kolejnym posunięciu.
 
@@ -37,6 +37,11 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 * **`Font Awesome`:** Biblioteka ikon.
 
 ## ⏱️ Historia wersji 
+
+* **v1.2 (2025-09-23):** 
+    * Usunięcie poziomego suwaka przy liście ruchów.
+    * Zmiana sposobu podświetlania aktywnych pól.
+    * Możliwość przesuwanie ruchów palcem.
 
 * **v1.1 (2025-09-20):** Aktualizacja interfejsu.
     * Możliwość przeciągania pliku na ikonkę folderu.
