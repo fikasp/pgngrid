@@ -1,7 +1,9 @@
 // @p PGNgrid
 //========================
-// #region @r GLOBALS
+//#region @r GLOBALS
 //========================
+// @b States
+//------------------------
 const chessboards = []
 let allGames = []
 let bigBoard = null
@@ -14,7 +16,7 @@ let touchEndX = 0
 
 // #endregion
 //========================
-// #region @r SELECTORS
+//#region @r SELECTORS
 //========================
 // @b Layout
 //------------------------
@@ -51,37 +53,109 @@ const $selectGame = document.getElementById('game-select')
 
 // #endregion
 //========================
-// #region @r UTILITIES
+//#region @r UTILITIES
 //========================
-//
-// @b Clear content
+
+// @b Logger
 //------------------------
-function clearContent(element) {
-	if (element) {
+/**
+ * @typedef {Object} Logger
+ * @property {boolean} active - Flag to activate/deactivate the logger
+ * @property {Object.<string, string>} styles - Mapping of log modes to CSS styles
+ * @property {function(string, ...any):void} styled - Styled log with function name
+ * @property {function(...any):void} default - Plain log without colors
+ * @property {function(...any):void} gray - Shortcut for gray logs
+ * @property {function(...any):void} handler - Shortcut for handlers
+ * @property {function(...any):void} orange - Shortcut for orange logs
+ * @property {function(...any):void} blue - Shortcut for blue logs
+ * @property {function(...any):void} red - Shortcut for red logs
+ * @property {function(...any):void} white - Shortcut for white logs
+ * @property {function(...any):void} yellow - Shortcut for yellow logs
+ * @property {function():void} init - Initializes shortcut methods
+ */
+/** @type {Logger} */
+const log = {
+	// Logger active flag
+	active: true,
+
+	// Mapping of log modes to CSS styles
+	styles: {
+		blue: 'color: dodgerblue;',
+		gray: 'color: gray;',
+		handler: 'color: steelblue;',
+		orange: 'color: orange;',
+		red: 'color: red;',
+		white: 'color: white;',
+		yellow: 'color: yellow;',
+	},
+
+	//Styled log with function name
+	styled(mode, ...args) {
+		if (!this.active) return
+		const stack = new Error().stack
+		const caller =
+			stack
+				?.split('\n')[3]
+				?.trim()
+				.split(' ')[1]
+				.replace(/^(HTML\w+)/, '')
+				?.replace(/[^a-zA-Z0-9_$]/g, '') || 'anonymous'
+		const content = args
+			.map((a) => (typeof a === 'object' ? JSON.stringify(a, null, 2) : a))
+			.join(', ')
+		console.log(
+			`%c${caller}%c(${content})`,
+			`${this.styles[mode]}font-weight: bold;`,
+			this.styles[mode]
+		)
+	},
+
+	// Plain log without colors
+	default(...args) {
+		if (!this.active) return
+		console.log(...args)
+	},
+
+	// Initialize shortcut methods
+	init() {
+		Object.keys(this.styles).forEach((mode) => {
+			this[mode] = (...args) => this.styled(mode, ...args)
+		})
+	},
+}
+
+// @b Update content
+//------------------------
+function updateContent(element, content) {
+	if (!element) return
+	if (!content) {
 		element.innerHTML = ''
+	} else {
+		element.innerHTML = content
 	}
 }
 
 // #endregion
 //========================
-// #region @r HELPERS
+//#region @r HELPERS
 //========================
 // @b Save settings
 //------------------------
 function saveSettings() {
 	const settings = {
-		orientation: currentOrientation,
+		columns: $selectColumns.value,
 		darkColor: $pickerBoardColor.value,
 		highlightColor: $pickerHighlightColor.value,
-		columns: $selectColumns.value,
+		orientation: currentOrientation,
 	}
-	localStorage.setItem('chessboardSettings', JSON.stringify(settings))
+	localStorage.setItem('settings', JSON.stringify(settings))
+	log.orange(settings)
 }
 
 // @b Load settings
 //------------------------
 function loadSettings() {
-	const savedSettings = localStorage.getItem('chessboardSettings')
+	const savedSettings = localStorage.getItem('settings')
 	let settings = {}
 
 	if (savedSettings) {
@@ -89,13 +163,14 @@ function loadSettings() {
 	} else {
 		settings = {
 			columns: 3,
-			orientation: 'white',
 			darkColor: '#998877',
 			highlightColor: '#336699',
+			orientation: 'white',
 		}
-		localStorage.setItem('chessboardSettings', JSON.stringify(settings))
+		localStorage.setItem('settings', JSON.stringify(settings))
 	}
 
+	log.orange(settings)
 	updateColumnsSelect()
 
 	if ($selectColumns && settings.columns) {
@@ -202,7 +277,7 @@ function setTitle(title) {
 }
 // #endregion
 //========================
-// #region @r HANDLERS
+//#region @r HANDLERS
 //========================
 //------------------------
 // @g GENERALS
@@ -260,6 +335,14 @@ function handleResize() {
 		renderBigBoard()
 	}
 }
+
+// @b Handle print boards
+//------------------------
+function handlePrintBoards() {
+	log.handler()
+	window.print()
+}
+
 //------------------------
 // @g DROP AREA
 //------------------------
@@ -352,27 +435,23 @@ function handleFileDropOnButton(e) {
 //------------------------
 function handleOrientationToggle() {
 	currentOrientation = currentOrientation === 'white' ? 'black' : 'white'
-
-	let settings = JSON.parse(localStorage.getItem('chessboardSettings')) || {}
-	settings.orientation = currentOrientation
-	localStorage.setItem('chessboardSettings', JSON.stringify(settings))
-
-	if (pgnString) {
-		generateBoards()
-	}
+	log.handler(currentOrientation)
+	generateBoards()
+	saveSettings()
 }
 
 // @b Handle game select change
 //------------------------
 function handleGameSelectChange() {
 	const selectedIndex = $selectGame.value
+	log.handler(selectedIndex)
 	if (selectedIndex !== '') {
 		const selectedGame = allGames[selectedIndex]
 		const gameTitle = selectedGame.header.Event
 		renderBoards(allGames[selectedIndex].pgn)
 		setTitle(gameTitle)
 	} else {
-		$divBoards.innerHTML = ''
+		updateContent($divBoards)
 	}
 }
 
@@ -417,6 +496,7 @@ function handleWindowSettingsClick(event) {
 // @b Handle board click
 //------------------------
 function handleBoardClick(index) {
+	log.handler(index)
 	currentBoardIndex = index
 	$modalBigBoard.classList.add('show-modal')
 	$modalBigBoard.addEventListener('wheel', handleWheelNavigation, {
@@ -514,7 +594,7 @@ function handleSwipe() {
 
 // #endregion
 //========================
-// #region @r LISTENERS
+//#region @r LISTENERS
 //========================
 const setupListeners = () => {
 	// @b Window
@@ -541,7 +621,7 @@ const setupListeners = () => {
 	$btnPrevMove.addEventListener('click', handlePrevMoveClick)
 	$btnOrientation.addEventListener('click', handleOrientationToggle)
 	$btnSettings.addEventListener('click', handleSettingsClick)
-	$btnPrint.addEventListener('click', printBoards)
+	$btnPrint.addEventListener('click', handlePrintBoards)
 	$btnFile.addEventListener('dragover', handleFileDragOverOnButton)
 	$btnFile.addEventListener('dragleave', handleFileDragLeaveOnButton)
 	$btnFile.addEventListener('drop', handleFileDropOnButton)
@@ -558,12 +638,12 @@ const setupListeners = () => {
 }
 // #endregion
 //========================
-// #region @r MAIN LOGIC
+//#region @r MAIN LOGIC
 //========================
 // @b Process PGN
 //------------------------
 function processPgn() {
-	clearContent($divBoards)
+	updateContent($divBoards)
 	chessboards.length = 0
 	positions.length = 0
 	allGames.length = 0
@@ -642,7 +722,7 @@ function processPgn() {
 // @b Populate game select
 //------------------------
 function populateGameSelect() {
-	clearContent($selectGame)
+	updateContent($selectGame)
 	$selectGame.style.display = 'block'
 
 	allGames.forEach((game, index) => {
@@ -667,7 +747,7 @@ function updateColumnsSelect() {
 	let maxColumns = Math.floor((containerWidth + gap) / (minBoardSize + gap))
 	maxColumns = Math.max(1, maxColumns)
 
-	$selectColumns.innerHTML = ''
+	updateContent($selectColumns)
 	for (let i = 1; i <= maxColumns; i++) {
 		const option = document.createElement('option')
 		option.value = i
@@ -702,7 +782,7 @@ function updateBoardLayout() {
 // @b Generate boards
 //------------------------
 function generateBoards() {
-	$divBoards.innerHTML = ''
+	updateContent($divBoards)
 	chessboards.length = 0
 
 	const currentSize = calculateBoardSize()
@@ -742,8 +822,6 @@ function generateBoards() {
 		chessboards.push({ board, boardId })
 		boardWrapper.addEventListener('click', () => handleBoardClick(index))
 	})
-	changeBoardColors()
-	changeHighlightColor()
 	highlightLastMoves()
 	updateBoardLayout()
 }
@@ -852,7 +930,7 @@ function scrollToActiveMove() {
 // @b Render move list
 //------------------------
 function renderMoveList() {
-	$moveListDisplay.innerHTML = ''
+	updateContent($moveListDisplay)
 	positions.forEach((pos, index) => {
 		const moveSpan = document.createElement('span')
 		moveSpan.innerText = pos.moveText
@@ -870,6 +948,7 @@ function renderMoveList() {
 // @b Render big board
 //------------------------
 function renderBigBoard() {
+	log.yellow()
 	const position = positions[currentBoardIndex]
 	if (!position) return
 	if (bigBoard) bigBoard.destroy()
@@ -907,7 +986,8 @@ function renderBigBoard() {
 // @b Render boards
 //------------------------
 function renderBoards(pgnToRender) {
-	$divBoards.innerHTML = ''
+	log.yellow()
+	updateContent($divBoards)
 	chessboards.length = 0
 	positions = []
 	try {
@@ -946,18 +1026,13 @@ function renderBoards(pgnToRender) {
 	}
 }
 
-// @b Print boards
-//------------------------
-function printBoards() {
-	window.print()
-}
-
 // #endregion
 //========================
-// #region @r APP INIT
+//#region @r APP INIT
 //========================
 function init() {
-	console.log('App started...')
+	log.init()
+	log.white()
 	loadSettings()
 	changeBoardColors()
 	changeHighlightColor()

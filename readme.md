@@ -38,6 +38,11 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 
 ## ⏱️ Historia wersji 
 
+* **v1.3 (2025-09-24):** 
+    * Zastosowanie czcionki Play.
+    * Wprowadzenie systemu logów konsoli.
+    * Usprawnienie zapisu do local storage.
+
 * **v1.2 (2025-09-23):** 
     * Usunięcie poziomego suwaka przy liście ruchów.
     * Zmiana sposobu podświetlania aktywnych pól.
