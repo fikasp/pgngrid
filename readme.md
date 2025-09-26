@@ -38,6 +38,11 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 
 ## ⏱️ Historia wersji 
 
+* **v1.4 (2025-09-26):** 
+    * Wprowadzenie metodologii BEM.
+    * Gruntowna przebudowa i refaktoryzacja skryptów.
+    * Blokada przewijania tła przy otwartym modalu.
+
 * **v1.3 (2025-09-24):** 
     * Zastosowanie czcionki Play.
     * Wprowadzenie systemu logów konsoli.

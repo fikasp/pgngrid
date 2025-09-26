@@ -7,6 +7,8 @@ const STATE = {
 	bigBoard: null,
 	chessboards: [],
 	currentBoardIndex: 0,
+	isModalOpen: false,
+	lastWidth: window.innerWidth,
 	pgnString: '',
 	positions: [],
 	settings: {
@@ -23,6 +25,7 @@ const STATE = {
 //#region @r SELECTORS
 //========================
 const $ = {
+	body: document.body,
 	root: document.documentElement,
 	logo: document.getElementById('logo'),
 	divs: {
@@ -69,7 +72,8 @@ const Listeners = {
 	// / @b Setup all event listeners
 	// ------------------------
 	setup: () => {
-		window.onresize = Handlers.window.resize
+		window.onresize = Tools.debounce(Handlers.window.resize, 200)
+		window.addEventListener('touchmove', Handlers.window.blockScroll, { passive: false })
 		document.addEventListener('keydown', Handlers.window.keyDown)
 
 		// Modals
@@ -89,8 +93,8 @@ const Listeners = {
 		// Buttons
 		$.buttons.closeBigBoard.addEventListener('click', Handlers.modals.closeBoardClick)
 		$.buttons.closeSettings.addEventListener('click', Handlers.modals.closeSettingsClick)
-		$.buttons.nextMove.addEventListener('click', Handlers.boardNavigation.nextMoveClick)
-		$.buttons.prevMove.addEventListener('click', Handlers.boardNavigation.prevMoveClick)
+		$.buttons.nextMove.addEventListener('click', Handlers.navigation.nextMoveClick)
+		$.buttons.prevMove.addEventListener('click', Handlers.navigation.prevMoveClick)
 		$.buttons.orientation.addEventListener('click', Handlers.settings.orientationToggle)
 		$.buttons.settings.addEventListener('click', Handlers.modals.settingsClick)
 		$.buttons.print.addEventListener('click', Handlers.window.printBoards)
@@ -123,8 +127,8 @@ const Handlers = {
 		keyDown: (event) => {
 			Log.blue(event.key)
 			if ($.modals.bigBoard.classList.contains('show-modal')) {
-				if (event.key === 'ArrowLeft') Handlers.boardNavigation.prevMoveClick()
-				else if (event.key === 'ArrowRight') Handlers.boardNavigation.nextMoveClick()
+				if (event.key === 'ArrowLeft') Handlers.navigation.prevMoveClick()
+				else if (event.key === 'ArrowRight') Handlers.navigation.nextMoveClick()
 				else if (event.key === 'Escape') Handlers.modals.closeBoardClick(event)
 			} else if ($.modals.settings.classList.contains('show-modal') && event.key === 'Escape') {
 				Handlers.modals.closeSettingsClick(event)
@@ -134,12 +138,27 @@ const Handlers = {
 		// ------------------------
 		resize: () => {
 			Log.blue()
+			const currentWidth = window.innerWidth
+			const widthDifference = Math.abs(currentWidth - STATE.lastWidth)
+
+			const MIN_WIDTH_CHANGE_THRESHOLD = 50
+
+			if (widthDifference < MIN_WIDTH_CHANGE_THRESHOLD) {
+				return
+			}
+			STATE.lastWidth = currentWidth
+
 			Settings.updateColumnsSelect()
 			if (STATE.pgnString && STATE.allGames.length > 0) {
 				Logic.processBoards(STATE.allGames[$.selects.game.value].pgn)
 			}
 			if ($.modals.bigBoard.classList.contains('show-modal')) {
 				Renderers.renderBigBoard()
+			}
+		},
+		blockScroll: (event) => {
+			if (STATE.isModalOpen) {
+				event.preventDefault()
 			}
 		},
 		// / @b Handle print button click
@@ -265,12 +284,14 @@ const Handlers = {
 		// ------------------------
 		settingsClick: () => {
 			Log.blue()
+			STATE.isModalOpen = true
 			$.modals.settings.classList.add('show-modal')
 		},
 		// / @b Close settings modal
 		// ------------------------
 		closeSettingsClick: (event) => {
 			Log.blue()
+			STATE.isModalOpen = false
 			if (event.target === $.modals.settings || event.target === $.buttons.closeSettings) {
 				$.modals.settings.classList.remove('show-modal')
 			}
@@ -279,11 +300,12 @@ const Handlers = {
 		// ------------------------
 		boardClick: (index) => {
 			Log.blue(index)
+			STATE.isModalOpen = true
 			STATE.currentBoardIndex = index
 			$.modals.bigBoard.classList.add('show-modal')
-			$.modals.bigBoard.addEventListener('wheel', Handlers.boardNavigation.wheelNavigation, { passive: false })
-			$.divs.bigBoard.addEventListener('touchstart', Handlers.boardNavigation.touchStart, { passive: false })
-			$.divs.bigBoard.addEventListener('touchend', Handlers.boardNavigation.touchEnd, { passive: false })
+			$.modals.bigBoard.addEventListener('wheel', Handlers.navigation.wheelNavigation, { passive: false })
+			$.divs.bigBoard.addEventListener('touchstart', Handlers.navigation.touchStart, { passive: false })
+			$.divs.bigBoard.addEventListener('touchend', Handlers.navigation.touchEnd, { passive: false })
 			Renderers.renderBigBoard()
 		},
 		// / @b Close big board modal
@@ -293,14 +315,15 @@ const Handlers = {
 			event.stopPropagation()
 			if (event.target === $.modals.bigBoard || event.currentTarget === $.buttons.closeBigBoard) {
 				$.modals.bigBoard.classList.remove('show-modal')
-				$.modals.bigBoard.removeEventListener('wheel', Handlers.boardNavigation.wheelNavigation)
-				$.divs.bigBoard.removeEventListener('touchstart', Handlers.boardNavigation.touchStart)
-				$.divs.bigBoard.removeEventListener('touchend', Handlers.boardNavigation.touchEnd)
+				$.modals.bigBoard.removeEventListener('wheel', Handlers.navigation.wheelNavigation)
+				$.divs.bigBoard.removeEventListener('touchstart', Handlers.navigation.touchStart)
+				$.divs.bigBoard.removeEventListener('touchend', Handlers.navigation.touchEnd)
+				STATE.isModalOpen = false
 			}
 		},
 	},
 
-	boardNavigation: {
+	navigation: {
 		// / @b Navigate to previous move
 		// ------------------------
 		prevMoveClick: () => {
@@ -323,8 +346,8 @@ const Handlers = {
 		// ------------------------
 		wheelNavigation: (event) => {
 			event.preventDefault()
-			if (event.deltaY > 0) Handlers.boardNavigation.nextMoveClick()
-			else Handlers.boardNavigation.prevMoveClick()
+			if (event.deltaY > 0) Handlers.navigation.nextMoveClick()
+			else Handlers.navigation.prevMoveClick()
 		},
 		// / @b Handle touch start for swipe
 		// ------------------------
@@ -333,13 +356,13 @@ const Handlers = {
 		// ------------------------
 		touchEnd: (event) => {
 			STATE.touchEndX = event.changedTouches[0].screenX
-			Handlers.boardNavigation.swipe()
+			Handlers.navigation.swipe()
 		},
 		// / @b Determine and execute swipe action
 		// ------------------------
 		swipe: () => {
-			if (STATE.touchEndX < STATE.touchStartX - 50) Handlers.boardNavigation.nextMoveClick()
-			else if (STATE.touchEndX > STATE.touchStartX + 50) Handlers.boardNavigation.prevMoveClick()
+			if (STATE.touchEndX < STATE.touchStartX - 50) Handlers.navigation.nextMoveClick()
+			else if (STATE.touchEndX > STATE.touchStartX + 50) Handlers.navigation.prevMoveClick()
 		},
 	},
 }
@@ -430,6 +453,18 @@ const Tools = {
 	//------------------------
 	clearContent: (element) => {
 		if (element) element.innerHTML = ''
+	},
+
+	// @b Debounce
+	// ------------------------
+	debounce: (func, delay) => {
+		let timeoutId
+		return function (...args) {
+			clearTimeout(timeoutId)
+			timeoutId = setTimeout(() => {
+				func.apply(this, args)
+			}, delay)
+		}
 	},
 
 	// @b Lighten HEX color

@@ -456,7 +456,6 @@ body {
 /* Navigation control wrapper */
 .modal__nav-controls {
 	width: 100%;
-	height: 100%;
 }
 /* General style for navigation buttons */
 .modal__nav-btn {
