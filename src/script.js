@@ -136,13 +136,13 @@ const Handlers = {
 		// / @b Handle window resize event
 		// ------------------------
 		resize: () => {
-			Log.blue()
 			const currentWidth = window.innerWidth
 			const currentHeight = window.innerHeight
 			const widthDifference = Math.abs(currentWidth - STATE.lastWidth)
 			const heightDifference = Math.abs(currentHeight - STATE.lastHeight)
-
-			const MIN_CHANGE_THRESHOLD = 50
+			Log.blue(widthDifference, heightDifference)
+			
+			const MIN_CHANGE_THRESHOLD = 100
 
 			if (widthDifference < MIN_CHANGE_THRESHOLD && heightDifference < MIN_CHANGE_THRESHOLD) {
 				return
