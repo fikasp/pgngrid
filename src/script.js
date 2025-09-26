@@ -2,7 +2,7 @@
 //========================
 //#region @r STATE
 //========================
-const state = {
+const STATE = {
 	allGames: [],
 	bigBoard: null,
 	chessboards: [],
@@ -60,6 +60,288 @@ const $ = {
 		game: document.getElementById('game-select'), // .header__select--game
 	},
 	moveListDisplay: document.getElementById('move-list-display'), // .modal__move-list
+}
+// #endregion
+//========================
+//#region @r LISTENERS
+//========================
+const Listeners = {
+	// / @b Setup all event listeners
+	// ------------------------
+	setup: () => {
+		window.onresize = Handlers.window.resize
+		document.addEventListener('keydown', Handlers.window.keyDown)
+
+		// Modals
+		$.modals.bigBoard.addEventListener('click', Handlers.modals.closeBoardClick)
+		$.modals.settings.addEventListener('click', Handlers.modals.closeSettingsClick)
+
+		// Paste/Input Area
+		$.inputs.pasteArea.addEventListener('input', Handlers.input.pasteAreaInput)
+		$.inputs.pasteArea.addEventListener('click', Handlers.input.pasteAreaClick)
+
+		// File Drop Area
+		$.inputs.dropArea.addEventListener('click', Handlers.file.dropClick)
+		$.inputs.dropArea.addEventListener('dragover', Handlers.file.dragOver)
+		$.inputs.dropArea.addEventListener('dragleave', Handlers.file.dragLeave)
+		$.inputs.dropArea.addEventListener('drop', Handlers.file.drop)
+
+		// Buttons
+		$.buttons.closeBigBoard.addEventListener('click', Handlers.modals.closeBoardClick)
+		$.buttons.closeSettings.addEventListener('click', Handlers.modals.closeSettingsClick)
+		$.buttons.nextMove.addEventListener('click', Handlers.boardNavigation.nextMoveClick)
+		$.buttons.prevMove.addEventListener('click', Handlers.boardNavigation.prevMoveClick)
+		$.buttons.orientation.addEventListener('click', Handlers.settings.orientationToggle)
+		$.buttons.settings.addEventListener('click', Handlers.modals.settingsClick)
+		$.buttons.print.addEventListener('click', Handlers.window.printBoards)
+
+		// File Button
+		$.buttons.file.addEventListener('dragover', Handlers.file.dragOverOnButton)
+		$.buttons.file.addEventListener('dragleave', Handlers.file.dragLeaveOnButton)
+		$.buttons.file.addEventListener('drop', Handlers.file.dropOnButton)
+		$.inputs.file.addEventListener('change', Handlers.file.change)
+
+		// Selects
+		$.selects.game.addEventListener('change', Handlers.selects.gameSelectChange)
+		$.selects.columns.addEventListener('change', Handlers.selects.columnsSelectChange)
+		Tools.addWheelListener($.selects.columns, Handlers.selects.columnsSelectChange)
+		Tools.addWheelListener($.selects.game, Handlers.selects.gameSelectChange)
+
+		// Color Pickers
+		$.inputs.boardColorPicker.addEventListener('input', Handlers.settings.boardColorPicker)
+		$.inputs.highlightColorPicker.addEventListener('input', Handlers.settings.highlightColorPicker)
+	},
+}
+// #endregion
+//========================
+//#region @r HANDLERS
+//========================
+const Handlers = {
+	window: {
+		// / @b Handle key down events
+		// ------------------------
+		keyDown: (event) => {
+			Log.blue(event.key)
+			if ($.modals.bigBoard.classList.contains('show-modal')) {
+				if (event.key === 'ArrowLeft') Handlers.boardNavigation.prevMoveClick()
+				else if (event.key === 'ArrowRight') Handlers.boardNavigation.nextMoveClick()
+				else if (event.key === 'Escape') Handlers.modals.closeBoardClick(event)
+			} else if ($.modals.settings.classList.contains('show-modal') && event.key === 'Escape') {
+				Handlers.modals.closeSettingsClick(event)
+			}
+		},
+		// / @b Handle window resize event
+		// ------------------------
+		resize: () => {
+			Log.blue()
+			Settings.updateColumnsSelect()
+			if (STATE.pgnString && STATE.allGames.length > 0) {
+				Logic.processBoards(STATE.allGames[$.selects.game.value].pgn)
+			}
+			if ($.modals.bigBoard.classList.contains('show-modal')) {
+				Renderers.renderBigBoard()
+			}
+		},
+		// / @b Handle print button click
+		// ------------------------
+		printBoards: () => {
+			Log.blue()
+			window.print()
+		},
+	},
+
+	file: {
+		// / @b Trigger file input click
+		// ------------------------
+		dropClick: () => $.inputs.file.click(),
+		// / @b Handle file drag over event
+		// ------------------------
+		dragOver: (e) => {
+			e.preventDefault()
+			$.inputs.dropArea.classList.add('drag-over')
+		},
+		// / @b Handle file drag leave event
+		// ------------------------
+		dragLeave: () => $.inputs.dropArea.classList.remove('drag-over'),
+		// / @b Handle file drop event
+		// ------------------------
+		drop: (e) => {
+			e.preventDefault()
+			$.inputs.dropArea.classList.remove('drag-over')
+			Logic.handleFile(e.dataTransfer.files[0])
+		},
+		// / @b Handle file input change
+		// ------------------------
+		change: (event) => Logic.handleFile(event.target.files[0]),
+		// / @b Handle file drag over on button
+		// ------------------------
+		dragOverOnButton: (e) => {
+			e.preventDefault()
+			e.stopPropagation()
+			$.buttons.file.classList.add('drag-over')
+		},
+		// / @b Handle file drag leave on button
+		// ------------------------
+		dragLeaveOnButton: (e) => {
+			e.preventDefault()
+			e.stopPropagation()
+			$.buttons.file.classList.remove('drag-over')
+		},
+		// / @b Handle file drop on button
+		// ------------------------
+		dropOnButton: (e) => {
+			e.preventDefault()
+			e.stopPropagation()
+			$.buttons.file.classList.remove('drag-over')
+			Logic.handleFile(e.dataTransfer.files[0])
+		},
+	},
+
+	input: {
+		// / @b Handle PGN paste area input
+		// ------------------------
+		pasteAreaInput: (event) => {
+			STATE.pgnString = event.target.value.trim()
+			if (STATE.pgnString.length > 0) Logic.processPgn()
+		},
+		// / @b Prevent click propagation on paste area
+		// ------------------------
+		pasteAreaClick: (event) => event.stopPropagation(),
+	},
+
+	selects: {
+		// / @b Handle game select change
+		// ------------------------
+		gameSelectChange: () => {
+			const selectedIndex = $.selects.game.value
+			Log.blue(selectedIndex)
+			if (selectedIndex !== '') {
+				const selectedGame = STATE.allGames[selectedIndex]
+				const gameTitle = selectedGame.header.Event
+				Logic.processBoards(STATE.allGames[selectedIndex].pgn)
+				Helpers.updateTitle(gameTitle)
+			} else {
+				Tools.clearContent($.divs.boards)
+			}
+		},
+		// / @b Handle columns select change
+		// ------------------------
+		columnsSelectChange: () => {
+			Log.blue($.selects.game.value)
+			Logic.processBoards(STATE.allGames[$.selects.game.value].pgn)
+			Helpers.updateBoardLayout()
+			Settings.saveSettings()
+		},
+	},
+
+	settings: {
+		// / @b Toggle board orientation
+		// ------------------------
+		orientationToggle: () => {
+			STATE.settings.orientation = STATE.settings.orientation === 'white' ? 'black' : 'white'
+			Log.blue(STATE.settings.orientation)
+			Renderers.renderBoards()
+			Settings.saveSettings()
+		},
+		// / @b Handle dark board color change
+		// ------------------------
+		boardColorPicker: () => {
+			Log.blue()
+			Settings.changeBoardColors()
+			Settings.saveSettings()
+		},
+		// / @b Handle highlight color change
+		// ------------------------
+		highlightColorPicker: () => {
+			Log.blue()
+			Settings.changeHighlightColor()
+			Renderers.highlightMoves()
+			Settings.saveSettings()
+		},
+	},
+
+	modals: {
+		// / @b Show settings modal
+		// ------------------------
+		settingsClick: () => {
+			Log.blue()
+			$.modals.settings.classList.add('show-modal')
+		},
+		// / @b Close settings modal
+		// ------------------------
+		closeSettingsClick: (event) => {
+			Log.blue()
+			if (event.target === $.modals.settings || event.target === $.buttons.closeSettings) {
+				$.modals.settings.classList.remove('show-modal')
+			}
+		},
+		// / @b Handle click on a small board to open the big board modal
+		// ------------------------
+		boardClick: (index) => {
+			Log.blue(index)
+			STATE.currentBoardIndex = index
+			$.modals.bigBoard.classList.add('show-modal')
+			$.modals.bigBoard.addEventListener('wheel', Handlers.boardNavigation.wheelNavigation, { passive: false })
+			$.divs.bigBoard.addEventListener('touchstart', Handlers.boardNavigation.touchStart, { passive: false })
+			$.divs.bigBoard.addEventListener('touchend', Handlers.boardNavigation.touchEnd, { passive: false })
+			Renderers.renderBigBoard()
+		},
+		// / @b Close big board modal
+		// ------------------------
+		closeBoardClick: (event) => {
+			Log.blue()
+			event.stopPropagation()
+			if (event.target === $.modals.bigBoard || event.currentTarget === $.buttons.closeBigBoard) {
+				$.modals.bigBoard.classList.remove('show-modal')
+				$.modals.bigBoard.removeEventListener('wheel', Handlers.boardNavigation.wheelNavigation)
+				$.divs.bigBoard.removeEventListener('touchstart', Handlers.boardNavigation.touchStart)
+				$.divs.bigBoard.removeEventListener('touchend', Handlers.boardNavigation.touchEnd)
+			}
+		},
+	},
+
+	boardNavigation: {
+		// / @b Navigate to previous move
+		// ------------------------
+		prevMoveClick: () => {
+			Log.blue()
+			if (STATE.currentBoardIndex > 0) {
+				STATE.currentBoardIndex--
+				Renderers.renderBigBoard()
+			}
+		},
+		// / @b Navigate to next move
+		// ------------------------
+		nextMoveClick: () => {
+			Log.blue()
+			if (STATE.currentBoardIndex < STATE.positions.length - 1) {
+				STATE.currentBoardIndex++
+				Renderers.renderBigBoard()
+			}
+		},
+		// / @b Handle wheel navigation (scroll) in big board modal
+		// ------------------------
+		wheelNavigation: (event) => {
+			event.preventDefault()
+			if (event.deltaY > 0) Handlers.boardNavigation.nextMoveClick()
+			else Handlers.boardNavigation.prevMoveClick()
+		},
+		// / @b Handle touch start for swipe
+		// ------------------------
+		touchStart: (event) => (STATE.touchStartX = event.changedTouches[0].screenX),
+		// / @b Handle touch end for swipe
+		// ------------------------
+		touchEnd: (event) => {
+			STATE.touchEndX = event.changedTouches[0].screenX
+			Handlers.boardNavigation.swipe()
+		},
+		// / @b Determine and execute swipe action
+		// ------------------------
+		swipe: () => {
+			if (STATE.touchEndX < STATE.touchStartX - 50) Handlers.boardNavigation.nextMoveClick()
+			else if (STATE.touchEndX > STATE.touchStartX + 50) Handlers.boardNavigation.prevMoveClick()
+		},
+	},
 }
 // #endregion
 //========================
@@ -197,7 +479,6 @@ const Helpers = {
 	// / @b Calculate single board size in grid
 	// ------------------------
 	calculateBoardSize: () => {
-		Log.gray()
 		if (!$.selects.columns) return 400
 		const columns = parseInt($.selects.columns.value, 10)
 		const containerWidth = $.divs.boards.clientWidth - 20
@@ -238,7 +519,6 @@ const Helpers = {
 	// / @b Scroll to active move in the move list
 	// ------------------------
 	scrollToActiveMove: () => {
-		Log.gray()
 		const activeMoveElement = document.querySelector('.modal__move-list .active-move')
 		if (activeMoveElement) {
 			const listContainer = activeMoveElement.parentElement
@@ -250,11 +530,18 @@ const Helpers = {
 			})
 		}
 	},
+	// / @b Update board grid layout based on columns setting
+	// ------------------------
+	updateBoardLayout: () => {
+		if ($.selects.columns) {
+			const columns = $.selects.columns.value
+			$.divs.boards.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
+		}
+	},
 
 	// / @b Update logo and favicon
 	// ------------------------
 	updateLogo: () => {
-		Log.gray()
 		const canvas = document.createElement('canvas')
 		canvas.width = 16
 		canvas.height = 16
@@ -266,535 +553,7 @@ const Helpers = {
 	// / @b Update page title
 	// ------------------------
 	updateTitle: (title) => {
-		Log.gray()
 		Tools.setTitle('PGNgrid - ' + title)
-	},
-}
-// #endregion
-//========================
-//#region @r HANDLERS
-//========================
-const Handlers = {
-	window: {
-		// / @b Handle key down events
-		// ------------------------
-		keyDown: (event) => {
-			Log.blue(event.key)
-			if ($.modals.bigBoard.classList.contains('show-modal')) {
-				if (event.key === 'ArrowLeft') Handlers.boardNavigation.prevMoveClick()
-				else if (event.key === 'ArrowRight') Handlers.boardNavigation.nextMoveClick()
-				else if (event.key === 'Escape') Handlers.modals.closeBoardClick(event)
-			} else if ($.modals.settings.classList.contains('show-modal') && event.key === 'Escape') {
-				Handlers.modals.closeSettingsClick(event)
-			}
-		},
-		// / @b Handle window resize event
-		// ------------------------
-		resize: () => {
-			Log.blue()
-			Settings.updateColumnsSelect()
-			if (state.pgnString && state.allGames.length > 0) {
-				Renderers.renderBoards(state.allGames[$.selects.game.value].pgn)
-			}
-			if ($.modals.bigBoard.classList.contains('show-modal')) {
-				Renderers.renderBigBoard()
-			}
-		},
-		// / @b Handle print button click
-		// ------------------------
-		printBoards: () => {
-			Log.blue()
-			window.print()
-		},
-	},
-
-	file: {
-		// / @b Trigger file input click
-		// ------------------------
-		dropClick: () => $.inputs.file.click(),
-		// / @b Handle file drag over event
-		// ------------------------
-		dragOver: (e) => {
-			e.preventDefault()
-			$.inputs.dropArea.classList.add('drag-over')
-		},
-		// / @b Handle file drag leave event
-		// ------------------------
-		dragLeave: () => $.inputs.dropArea.classList.remove('drag-over'),
-		// / @b Handle file drop event
-		// ------------------------
-		drop: (e) => {
-			e.preventDefault()
-			$.inputs.dropArea.classList.remove('drag-over')
-			Logic.handleFile(e.dataTransfer.files[0])
-		},
-		// / @b Handle file input change
-		// ------------------------
-		change: (event) => Logic.handleFile(event.target.files[0]),
-		// / @b Handle file drag over on button
-		// ------------------------
-		dragOverOnButton: (e) => {
-			e.preventDefault()
-			e.stopPropagation()
-			$.buttons.file.classList.add('drag-over')
-		},
-		// / @b Handle file drag leave on button
-		// ------------------------
-		dragLeaveOnButton: (e) => {
-			e.preventDefault()
-			e.stopPropagation()
-			$.buttons.file.classList.remove('drag-over')
-		},
-		// / @b Handle file drop on button
-		// ------------------------
-		dropOnButton: (e) => {
-			e.preventDefault()
-			e.stopPropagation()
-			$.buttons.file.classList.remove('drag-over')
-			Logic.handleFile(e.dataTransfer.files[0])
-		},
-	},
-
-	input: {
-		// / @b Handle PGN paste area input
-		// ------------------------
-		pasteAreaInput: (event) => {
-			state.pgnString = event.target.value.trim()
-			if (state.pgnString.length > 0) Logic.processPgn()
-		},
-		// / @b Prevent click propagation on paste area
-		// ------------------------
-		pasteAreaClick: (event) => event.stopPropagation(),
-	},
-
-	selects: {
-		// / @b Handle game select change
-		// ------------------------
-		gameSelectChange: () => {
-			const selectedIndex = $.selects.game.value
-			Log.blue(selectedIndex)
-			if (selectedIndex !== '') {
-				const selectedGame = state.allGames[selectedIndex]
-				const gameTitle = selectedGame.header.Event
-				Renderers.renderBoards(state.allGames[selectedIndex].pgn)
-				Helpers.updateTitle(gameTitle)
-			} else {
-				Tools.clearContent($.divs.boards)
-			}
-		},
-		// / @b Handle columns select change
-		// ------------------------
-		columnsSelectChange: () => {
-			Log.blue($.selects.game.value)
-			Renderers.renderBoards(state.allGames[$.selects.game.value].pgn)
-			Renderers.updateBoardLayout()
-			Settings.saveSettings()
-		},
-	},
-
-	settings: {
-		// / @b Toggle board orientation
-		// ------------------------
-		orientationToggle: () => {
-			Log.blue(state.settings.orientation)
-			state.settings.orientation = state.settings.orientation === 'white' ? 'black' : 'white'
-			Renderers.generateBoards()
-			Settings.saveSettings()
-		},
-		// / @b Handle dark board color change
-		// ------------------------
-		boardColorPicker: () => {
-			Log.blue()
-			Settings.changeBoardColors()
-			Settings.saveSettings()
-		},
-		// / @b Handle highlight color change
-		// ------------------------
-		highlightColorPicker: () => {
-			Log.blue()
-			Settings.changeHighlightColor()
-			Renderers.highlightMoves()
-			Settings.saveSettings()
-		},
-	},
-
-	modals: {
-		// / @b Show settings modal
-		// ------------------------
-		settingsClick: () => {
-			Log.blue()
-			$.modals.settings.classList.add('show-modal')
-		},
-		// / @b Close settings modal
-		// ------------------------
-		closeSettingsClick: (event) => {
-			Log.blue()
-			if (event.target === $.modals.settings || event.target === $.buttons.closeSettings) {
-				$.modals.settings.classList.remove('show-modal')
-			}
-		},
-		// / @b Handle click on a small board to open the big board modal
-		// ------------------------
-		boardClick: (index) => {
-			Log.blue(index)
-			state.currentBoardIndex = index
-			$.modals.bigBoard.classList.add('show-modal')
-			$.modals.bigBoard.addEventListener('wheel', Handlers.boardNavigation.wheelNavigation, { passive: false })
-			$.divs.bigBoard.addEventListener('touchstart', Handlers.boardNavigation.touchStart, { passive: false })
-			$.divs.bigBoard.addEventListener('touchend', Handlers.boardNavigation.touchEnd, { passive: false })
-			Renderers.renderBigBoard()
-		},
-		// / @b Close big board modal
-		// ------------------------
-		closeBoardClick: (event) => {
-			Log.blue(event.target)
-			if (event.target === $.modals.bigBoard || event.currentTarget === $.buttons.closeBigBoard) {
-				$.modals.bigBoard.classList.remove('show-modal')
-				$.modals.bigBoard.removeEventListener('wheel', Handlers.boardNavigation.wheelNavigation)
-				$.divs.bigBoard.removeEventListener('touchstart', Handlers.boardNavigation.touchStart)
-				$.divs.bigBoard.removeEventListener('touchend', Handlers.boardNavigation.touchEnd)
-			}
-		},
-	},
-
-	boardNavigation: {
-		// / @b Navigate to previous move
-		// ------------------------
-		prevMoveClick: () => {
-			Log.blue()
-			if (state.currentBoardIndex > 0) {
-				state.currentBoardIndex--
-				Renderers.renderBigBoard()
-			}
-		},
-		// / @b Navigate to next move
-		// ------------------------
-		nextMoveClick: () => {
-			Log.blue()
-			if (state.currentBoardIndex < state.positions.length - 1) {
-				state.currentBoardIndex++
-				Renderers.renderBigBoard()
-			}
-		},
-		// / @b Handle wheel navigation (scroll) in big board modal
-		// ------------------------
-		wheelNavigation: (event) => {
-			event.preventDefault()
-			if (event.deltaY > 0) Handlers.boardNavigation.nextMoveClick()
-			else Handlers.boardNavigation.prevMoveClick()
-		},
-		// / @b Handle touch start for swipe
-		// ------------------------
-		touchStart: (event) => (state.touchStartX = event.changedTouches[0].screenX),
-		// / @b Handle touch end for swipe
-		// ------------------------
-		touchEnd: (event) => {
-			state.touchEndX = event.changedTouches[0].screenX
-			Handlers.boardNavigation.swipe()
-		},
-		// / @b Determine and execute swipe action
-		// ------------------------
-		swipe: () => {
-			if (state.touchEndX < state.touchStartX - 50) Handlers.boardNavigation.nextMoveClick()
-			else if (state.touchEndX > state.touchStartX + 50) Handlers.boardNavigation.prevMoveClick()
-		},
-	},
-}
-// #endregion
-//========================
-//#region @r LISTENERS
-//========================
-const Listeners = {
-	// / @b Setup all event listeners
-	// ------------------------
-	setup: () => {
-		window.onresize = Handlers.window.resize
-		document.addEventListener('keydown', Handlers.window.keyDown)
-
-		// Modals
-		$.modals.bigBoard.addEventListener('click', Handlers.modals.closeBoardClick)
-		$.modals.settings.addEventListener('click', Handlers.modals.closeSettingsClick)
-
-		// Paste/Input Area
-		$.inputs.pasteArea.addEventListener('input', Handlers.input.pasteAreaInput)
-		$.inputs.pasteArea.addEventListener('click', Handlers.input.pasteAreaClick)
-
-		// File Drop Area
-		$.inputs.dropArea.addEventListener('click', Handlers.file.dropClick)
-		$.inputs.dropArea.addEventListener('dragover', Handlers.file.dragOver)
-		$.inputs.dropArea.addEventListener('dragleave', Handlers.file.dragLeave)
-		$.inputs.dropArea.addEventListener('drop', Handlers.file.drop)
-
-		// Buttons
-		$.buttons.closeBigBoard.addEventListener('click', Handlers.modals.closeBoardClick)
-		$.buttons.closeSettings.addEventListener('click', Handlers.modals.closeSettingsClick)
-		$.buttons.nextMove.addEventListener('click', Handlers.boardNavigation.nextMoveClick)
-		$.buttons.prevMove.addEventListener('click', Handlers.boardNavigation.prevMoveClick)
-		$.buttons.orientation.addEventListener('click', Handlers.settings.orientationToggle)
-		$.buttons.settings.addEventListener('click', Handlers.modals.settingsClick)
-		$.buttons.print.addEventListener('click', Handlers.window.printBoards)
-
-		// File Button
-		$.buttons.file.addEventListener('dragover', Handlers.file.dragOverOnButton)
-		$.buttons.file.addEventListener('dragleave', Handlers.file.dragLeaveOnButton)
-		$.buttons.file.addEventListener('drop', Handlers.file.dropOnButton)
-		$.inputs.file.addEventListener('change', Handlers.file.change)
-
-		// Selects
-		$.selects.game.addEventListener('change', Handlers.selects.gameSelectChange)
-		$.selects.columns.addEventListener('change', Handlers.selects.columnsSelectChange)
-		Tools.addWheelListener($.selects.columns, Handlers.selects.columnsSelectChange)
-		Tools.addWheelListener($.selects.game, Handlers.selects.gameSelectChange)
-
-		// Color Pickers
-		$.inputs.boardColorPicker.addEventListener('input', Handlers.settings.boardColorPicker)
-		$.inputs.highlightColorPicker.addEventListener('input', Handlers.settings.highlightColorPicker)
-	},
-}
-// #endregion
-//========================
-//#region @r RENDERERS
-//========================
-const Renderers = {
-	// / @b Generate all small boards for the current game
-	// ------------------------
-	generateBoards: () => {
-		Log.gray()
-		Tools.clearContent($.divs.boards)
-		state.chessboards.length = 0
-		const currentSize = Helpers.calculateBoardSize()
-		state.positions.forEach((pos, index) => {
-			const boardWrapper = document.createElement('div')
-			boardWrapper.className = 'board-wrapper'
-			boardWrapper.style.width = `${currentSize}px`
-			const boardDiv = document.createElement('div')
-			const boardId = 'board-' + Date.now() + Math.random().toString(36).substr(2, 9)
-			boardDiv.id = boardId
-			if (pos.moveText) {
-				const moveInfo = document.createElement('div')
-				moveInfo.className = 'move-info'
-				if (
-					(state.settings.orientation === 'white' && pos.color === 'w') ||
-					(state.settings.orientation === 'black' && pos.color === 'b')
-				) {
-					moveInfo.classList.add('bold-move')
-				}
-				moveInfo.innerText = pos.moveText
-				boardWrapper.appendChild(moveInfo)
-			}
-			boardWrapper.appendChild(boardDiv)
-			$.divs.boards.appendChild(boardWrapper)
-			const config = {
-				position: pos.fen,
-				draggable: false,
-				pieceTheme: 'src/img/{piece}.png',
-				orientation: state.settings.orientation,
-				showNotation: false,
-			}
-			const board = new Chessboard(boardId, config)
-			state.chessboards.push({ board, boardId })
-			boardWrapper.addEventListener('click', () => Handlers.modals.boardClick(index))
-		})
-		Renderers.updateBoardLayout()
-		Renderers.highlightMoves()
-	},
-
-	// / @b Apply highlight to the last move on all boards
-	// ------------------------
-	highlightMoves: () => {
-		Log.gray()
-		if (!state.positions.length) return
-		const currentPosition = state.positions[state.currentBoardIndex]
-		const highlightColor = Helpers.getHighlightColor()
-		state.chessboards.forEach(({ boardId }, index) => {
-			const pos = state.positions[index]
-			const fromSquare = document.querySelector(`#${boardId} .square-${pos.from}`)
-			const toSquare = document.querySelector(`#${boardId} .square-${pos.to}`)
-			if (fromSquare && toSquare) Helpers.applyHighlight(fromSquare, toSquare, highlightColor)
-		})
-		if (!state.bigBoard || !currentPosition) return
-		const fromBig = document.querySelector(`#big-board .square-${currentPosition.from}`)
-		const toBig = document.querySelector(`#big-board .square-${currentPosition.to}`)
-		if (fromBig && toBig) Helpers.applyHighlight(fromBig, toBig, highlightColor)
-	},
-
-	// / @b Render move list below the big board
-	// ------------------------
-	renderMoveList: () => {
-		Log.gray()
-		Tools.clearContent($.moveListDisplay)
-		state.positions.forEach((pos, index) => {
-			const moveSpan = document.createElement('span')
-			moveSpan.innerText = pos.moveText
-			if (index === state.currentBoardIndex) {
-				moveSpan.classList.add('active-move')
-			}
-			moveSpan.addEventListener('click', () => {
-				state.currentBoardIndex = index
-				Renderers.renderBigBoard()
-			})
-			$.moveListDisplay.appendChild(moveSpan)
-		})
-		Helpers.scrollToActiveMove()
-	},
-
-	// / @b Render the big board modal
-	// ------------------------
-	renderBigBoard: () => {
-		Log.yellow()
-		const position = state.positions[state.currentBoardIndex]
-		if (!position) return
-		if (state.bigBoard) state.bigBoard.destroy()
-		if ($.divs.bigBoard) {
-			const config = {
-				position: position.fen,
-				draggable: false,
-				pieceTheme: 'src/img/{piece}.png',
-				showNotation: true,
-				orientation: state.settings.orientation,
-			}
-			state.bigBoard = new Chessboard('big-board', config)
-			const squares = document.querySelectorAll('#big-board .square-55d63')
-			squares.forEach((square) => {
-				square.classList.remove('highlight-3c678')
-				square.style.boxShadow = 'none'
-			})
-			Renderers.highlightMoves()
-		} else {
-			console.error('Element #big-board not found!')
-		}
-		if ($.buttons.prevMove) $.buttons.prevMove.disabled = state.currentBoardIndex === 0
-		if ($.buttons.nextMove) $.buttons.nextMove.disabled = state.currentBoardIndex >= state.positions.length - 1
-		Renderers.renderMoveList()
-	},
-
-	// / @b Process PGN and render all boards
-	// ------------------------
-	renderBoards: (pgnToRender) => {
-		Log.yellow()
-		Tools.clearContent($.divs.boards)
-		state.chessboards.length = 0
-		state.positions = []
-		try {
-			const game = new Chess()
-			game.load_pgn(pgnToRender)
-			const header = game.header()
-			const startFen = header.FEN || 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-			let startMoveNumber = 1
-			if (header.FEN) {
-				const fenParts = startFen.split(' ')
-				startMoveNumber = parseInt(fenParts[5], 10)
-			}
-			const history = game.history({ verbose: true })
-			const tempGame = new Chess(startFen)
-			history.forEach((move, index) => {
-				const moveColor = move.color
-				let moveText = ''
-				tempGame.move(move)
-				if (moveColor === 'w') {
-					moveText = `${startMoveNumber + Math.floor(index / 2)}. ${move.san}`
-				} else {
-					moveText = `${startMoveNumber + Math.floor(index / 2)}... ${move.san}`
-				}
-				state.positions.push({
-					fen: tempGame.fen(),
-					moveText: moveText,
-					color: moveColor,
-					from: move.from,
-					to: move.to,
-				})
-			})
-			Renderers.generateBoards()
-		} catch (error) {
-			console.error('Błąd podczas renderowania partii:', error)
-		}
-	},
-
-	// / @b Update board grid layout based on columns setting
-	// ------------------------
-	updateBoardLayout: () => {
-		Log.white()
-		if ($.selects.columns) {
-			const columns = $.selects.columns.value
-			$.divs.boards.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
-		}
-	},
-}
-// #endregion
-//========================
-//#region @r LOGIC
-//========================
-const Logic = {
-	// / @b Handle file reading and initiate PGN processing
-	// ------------------------
-	handleFile: (file) => {
-		if (!file) return
-		const reader = new FileReader()
-		reader.onload = (e) => {
-			state.pgnString = e.target.result
-			Logic.processPgn()
-		}
-		reader.readAsText(file)
-	},
-
-	// / @b Process PGN string to extract games and positions
-	// ------------------------
-	processPgn: () => {
-		Log.yellow()
-		Tools.clearContent($.divs.boards)
-		state.chessboards.length = 0
-		state.positions.length = 0
-		state.allGames.length = 0
-		if (state.pgnString.length === 0) return
-		$.inputs.dropArea.style.display = 'none'
-		if ($.headers.right) $.headers.right.style.display = 'flex'
-		if ($.headers.center) $.headers.center.style.display = 'flex'
-		try {
-			let gamesArray = []
-			if (state.pgnString.includes('[Event')) {
-				gamesArray = state.pgnString
-					.split('[Event ')
-					.filter(Boolean)
-					.map((gamePgn) => `[Event ${gamePgn}`)
-			} else {
-				gamesArray = state.pgnString.split(/\n\s*\n/).filter((line) => line.trim().length > 0)
-			}
-			if (gamesArray.length === 0) throw new Error('No games found in the provided PGN.')
-			gamesArray.forEach((gamePgn, index) => {
-				const game = new Chess()
-				let cleanPgn = gamePgn.replace(/{[^}]*}/g, '').replace(/\[%[^\]]*]/g, '')
-				const finalPgn = cleanPgn.startsWith('[Event')
-					? cleanPgn
-					: `[Event "Partia ${
-							index + 1
-					  }"]\n[Site "Online"]\n[Date "????.??.??"]\n[Round "?"]\n[White "?"]\n[Black "?"]\n[Result "*"]\n\n${cleanPgn}`
-				if (game.load_pgn(finalPgn)) {
-					const headers = {}
-					const headerRegex = /\[(\w+)\s+"(.*?)"\]/g
-					let match
-					while ((match = headerRegex.exec(finalPgn)) !== null) {
-						headers[match[1]] = match[2]
-					}
-					state.allGames.push({ pgn: finalPgn, header: headers })
-				} else {
-					console.warn(`Could not load PGN for game: ${index + 1}`)
-				}
-			})
-			if (state.allGames.length === 0) {
-				alert('Nie znaleziono żadnej partii w podanym tekście.')
-				$.selects.game.style.display = 'none'
-				return
-			}
-			if ($.selects.columns) $.selects.columns.style.display = 'inline-block'
-			Settings.updateGameSelect()
-			const firstGame = state.allGames[0]
-			const firstGameTitle = firstGame.header.Event
-			Renderers.renderBoards(state.allGames[0].pgn)
-			Helpers.updateTitle(firstGameTitle)
-		} catch (error) {
-			console.error('Błąd podczas przetwarzania PGN:', error)
-			alert('Wystąpił błąd podczas przetwarzania PGN. Upewnij się, że format jest poprawny.')
-		}
 	},
 }
 // #endregion
@@ -805,13 +564,13 @@ const Settings = {
 	// / @b Apply saved settings to the UI elements
 	// ------------------------
 	applySettingsToUI: () => {
-		$.selects.columns.value = state.settings.columns
-		$.inputs.boardColorPicker.value = state.settings.darkColor
-		$.inputs.highlightColorPicker.value = state.settings.highlightColor
+		$.selects.columns.value = STATE.settings.columns
+		$.inputs.boardColorPicker.value = STATE.settings.darkColor
+		$.inputs.highlightColorPicker.value = STATE.settings.highlightColor
 		Settings.changeBoardColors()
 		Settings.changeHighlightColor()
 		Settings.updateColumnsSelect()
-		Renderers.updateBoardLayout()
+		Helpers.updateBoardLayout()
 	},
 	// / @b Update CSS variables for board colors
 	// ------------------------
@@ -836,12 +595,12 @@ const Settings = {
 		if (saved) {
 			try {
 				const parsed = JSON.parse(saved)
-				state.settings = { ...state.settings, ...(parsed || {}) }
+				STATE.settings = { ...STATE.settings, ...(parsed || {}) }
 			} catch (e) {
 				console.error('Error parsing settings:', e)
 			}
 		}
-		Log.orange(state.settings)
+		Log.orange(STATE.settings)
 	},
 	// / @b Save current settings to local storage
 	// ------------------------
@@ -850,7 +609,7 @@ const Settings = {
 			columns: $.selects.columns.value,
 			darkColor: $.inputs.boardColorPicker.value,
 			highlightColor: $.inputs.highlightColorPicker.value,
-			orientation: state.settings.orientation,
+			orientation: STATE.settings.orientation,
 		}
 		localStorage.setItem('settings', JSON.stringify(settings))
 		Log.orange(settings)
@@ -872,10 +631,10 @@ const Settings = {
 			option.textContent = i
 			$.selects.columns.appendChild(option)
 		}
-		let current = parseInt(state.settings.columns, 10)
+		let current = parseInt(STATE.settings.columns, 10)
 		if (isNaN(current) || current > maxColumns || current < 1) current = maxColumns
 		$.selects.columns.value = current
-		state.settings.columns = current
+		STATE.settings.columns = current
 	},
 	// / @b Populate game select options
 	// ------------------------
@@ -883,7 +642,7 @@ const Settings = {
 		Log.white()
 		Tools.clearContent($.selects.game)
 		$.selects.game.style.display = 'block'
-		state.allGames.forEach((game, index) => {
+		STATE.allGames.forEach((game, index) => {
 			const event = game.header.Event || `Partia ${index + 1}`
 			const optionText = event
 			const option = document.createElement('option')
@@ -895,11 +654,245 @@ const Settings = {
 }
 // #endregion
 //========================
+//#region @r RENDERERS
+//========================
+const Renderers = {
+	// / @b Apply highlight to the last move on all boards
+	// ------------------------
+	highlightMoves: () => {
+		Log.gray()
+		if (!STATE.positions.length) return
+		const currentPosition = STATE.positions[STATE.currentBoardIndex]
+		const highlightColor = Helpers.getHighlightColor()
+		STATE.chessboards.forEach(({ boardId }, index) => {
+			const pos = STATE.positions[index]
+			const fromSquare = document.querySelector(`#${boardId} .square-${pos.from}`)
+			const toSquare = document.querySelector(`#${boardId} .square-${pos.to}`)
+			if (fromSquare && toSquare) Helpers.applyHighlight(fromSquare, toSquare, highlightColor)
+		})
+		if (!STATE.bigBoard || !currentPosition) return
+		const fromBig = document.querySelector(`#big-board .square-${currentPosition.from}`)
+		const toBig = document.querySelector(`#big-board .square-${currentPosition.to}`)
+		if (fromBig && toBig) Helpers.applyHighlight(fromBig, toBig, highlightColor)
+	},
+
+	// / @b Generate all small boards for the current game
+	// ------------------------
+	renderBoards: () => {
+		Log.orange()
+		Tools.clearContent($.divs.boards)
+		STATE.chessboards.length = 0
+		const currentSize = Helpers.calculateBoardSize()
+		STATE.positions.forEach((pos, index) => {
+			const boardWrapper = document.createElement('div')
+			boardWrapper.className = 'board-wrapper'
+			boardWrapper.style.width = `${currentSize}px`
+			const boardDiv = document.createElement('div')
+			const boardId = 'board-' + Date.now() + Math.random().toString(36).substr(2, 9)
+			boardDiv.id = boardId
+			if (pos.moveText) {
+				const moveInfo = document.createElement('div')
+				moveInfo.className = 'move-info'
+				if (
+					(STATE.settings.orientation === 'white' && pos.color === 'w') ||
+					(STATE.settings.orientation === 'black' && pos.color === 'b')
+				) {
+					moveInfo.classList.add('bold-move')
+				}
+				moveInfo.innerText = pos.moveText
+				boardWrapper.appendChild(moveInfo)
+			}
+			boardWrapper.appendChild(boardDiv)
+			$.divs.boards.appendChild(boardWrapper)
+			const config = {
+				position: pos.fen,
+				draggable: false,
+				pieceTheme: 'src/img/{piece}.png',
+				orientation: STATE.settings.orientation,
+				showNotation: false,
+			}
+			const board = new Chessboard(boardId, config)
+			STATE.chessboards.push({ board, boardId })
+			boardWrapper.addEventListener('click', () => Handlers.modals.boardClick(index))
+		})
+		Helpers.updateBoardLayout()
+		Renderers.highlightMoves()
+	},
+
+	// / @b Render the big board modal
+	// ------------------------
+	renderBigBoard: () => {
+		Log.orange()
+		const position = STATE.positions[STATE.currentBoardIndex]
+		if (!position) return
+		if (STATE.bigBoard) STATE.bigBoard.destroy()
+		if ($.divs.bigBoard) {
+			const config = {
+				position: position.fen,
+				draggable: false,
+				pieceTheme: 'src/img/{piece}.png',
+				showNotation: true,
+				orientation: STATE.settings.orientation,
+			}
+			STATE.bigBoard = new Chessboard('big-board', config)
+			const squares = document.querySelectorAll('#big-board .square-55d63')
+			squares.forEach((square) => {
+				square.classList.remove('highlight-3c678')
+				square.style.boxShadow = 'none'
+			})
+			Renderers.highlightMoves()
+		} else {
+			console.error('Element #big-board not found!')
+		}
+		if ($.buttons.prevMove) $.buttons.prevMove.disabled = STATE.currentBoardIndex === 0
+		if ($.buttons.nextMove) $.buttons.nextMove.disabled = STATE.currentBoardIndex >= STATE.positions.length - 1
+		Renderers.renderMoveList()
+	},
+
+	// / @b Render move list below the big board
+	// ------------------------
+	renderMoveList: () => {
+		Log.gray()
+		Tools.clearContent($.moveListDisplay)
+		STATE.positions.forEach((pos, index) => {
+			const moveSpan = document.createElement('span')
+			moveSpan.innerText = pos.moveText
+			if (index === STATE.currentBoardIndex) {
+				moveSpan.classList.add('active-move')
+			}
+			moveSpan.addEventListener('click', () => {
+				STATE.currentBoardIndex = index
+				Renderers.renderBigBoard()
+			})
+			$.moveListDisplay.appendChild(moveSpan)
+		})
+		Helpers.scrollToActiveMove()
+	},
+}
+// #endregion
+//========================
+//#region @r MAIN LOGIC
+//========================
+const Logic = {
+	// / @b Handle file
+	// ------------------------
+	handleFile: (file) => {
+		if (!file) return
+		const reader = new FileReader()
+		reader.onload = (e) => {
+			STATE.pgnString = e.target.result
+			Logic.processPgn()
+		}
+		reader.readAsText(file)
+	},
+
+	// / @b Process PGN
+	// ------------------------
+	processPgn: () => {
+		Log.yellow()
+		Tools.clearContent($.divs.boards)
+		STATE.chessboards.length = 0
+		STATE.positions.length = 0
+		STATE.allGames.length = 0
+		if (STATE.pgnString.length === 0) return
+		$.inputs.dropArea.style.display = 'none'
+		if ($.headers.right) $.headers.right.style.display = 'flex'
+		if ($.headers.center) $.headers.center.style.display = 'flex'
+		try {
+			let gamesArray = []
+			if (STATE.pgnString.includes('[Event')) {
+				gamesArray = STATE.pgnString
+					.split('[Event ')
+					.filter(Boolean)
+					.map((gamePgn) => `[Event ${gamePgn}`)
+			} else {
+				gamesArray = STATE.pgnString.split(/\n\s*\n/).filter((line) => line.trim().length > 0)
+			}
+			if (gamesArray.length === 0) throw new Error('No games found in the provided PGN.')
+			gamesArray.forEach((gamePgn, index) => {
+				const game = new Chess()
+				let cleanPgn = gamePgn.replace(/{[^}]*}/g, '').replace(/\[%[^\]]*]/g, '')
+				const finalPgn = cleanPgn.startsWith('[Event')
+					? cleanPgn
+					: `[Event "Partia ${
+							index + 1
+					  }"]\n[Site "Online"]\n[Date "????.??.??"]\n[Round "?"]\n[White "?"]\n[Black "?"]\n[Result "*"]\n\n${cleanPgn}`
+				if (game.load_pgn(finalPgn)) {
+					const headers = {}
+					const headerRegex = /\[(\w+)\s+"(.*?)"\]/g
+					let match
+					while ((match = headerRegex.exec(finalPgn)) !== null) {
+						headers[match[1]] = match[2]
+					}
+					STATE.allGames.push({ pgn: finalPgn, header: headers })
+				} else {
+					console.warn(`Could not load PGN for game: ${index + 1}`)
+				}
+			})
+			if (STATE.allGames.length === 0) {
+				alert('Nie znaleziono żadnej partii w podanym tekście.')
+				$.selects.game.style.display = 'none'
+				return
+			}
+			if ($.selects.columns) $.selects.columns.style.display = 'inline-block'
+			Settings.updateGameSelect()
+			const firstGame = STATE.allGames[0]
+			const firstGameTitle = firstGame.header.Event
+			Logic.processBoards(STATE.allGames[0].pgn)
+			Helpers.updateTitle(firstGameTitle)
+		} catch (error) {
+			console.error('Błąd podczas przetwarzania PGN:', error)
+			alert('Wystąpił błąd podczas przetwarzania PGN. Upewnij się, że format jest poprawny.')
+		}
+	},
+
+	// @b Process boards
+	//------------------------
+	processBoards: (pgnToRender) => {
+		Log.yellow()
+		Tools.clearContent($.divs.boards)
+		STATE.chessboards.length = 0
+		STATE.positions = []
+		try {
+			const game = new Chess()
+			game.load_pgn(pgnToRender)
+			const header = game.header()
+			const startFen = header.FEN || 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+			let startMoveNumber = 1
+			if (header.FEN) {
+				const fenParts = startFen.split(' ')
+				startMoveNumber = parseInt(fenParts[5], 10)
+			}
+			const history = game.history({ verbose: true })
+			const tempGame = new Chess(startFen)
+			history.forEach((move, index) => {
+				const moveColor = move.color
+				let moveText = ''
+				tempGame.move(move)
+				if (moveColor === 'w') {
+					moveText = `${startMoveNumber + Math.floor(index / 2)}. ${move.san}`
+				} else {
+					moveText = `${startMoveNumber + Math.floor(index / 2)}... ${move.san}`
+				}
+				STATE.positions.push({
+					fen: tempGame.fen(),
+					moveText: moveText,
+					color: moveColor,
+					from: move.from,
+					to: move.to,
+				})
+			})
+			Renderers.renderBoards()
+		} catch (error) {
+			console.error('Błąd podczas renderowania partii:', error)
+		}
+	},
+}
+// #endregion
+//========================
 //#region @r APP INIT
 //========================
 const App = {
-	// / @b Initialize the application
-	// ------------------------
 	init: () => {
 		Log.init()
 		Log.yellow()
