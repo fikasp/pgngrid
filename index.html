@@ -28,48 +28,36 @@
 		 @g HEADER
 		------------------------->
 		<div class="header">
-			<div class="header-top">
+			<div class="header__top">
 				<!-- @b Header left
 				------------------------->
-				<div class="header-left">
-					<a href="#" class="header-link" onclick="location.reload()">
-						<div class="header-logo">
+				<div class="header__left">
+					<a href="#" class="header__link" onclick="location.reload()">
+						<div class="header__logo">
 							<canvas id="logo" width="30" height="30"></canvas>
 						</div>
-						<h1 class="header-title">PGNgrid</h1>
+						<h1 class="header__title">PGNgrid</h1>
 					</a>
 				</div>
 
 				<!-- @b Header right
 				------------------------->
-				<div class="header-right">
+				<div class="header__right">
 					<!-- Orientation -->
-					<button
-						id="btn-orientation"
-						class="btn-orientation"
-						title="Obróć orientację"
-					>
+					<button id="btn-orientation" class="header__button header__button--orientation" title="Obróć orientację">
 						<i class="fa-solid fa-rotate fa-2x"></i>
 					</button>
-
 					<!-- Settings -->
-					<button id="btn-settings" class="btn-settings" title="Ustawienia">
+					<button id="btn-settings" class="header__button header__button--settings" title="Ustawienia">
 						<i class="fa-solid fa-gear fa-2x"></i>
 					</button>
-
 					<!-- Print -->
-					<button id="btn-print" class="btn-print" title="Drukuj">
+					<button id="btn-print" class="header__button header__button--print" title="Drukuj">
 						<i class="fa-solid fa-print fa-2x"></i>
 					</button>
-
 					<!-- File -->
-					<input type="file" id="pgn-file" />
-					<label
-						for="pgn-file"
-						id="btn-file"
-						class="file-label"
-						title="Wczytaj plik PGN"
-					>
+					<input type="file" id="pgn-file" class="header__file-input" />
+					<label for="pgn-file" id="btn-file" class="header__button header__button--file" title="Wczytaj plik PGN">
 						<i class="fa-solid fa-folder-open fa-2x"></i>
 					</label>
 				</div>
@@ -77,8 +65,8 @@
 
 			<!-- @b Header center
 			------------------------->
-			<div class="header-center">
-				<select id="game-select">
+			<div class="header__center">
+				<select id="game-select" class="header__select header__select--game">
 					<option value="">Wybierz partię</option>
 				</select>
 			</div>
@@ -87,68 +75,67 @@
 		<!------------------------
 			@g DROP AREA
 		------------------------->
-		<div id="file-drop-area">
-			<i class="fa-solid fa-folder-open"></i>
+		<div id="file-drop-area" class="drop-zone">
+			<i class="fa-solid fa-folder-open drop-zone__icon"></i>
 			<textarea
 				id="pgn-paste-area"
+				class="drop-zone__textarea"
 				placeholder="Przeciągnij plik, kliknij lub wklej tekst tutaj..."
 			></textarea>
 		</div>
-
 		<!------------------------
 			@g BOARDS
 		------------------------->
-		<div id="boards"></div>
+		<div id="boards" class="board-grid"></div>
 
 		<!------------------------
 			@g BIG BOARD MODAL
 		------------------------->
-		<div id="big-board-modal" class="modal">
-			<button id="btn-close-board" class="btn-nav close">
-				<i class="fa-solid fa-close"></i>
-			</button>
-			<div class="modal-content-board">
-				<div id="move-list-display">Ruchy</div>
-				<div id="big-board-wrapper" class="big-board-wrapper">
+		<div id="big-board-modal" class="modal modal--board">
+			<button id="btn-close-board" class="modal__close-btn"><i class="fa-solid fa-close"></i></button>
+
+			<div class="modal__content modal__content--board">
+				<div id="move-list-display" class="modal__move-list">Ruchy</div>
+
+				<div id="big-board-wrapper" class="modal__board-wrapper">
 					<!--Big board -->
 					<div id="big-board"></div>
-					<div class="navigation-buttons">
+
+					<div class="modal__nav-controls">
 						<!-- Prev -->
-						<button id="btn-prev-move" class="btn-nav left">
+						<button id="btn-prev-move" class="modal__nav-btn modal__nav-btn--left">
 							<i class="fa-solid fa-angle-left"></i>
 						</button>
-
 						<!-- Next -->
-						<button id="btn-next-move" class="btn-nav right">
+						<button id="btn-next-move" class="modal__nav-btn modal__nav-btn--right">
 							<i class="fa-solid fa-angle-right"></i>
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<!------------------------
 			@g SETTINGS MODAL
 		------------------------->
-		<div id="settings-modal" class="modal">
-			<div class="modal-content-settings">
+
+		<div id="settings-modal" class="modal modal--settings">
+			<div class="modal__content modal__content--settings">
 				<!-- Header -->
-				<div class="modal-header">
+				<div class="modal__header">
 					<h2>Ustawienia</h2>
-					<span class="btn-close-settings">&times;</span>
+					<span id="btn-close-settings" class="modal__close-settings">&times;</span>
 				</div>
-				<div class="modal-grid">
+
+				<div class="modal__grid">
 					<!-- Board columns -->
-					<label for="board-columns">Liczba kolumn:</label>
-					<select id="board-columns"></select>
-
+					<label for="board-columns" class="modal__label">Liczba kolumn:</label>
+					<select id="board-columns" class="modal__select"></select>
 					<!-- Dark color picker -->
-					<label for="dark-color-picker">Kolor ciemnych pól:</label>
-					<input type="color" id="dark-color-picker" value="#888888" />
-
+					<label for="dark-color-picker" class="modal__label">Kolor ciemnych pól:</label>
+					<input type="color" id="dark-color-picker" class="modal__color-picker" value="#888888" />
 					<!-- Highlight color picker -->
-					<label for="highlight-color-picker">Kolor podświetlenia:</label>
-					<input type="color" id="highlight-color-picker" value="#3399dd" />
+					<label for="highlight-color-picker" class="modal__label">Kolor podświetlenia:</label>
+					<input type="color" id="highlight-color-picker" class="modal__color-picker" value="#3399dd" />
 				</div>
 			</div>
 		</div>
@@ -159,9 +146,9 @@
 		<div class="footer">2025 © Przemysław Fikas</div>
 
 		<!-- #endregion -->
-	<!--====================-->
-	<!--#region @r SCRIPTS -->
-	<!--====================-->
+		<!--====================-->
+		<!--#region @r SCRIPTS -->
+		<!--====================-->
 		<script src="src/vendor/jquery.js"></script>
 		<script src="src/vendor/chesspieces.js"></script>
 		<script src="src/vendor/chessboard.js"></script>

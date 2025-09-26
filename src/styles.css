@@ -50,7 +50,6 @@
 	font-weight: 400;
 	font-style: normal;
 }
-
 @font-face {
 	font-family: 'Play';
 	src: url('vendor/webfonts/play-bold.woff2') format('woff2');
@@ -78,96 +77,76 @@ body {
 /*========================*/
 /*#region @r HEADER */
 /*========================*/
+/* @b Main layout
+/*------------------------*/
 .header {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 60px;
+	height: auto;
 	background-color: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(5px);
 	color: white;
-	padding: 0 20px;
+	padding: 10px 20px;
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	z-index: 1000;
 }
-
-.header-top {
+/* Container for left and right sections */
+.header__top {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+	height: 40px;
 }
-
-.header-left {
+/* Left section: Logo and Title */
+.header__left {
 	display: flex;
 	align-items: center;
 	gap: 15px;
 }
-
-.header-center {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
+/* Center section: Game selection  */
+.header__center {
+	display: none;
 	justify-content: center;
-	z-index: 1;
+	align-items: center;
+	gap: 15px;
+	width: 100%;
+	padding-top: 10px;
 }
-
-.header-right {
+/* Right section: Control buttons */
+.header__right {
 	display: none;
 	align-items: center;
 	gap: 15px;
 }
-
-.header-link {
+/* Link for logo and title (page reset) */
+.header__link {
 	display: flex;
 	align-items: center;
 	text-decoration: none;
 	gap: 15px;
 }
-
-.header-title {
+/* Tile */
+.header__title {
 	margin: 0;
 	font-size: 1.2em;
 	transition: color 0.3s;
 	color: white;
 }
-
-.header-logo {
+/* Logo */
+.header__logo {
 	width: 30px;
 	height: 30px;
 }
 
-@media screen and (max-width: 1000px) {
-	.header {
-		height: auto;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 15px 20px;
-	}
-	.header-top {
-		width: 100%;
-	}
-	.header-center {
-		display: none;
-		position: static;
-		transform: none;
-		margin-top: 15px;
-		width: 100%;
-	}
-}
-
-/* @b Buttons
+/* @b Button
 /*------------------------*/
-.btn-print,
-.btn-settings,
-.btn-orientation,
-.file-label {
+.header__button {
 	background: none;
 	border: none;
 	color: white;
@@ -175,27 +154,23 @@ body {
 	cursor: pointer;
 	transition: color 0.3s;
 }
-
-.btn-print:hover,
-.btn-settings:hover,
-.btn-orientation:hover,
-.header-title:hover,
-.file-label:hover {
-	color: #ccc;
+/* Hover effects for buttons and title */
+.header__button:hover,
+.header__title:hover {
+	color: var(--grayC);
 }
-
-#btn-file.drag-over {
-	transition: all 0.2s ease-in-out;
+/* Visual indication for file drag-over state */
+.header__button--file.drag-over {
 	color: #22cc88;
+	transition: all 0.2s ease-in-out;
 }
-
-#pgn-file {
+.header__file-input {
 	display: none;
 }
 
-/* @b Game select
+/* @b Select
 /*------------------------*/
-#game-select {
+.header__select {
 	display: none;
 	appearance: none;
 	-webkit-appearance: none;
@@ -212,360 +187,185 @@ body {
 	min-width: 300px;
 	max-width: 1000px;
 }
-
-#game-select:hover {
-	background-color: #111;
+.header__select:hover {
+	background-color: var(--gray1);
 	border-color: #666;
 }
-
-#game-select option {
-	background-color: #111;
+.header__select option {
+	background-color: var(--gray1);
 	color: #fff;
 }
-
-@media screen and (max-width: 1500px) {
-	#game-select {
-		max-width: 600px;
-	}
+.header__select--game {
+	min-width: 300px;
+	max-width: 500px;
 }
 
+/* @b Media Query
+/*------------------------*/
+/* Desktop layout (min-width 1000px) */
+@media screen and (min-width: 1000px) {
+	.header {
+		height: 60px;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.header__center {
+		display: flex;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		padding-top: 0;
+		width: auto;
+	}
+}
+/* Mobile layout fixes (max-width 1000px) */
 @media screen and (max-width: 1000px) {
-	#game-select {
+	.header__select {
 		max-width: none;
 		width: 100%;
 	}
 }
 /* #endregion */
 /*========================*/
-/*#region @r DROPAREA */
+/*#region @r DROP ZONE */
 /*========================*/
-#file-drop-area {
+/* @b Main area
+/*------------------------*/
+.drop-zone {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	position: absolute;
+	position: absolute; /* Allows for centering */
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	transition: all 0.3s ease;
 	width: 300px;
-	height: auto;
 	min-height: 300px;
 	padding: 40px;
 	border: 3px dashed #ccc;
 	border-radius: 15px;
-	background-color: #222;
-	color: #ccc;
+	background-color: var(--gray2);
+	color: var(--grayC);
 	line-height: 1.5;
 	text-align: center;
 	cursor: pointer;
 }
-
-#file-drop-area:hover {
+/* Hover effects */
+.drop-zone:hover {
 	color: var(--highlight-color);
 	border-color: var(--highlight-color);
 	background-color: transparent;
 }
-
-#file-drop-area.drag-over {
-	border-color: #22cc88;
+/* Visual indication for file drag-over state */
+.drop-zone.drag-over {
 	background-color: transparent;
+	border-color: #22cc88;
 	color: #22cc88;
 }
-
-#file-drop-area i {
+.drop-zone__icon {
 	font-size: 50px;
 	margin-top: 70px;
 }
-
-/* @b Paste area
+/* @b Textarea
 /*------------------------*/
-#pgn-paste-area {
+.drop-zone__textarea {
 	width: 220px;
 	height: 66px;
 	padding: 10px 20px;
-	border: 0px;
+	border: 0;
 	border-radius: 8px;
 	font-family: inherit;
 	font-size: 0.9em;
 	line-height: 1.5em;
 	resize: none;
-	background-color: #222;
-	color: #aaa;
+	background-color: var(--gray2);
+	color: var(--grayA);
 	transition: all 0.3s ease;
 	text-align: center;
 	outline: none;
 }
-
-#pgn-paste-area:focus::placeholder {
+/* Hiding the placeholder when focused */
+.drop-zone__textarea:focus::placeholder {
 	color: transparent;
 }
-
 /* #endregion */
 /*========================*/
-/*#region @r BOARDS */
+/*#region @r BOARD GRID */
 /*========================*/
-
-#boards {
+/* @b Main container
+/*------------------------*/
+.board-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 0px;
+	gap: 0;
 	justify-items: center;
 	padding: 10px;
 	padding-top: 70px;
 	padding-bottom: 10px;
 }
+/* Top margin correction on small screens */
 @media screen and (max-width: 1000px) {
-	#boards {
+	.board-grid {
 		margin-top: 52px;
 	}
 }
-
+/* @b Single board wrapper
+/*------------------------*/
 .board-wrapper {
 	width: 100%;
 	padding: 5px;
 	position: relative;
 	cursor: pointer;
 }
-
 .board-wrapper:hover {
 	transform: scale(1.02);
 	transition: transform 0.2s ease-in-out;
 }
-
+/* Force 100% width for the chessboard.js element */
 .board-wrapper .chessboard-63f36 {
 	width: 100%;
 	height: auto;
 }
-
+/* Hide algebraic notation on small boards */
 .board-wrapper .notation-32e16 {
 	display: none !important;
 }
-
+/* @b Move info
+/*------------------------*/
 .move-info {
 	margin-bottom: 5px;
 }
-
 .bold-move {
 	font-weight: bold;
 }
-
 /* @b Boards colors
 /*------------------------*/
+/* Setting dark square color */
 .square-55d63.black-3c85d {
 	background-color: var(--board-dark-color);
 }
+/* Setting light square color */
 .square-55d63.white-1e1d7 {
 	background-color: var(--board-light-color);
 }
-
 /* @b Notation colors
 /*------------------------*/
+/* Notation color on light squares */
 .square-55d63.white-1e1d7 .notation-322f9 {
 	color: var(--board-dark-color);
 }
+/* Notation color on dark squares */
 .square-55d63.black-3c85d .notation-322f9 {
 	color: var(--board-light-color);
-}
-
-/* #endregion */
-/*========================*/
-/*#region @r BIG BOARD */
-/*========================*/
-.modal-content-board {
-	position: relative;
-	display: flex;
-	width: min(calc(100vw - 50px), calc(100vh - 100px));
-	height: min(calc(100vw - 50px), calc(100vh - 100px));
-	box-shadow: 0 0 15px 15px rgba(0, 0, 0, 1);
-	background-color: black;
-	aspect-ratio: 1;
-}
-
-#big-board-wrapper {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-/* @b Move list
-/*------------------------*/
-#move-list-display {
-	position: absolute;
-	top: -40px;
-	left: 0;
-	max-width: 100%;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	white-space: nowrap;
-	overflow-x: auto;
-	margin-bottom: 20px;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-#move-list-display::-webkit-scrollbar {
-	display: none;
-}
-
-#move-list-display span {
-	font-size: 1.2rem;
-	padding: 5px 10px;
-	border-radius: 5px;
-	transition: 0.2s;
-	white-space: nowrap;
-	cursor: pointer;
-}
-
-#move-list-display span:hover {
-	color: #aaa;
-}
-
-#move-list-display span.active-move {
-	background-color: var(--highlight-color);
-	color: white;
-}
-
-/* @b Buttons
-/*------------------------*/
-.btn-nav {
-	-webkit-tap-highlight-color: transparent;
-	position: absolute;
-	background: transparent;
-	text-shadow: 0 0 5px #000;
-	color: #ccc;
-	border: none;
-	cursor: pointer;
-	font-size: 2em;
-	transition: color 0.3s;
-	z-index: 10;
-}
-
-.btn-nav:hover:enabled {
-	color: #aaa;
-}
-
-.btn-nav:disabled {
-	display: none;
-}
-
-.btn-nav.left {
-	left: -45px;
-	padding: 15px;
-	transform: translateY(-50%);
-	top: 50%;
-}
-
-.btn-nav.right {
-	right: -45px;
-	padding: 15px;
-	transform: translateY(-50%);
-	top: 50%;
-}
-
-.btn-nav.close {
-	position: absolute;
-	padding: 4px;
-	top: 0px;
-	right: 0px;
-	font-size: 25px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: color 0.3s;
-	z-index: 1001;
-}
-.btn-nav.close:hover {
-	color: #aaa;
-}
-/* #endregion */
-/*========================*/
-/*#region @r SETTINGS */
-/*========================*/
-
-.modal-content-settings {
-	padding: 20px 20px 20px;
-	padding-top: 12px;
-	max-width: 400px;
-	background-color: #111;
-	border-radius: 10px;
-	box-shadow: 0 0px 20px #000;
-	text-align: left;
-	position: relative;
-	transform: scale(0.9);
-	transition: transform 0.3s ease-in-out;
-}
-
-.modal-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid #444;
-	padding-bottom: 10px;
-	margin-bottom: 20px;
-}
-
-.modal-grid {
-	display: grid;
-	grid-template-columns: 1.2fr 0.8fr;
-	align-items: center;
-	gap: 10px;
-}
-
-/* @b Buttons
-/*------------------------*/
-.btn-close-settings {
-	color: #aaa;
-	font-size: 28px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: all 0.3s ease;
-}
-.btn-close-settings:hover,
-.btn-close-settings:focus {
-	text-decoration: none;
-	color: #888;
-}
-
-#board-columns,
-input[type='color'] {
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	width: 100%;
-	padding: 8px 12px;
-	border: 1px solid #444;
-	border-radius: 5px;
-	background-color: #111;
-	text-align: center;
-	color: #fff;
-	font-size: 1em;
-	outline: none;
-	transition: border-color 0.3s;
-	height: 38px;
-}
-#board-columns:hover,
-input[type='color']:hover {
-	border-color: #666;
-}
-
-input[type='color'] {
-	padding: 0;
-}
-input[type='color']::-webkit-color-swatch-wrapper {
-	padding: 2px;
-}
-input[type='color']::-webkit-color-swatch,
-input[type='color']::-moz-color-swatch {
-	border-radius: 2px;
-	border: none;
 }
 /* #endregion */
 /*========================*/
 /*#region @r MODALS */
 /*========================*/
+/* @b General
+/*------------------------*/
 .modal {
 	position: fixed;
 	top: 0;
@@ -582,12 +382,226 @@ input[type='color']::-moz-color-swatch {
 	justify-content: center;
 	align-items: center;
 }
-
+/* Class to show the modal */
 .modal.show-modal {
 	visibility: visible;
-	transition: opacity 0.3s ease-in-out;
 	opacity: 1;
+	transition: opacity 0.3s ease-in-out;
 }
+/* Element (content box) */
+.modal__content {
+	box-shadow: 0 0 20px #000;
+	background-color: var(--gray1);
+}
+
+/*------------------------*/
+/* @g BIG BOARD
+/*------------------------*/
+.modal__content--board {
+	position: relative;
+	display: flex;
+	/* Constrain size to the smaller of 95% viewport width or height */
+	width: min(calc(100vw - 50px), calc(100vh - 100px));
+	height: min(calc(100vw - 50px), calc(100vh - 100px));
+	background-color: var(--black);
+	box-shadow: 0 0 15px 15px rgba(0, 0, 0, 1);
+	aspect-ratio: 1;
+}
+.modal__board-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* @b Move list
+/*------------------------*/
+.modal__move-list {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	max-width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	white-space: nowrap;
+	overflow-x: auto;
+	margin-bottom: 20px;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+/* Hide scrollbar (WebKit/Chrome) */
+.modal__move-list::-webkit-scrollbar {
+	display: none;
+}
+/* Style for a single move element */
+.modal__move-list span {
+	font-size: 1.2rem;
+	padding: 5px 10px;
+	border-radius: 5px;
+	transition: 0.2s;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.modal__move-list span:hover {
+	color: var(--grayA);
+}
+/* Highlight the active move */
+.modal__move-list span.active-move {
+	background-color: var(--highlight-color);
+	color: var(--white);
+}
+
+/* @b Buttons
+/*------------------------*/
+/* Navigation control wrapper */
+.modal__nav-controls {
+	width: 100%;
+	height: 100%;
+}
+/* General style for navigation buttons */
+.modal__nav-btn {
+	position: absolute;
+	background: transparent;
+	text-shadow: 0 0 5px var(--black);
+	color: var(--grayC);
+	border: none;
+	cursor: pointer;
+	font-size: 2em;
+	transition: color 0.3s;
+	z-index: 10;
+}
+.modal__nav-btn:hover:enabled {
+	color: var(--grayA);
+}
+.modal__nav-btn:disabled {
+	display: none;
+}
+/* Positioning for the left button */
+.modal__nav-btn--left {
+	left: -45px;
+	padding: 15px;
+	transform: translateY(-50%);
+	top: 50%;
+}
+/* Positioning for the right button */
+.modal__nav-btn--right {
+	right: -45px;
+	padding: 15px;
+	transform: translateY(-50%);
+	top: 50%;
+}
+/* Close button */
+.modal__close-btn {
+	position: absolute;
+	padding: 4px;
+	top: 0;
+	right: 0;
+	font-size: 25px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: color 0.3s;
+	z-index: 1001;
+	background: transparent;
+	border: none;
+	color: var(--grayC);
+}
+.modal__close-btn:hover {
+	color: var(--grayA);
+}
+
+/*------------------------*/
+/* @g SETTINGS
+/*------------------------*/
+.modal__content--settings {
+	padding: 20px;
+	padding-top: 12px;
+	max-width: 400px;
+	background-color: var(--gray1);
+	border-radius: 10px;
+	text-align: left;
+	position: relative;
+	transform: scale(0.9); /* Initial state for animation */
+	transition: transform 0.3s ease-in-out;
+}
+/* Scaling animation upon showing the modal */
+.modal.show-modal .modal__content--settings {
+	transform: scale(1);
+}
+/* Header for the settings modal */
+.modal__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #444;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+/* Grid layout for settings options */
+.modal__grid {
+	display: grid;
+	grid-template-columns: 1.2fr 0.8fr;
+	align-items: center;
+	gap: 10px;
+}
+.modal__title {
+	font-size: 1.2em;
+	color: var(--white);
+}
+/* Close button 'x' in the settings modal */
+.modal__close-settings {
+	color: var(--grayA);
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.modal__close-settings:hover,
+.modal__close-settings:focus {
+	text-decoration: none;
+	color: #888;
+}
+
+/* @b Controls
+/*------------------------*/
+/* Reset browser default appearance */
+.modal__label,
+.modal__select,
+.modal__color-picker {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	font-family: inherit;
+	font-size: 1em;
+}
+/* General styles for interactive elements */
+.modal__select,
+.modal__color-picker {
+	width: 100%;
+	border: 1px solid #444;
+	border-radius: 5px;
+	background-color: var(--gray1);
+	color: var(--white);
+	text-align: center;
+	outline: none;
+	border-radius: 2px;
+	transition: border-color 0.3s;
+	height: 38px;
+}
+.modal__select:hover,
+.modal__color-picker:hover {
+	border-color: #666;
+}
+/* Color Picker specific styles (WebKit/Chrome) */
+.modal__color-picker::-webkit-color-swatch-wrapper {
+	padding: 2px;
+}
+/* Color Picker specific styles (WebKit/Firefox) */
+.modal__color-picker::-webkit-color-swatch,
+.modal__color-picker::-moz-color-swatch {
+	border-radius: 2px;
+	border: none;
+}
+
 /* #endregion */
 /*========================*/
 /*#region @r FOOTER */
@@ -595,7 +609,7 @@ input[type='color']::-moz-color-swatch {
 .footer {
 	width: 100%;
 	height: 40px;
-	margin-top: auto;
+	margin-top: auto; /* Push to the very bottom */
 	background-color: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(5px);
 	color: white;
@@ -608,17 +622,18 @@ input[type='color']::-moz-color-swatch {
 /*#region @r PRINT */
 /*========================*/
 @media print {
+	/* Clean white background and black text for printing */
 	body {
 		background-color: #fff !important;
 		color: #000 !important;
 	}
-
+	/* Hide navigation and footer elements */
 	.header,
 	.footer {
 		display: none !important;
 	}
-
-	#boards {
+	/* Reset board grid margins for print layout */
+	.board-grid {
 		margin-top: 0 !important;
 		padding-top: 0 !important;
 		gap: 5px;
