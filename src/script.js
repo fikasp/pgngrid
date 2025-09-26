@@ -9,6 +9,7 @@ const STATE = {
 	currentBoardIndex: 0,
 	isModalOpen: false,
 	lastWidth: window.innerWidth,
+	lastHeight: window.innerHeight,
 	pgnString: '',
 	positions: [],
 	settings: {
@@ -69,8 +70,6 @@ const $ = {
 //#region @r LISTENERS
 //========================
 const Listeners = {
-	// / @b Setup all event listeners
-	// ------------------------
 	setup: () => {
 		window.onresize = Tools.debounce(Handlers.window.resize, 200)
 		window.addEventListener('touchmove', Handlers.window.blockScroll, { passive: false })
@@ -139,14 +138,18 @@ const Handlers = {
 		resize: () => {
 			Log.blue()
 			const currentWidth = window.innerWidth
+			const currentHeight = window.innerHeight
 			const widthDifference = Math.abs(currentWidth - STATE.lastWidth)
+			const heightDifference = Math.abs(currentHeight - STATE.lastHeight)
 
-			const MIN_WIDTH_CHANGE_THRESHOLD = 50
+			const MIN_CHANGE_THRESHOLD = 50
 
-			if (widthDifference < MIN_WIDTH_CHANGE_THRESHOLD) {
+			if (widthDifference < MIN_CHANGE_THRESHOLD && heightDifference < MIN_CHANGE_THRESHOLD) {
 				return
 			}
+
 			STATE.lastWidth = currentWidth
+			STATE.lastHeight = currentHeight
 
 			Settings.updateColumnsSelect()
 			if (STATE.pgnString && STATE.allGames.length > 0) {
@@ -156,6 +159,8 @@ const Handlers = {
 				Renderers.renderBigBoard()
 			}
 		},
+		// @b Block scroll
+		//------------------------
 		blockScroll: (event) => {
 			if (STATE.isModalOpen) {
 				event.preventDefault()

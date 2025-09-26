@@ -606,9 +606,9 @@ body {
 /*#region @r FOOTER */
 /*========================*/
 .footer {
-	width: 100%;
+	width: 100vw;
 	height: 40px;
-	margin-top: auto; /* Push to the very bottom */
+	margin-top: auto;
 	background-color: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(5px);
 	color: white;
