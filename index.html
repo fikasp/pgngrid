@@ -31,7 +31,7 @@
 			<div class="header__top">
 				<!-- @b Header left
 				------------------------->
-				<div class="header__left">
+				<div id="header-left" class="header__left">
 					<a href="#" class="header__link" onclick="location.reload()">
 						<div class="header__logo">
 							<canvas id="logo" width="30" height="30"></canvas>
@@ -42,7 +42,7 @@
 
 				<!-- @b Header right
 				------------------------->
-				<div class="header__right">
+				<div id="header-right" class="header__right">
 					<!-- Orientation -->
 					<button id="btn-orientation" class="header__button header__button--orientation" title="Obróć orientację">
 						<i class="fa-solid fa-rotate fa-2x"></i>
@@ -65,7 +65,7 @@
 
 			<!-- @b Header center
 			------------------------->
-			<div class="header__center">
+			<div id="header-center" class="header__center">
 				<select id="game-select" class="header__select header__select--game">
 					<option value="">Wybierz partię</option>
 				</select>
@@ -93,9 +93,8 @@
 		------------------------->
 		<div id="big-board-modal" class="modal modal--board">
 			<button id="btn-close-board" class="modal__close-btn"><i class="fa-solid fa-close"></i></button>
-
-			<div class="modal__content modal__content--board">
-				<div id="move-list-display" class="modal__move-list">Ruchy</div>
+			<div id="big-board-content" class="modal__content modal__content--board">
+				<div id="move-list" class="modal__move-list"></div>
 
 				<div id="big-board-wrapper" class="modal__board-wrapper">
 					<!--Big board -->
@@ -114,12 +113,12 @@
 				</div>
 			</div>
 		</div>
+
 		<!------------------------
 			@g SETTINGS MODAL
 		------------------------->
-
 		<div id="settings-modal" class="modal modal--settings">
-			<div class="modal__content modal__content--settings">
+			<div id="settings-content" class="modal__content modal__content--settings">
 				<!-- Header -->
 				<div class="modal__header">
 					<h2>Ustawienia</h2>
