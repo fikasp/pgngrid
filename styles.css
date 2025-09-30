@@ -19,9 +19,18 @@
 /* @b Reset
 /*------------------------*/
 * {
-	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	border: 0;
+	outline: 0;
+	font: inherit;
+	font-size: 100%;
+	line-height: 1;
+	vertical-align: baseline;
+	text-decoration: none;
+	list-style: none;
+	box-sizing: border-box;
+	border-spacing: 0;
 }
 
 /* @b Scrollbar
@@ -135,6 +144,8 @@ body {
 .header__title {
 	margin: 0;
 	font-size: 1.2em;
+	line-height: 1.5;
+	font-weight: bold;
 	transition: color 0.3s;
 	color: white;
 }
@@ -175,7 +186,7 @@ body {
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	padding: 8px 30px 8px 12px;
+	padding: 9px 30px 9px 12px;
 	background-color: transparent;
 	color: #fff;
 	border: 1px solid #444;
