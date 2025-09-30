@@ -11,11 +11,11 @@
 		<!-- Favicon -->
 		<link rel="icon" type="image/png" />
 		<!-- Font Avesome -->
-		<link rel="stylesheet" href="src/vendor/fontawesome.css" />
+		<link rel="stylesheet" href="vendor/fontawesome.css" />
 		<!-- Chessboard -->
-		<link rel="stylesheet" href="src/vendor/chessboard.css" />
+		<link rel="stylesheet" href="vendor/chessboard.css" />
 		<!-- Styles -->
-		<link rel="stylesheet" href="src/styles.css" />
+		<link rel="stylesheet" href="styles.css" />
 		<!-- Title -->
 		<title>PGNgrid</title>
 	</head>
@@ -94,7 +94,7 @@
 		<div id="big-board-modal" class="modal modal--board">
 			<button id="btn-close-board" class="modal__close-btn"><i class="fa-solid fa-close"></i></button>
 			<div id="big-board-content" class="modal__content modal__content--board">
-				<div id="move-list" class="modal__move-list"></div>
+				<div id="move-list-display" class="modal__move-list"></div>
 
 				<div id="big-board-wrapper" class="modal__board-wrapper">
 					<!--Big board -->
@@ -140,6 +140,25 @@
 		</div>
 
 		<!------------------------
+    	@g ERROR MODAL
+		------------------------->
+		<div id="error-modal" class="modal modal--error">
+			<div id="error-content" class="modal__content modal__content--error">
+				<div class="modal__header">
+					<h2>Błąd</h2>
+					<span id="btn-close-error" class="modal__close-error">&times;</span>
+				</div>
+				<div class="modal__body">
+					<i class="fa-solid fa-circle-exclamation modal__error-icon"></i>
+					<p id="error-message" class="modal__error-message"></p>
+				</div>
+				<div class="modal__footer">
+					<button id="btn-error-ok" class="modal__button">OK</button>
+				</div>
+			</div>
+		</div>
+
+		<!------------------------
 			@g FOOTER
 		------------------------->
 		<div class="footer">2025 © Przemysław Fikas</div>
@@ -148,11 +167,11 @@
 		<!--====================-->
 		<!--#region @r SCRIPTS -->
 		<!--====================-->
-		<script src="src/vendor/jquery.js"></script>
-		<script src="src/vendor/chesspieces.js"></script>
-		<script src="src/vendor/chessboard.js"></script>
-		<script src="src/vendor/chess.js"></script>
-		<script src="src/script.js"></script>
+		<script src="vendor/jquery.js"></script>
+		<script src="vendor/chesspieces.js"></script>
+		<script src="vendor/chessboard.js"></script>
+		<script src="vendor/chess.js"></script>
+		<script src="script.js"></script>
 	</body>
 	<!--#endregion-->
 </html>
