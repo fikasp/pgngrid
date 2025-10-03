@@ -2,37 +2,20 @@
 //========================
 //#region @r UTILS
 //========================
-
 // @g Logger
 //------------------------
-/**
- * @typedef {Object} Log
- * @property {boolean} active
- * @property {function(string):void} divider
- * @property {function(string):void} start
- * @property {function():void} end
- * @property {function():void} init
- * @property {function(...any):void} warn
- * @property {function(...any):void} error
- * @property {function(...any):void} default
- * @property {function(...any):void} blue
- * @property {function(...any):void} gray
- * @property {function(...any):void} orange
- * @property {function(...any):void} red
- * @property {function(...any):void} white
- * @property {function(...any):void} yellow
- */
-/** @type {Log} */
 const Log = {
-	// Config
-	_config: {
+	// @b Config
+	//------------------------
+	config: {
 		active: true,
-		caller: { active: true, showClass: true, style: 'font-size: 1.05em; font-weight: bold;' },
-		location: { active: true, style: 'font-size: 0.85em; font-style: italic; color: dimgray;' },
-		divider: { active: true, style: 'font-size: 1.05em; font-weight: bold;', char: '-', length: 12 },
-		group: { active: true, style: 'font-size: 1.1em; font-weight: bold;', collapsed: false },
+		maxDepth: Infinity,
+		location: { active: true, style: 'font-size: 0.9em; font-style: italic; color: dimgray;' },
+		divider: { active: false, style: 'font-size: 1.1em; font-weight: bold;', char: '-', length: 12 },
+		group: { active: true, style: 'font-size: 1.2em; font-weight: bold;', collapsed: false },
+		depth: { active: true, char: ' ' },
 	},
-	_styles: {
+	styles: {
 		blue: { active: true, style: 'color: steelblue;' },
 		gray: { active: true, style: 'color: gray;' },
 		orange: { active: true, style: 'color: orange;' },
@@ -40,27 +23,39 @@ const Log = {
 		white: { active: true, style: 'color: white;' },
 		yellow: { active: true, style: 'color: yellow;' },
 	},
-	
-	// Helpers
+
+	// @b Private
+	//------------------------
+
+	// Depth
+	_depth: 0,
+
+	// Should log
+	_shouldLog() {
+		return this.config.active && this._depth <= this.config.maxDepth
+	},
+
+	// Get indent
+	_getIndent() {
+		return this.config.depth.active ? this.config.depth.char.repeat(this._depth) : ''
+	},
+
+	// Get caller info
 	_getCallerInfo: (idx) => {
 		const line = new Error().stack?.split('\n')[idx]?.trim() || ''
 		const match = line.match(/at\s+(.+?)\s+\((.+)\)/) || line.match(/^(.+?)@(.+)/)
-		if (!match) return { caller: '', className: '', location: '' }
+		if (!match) return { caller: '', location: '' }
 
 		const fullName = match[1]
 		const parts = fullName.split('.')
 		const caller = parts.pop()
-		const className = parts.length > 0 ? parts.join('.') : ''
-
 		const fullPath = match[2] || match[1]
 		const loc = fullPath.match(/([^\/\\]+):(\d+):\d+/)
-
-		return {
-			caller,
-			className,
-			location: loc ? `${loc[1]}:${loc[2]}` : '',
-		}
+		const location = loc ? `${loc[1]}:${loc[2]}` : ''
+		return { caller, location }
 	},
+
+	// Format args
 	_formatArgs: (args) =>
 		args
 			.map((a) =>
@@ -68,92 +63,145 @@ const Log = {
 			)
 			.join(', '),
 
-	// Styled
-	styled(mode, ...args) {
-		if (!this._config.active || !this._styles[mode]?.active) return
-		const { caller, className, location } = this._getCallerInfo(4)
-		const content = this._formatArgs(args)
-		const style = this._styles[mode].style
+	// Enter with style
+	_enterWithStyle(color, ...data) {
+		if (!this.config.active || !this.styles[color]?.active) return
 
-		let message = ''
-		let styles = []
+		const indent = this._getIndent()
+		const { caller, location } = this._getCallerInfo(4)
 
-		if (this._config.caller.active) {
-			const fullCaller = className && this._config.caller.showClass ? `${className}.${caller}` : caller
-			message += `%c${fullCaller}%c(${content})`
-			styles.push(`${style}${this._config.caller.style}`, style)
-		} else {
-			message += `%c(${content})`
-			styles.push(style)
+		if (this._depth <= this.config.maxDepth) {
+			const formatted = data.length > 0 ? this._formatArgs(data) : ''
+			const message = `${indent}→ ${caller}(${formatted})`
+			console.log(`%c${message}`, this.styles[color].style)
+
+			if (this.config.location.active) {
+				console.log(`${indent}%c→ ${location}`, this.config.location.style)
+			}
 		}
-		if (this._config.location.active) {
-			message += `\n%c${location}`
-			styles.push(this._config.location.style)
+		this._depth++
+	},
+
+	// Start with style
+	_startWithStyle(color, text = null) {
+		if (!this._shouldLog() || !this.config.group.active || !this.styles[color]?.active) return
+
+		const indent = this._getIndent()
+		const displayText = text !== null ? text : this._getCallerInfo(5).caller
+		const method = this.config.group.collapsed ? console.groupCollapsed : console.group
+
+		const combinedStyle = `${this.config.group.style} ${this.styles[color].style}`
+		method(`${indent}%c${displayText}`, combinedStyle)
+	},
+
+	// Styled
+	_styled(mode, ...args) {
+		if (!this._shouldLog() || !this.styles[mode]?.active) return
+		const { location } = this._getCallerInfo(4)
+		const content = this._formatArgs(args)
+		const style = this.styles[mode].style
+		const indent = this._getIndent()
+
+		let message = `${indent}%c${content}`
+		let styles = [style]
+
+		if (this.config.location.active) {
+			message += `\n${indent}%c→ ${location}`
+			styles.push(this.config.location.style)
 		}
 		console.log(message, ...styles)
 	},
 
+	// @b Public
+	//------------------------
+
+	// Enter
+	enter(...data) {
+		if (!this.config.active) return
+
+		const indent = this._getIndent()
+		const { caller, location } = this._getCallerInfo(3)
+
+		if (this._depth <= this.config.maxDepth) {
+			const formatted = data.length > 0 ? this._formatArgs(data) : ''
+			console.log(`${indent}→ ${caller}(${formatted})`)
+
+			if (this.config.location.active) {
+				console.log(`${indent}%c→ ${location}`, this.config.location.style)
+			}
+		}
+		this._depth++
+	},
+
+	// Exit
+	exit() {
+		if (!this.config.active) return
+		this._depth = Math.max(0, this._depth - 1)
+	},
+
+	// Start
+	start(text = null) {
+		if (!this._shouldLog() || !this.config.group.active) return
+
+		const indent = this._getIndent()
+		const displayText = text !== null ? text : this._getCallerInfo(3).caller
+		const method = this.config.group.collapsed ? console.groupCollapsed : console.group
+
+		method(`${indent}%c${displayText}`, `${this.config.group.style} color: yellow;`)
+	},
+
+	// End
+	end() {
+		if (!this.config.active || !this.config.group.active) return
+		console.groupEnd()
+	},
+
 	// Default
 	default(...args) {
-		if (!this._config.active) return
-		console.log(...args)
-		if (this._config.location.active) {
+		if (!this._shouldLog()) return
+		const indent = this._getIndent()
+		console.log(indent, ...args)
+		if (this.config.location.active) {
 			const { location } = this._getCallerInfo(3)
-			console.log(`%c${location}`, this._config.location.style)
+			console.log(`${indent}%c↑ ${location}`, this.config.location.style)
 		}
 	},
 
 	// Error
 	error(...args) {
-		if (!this._config.active) return
-		console.error(...args)
-		if (this._config.location.active) {
-			const { location } = this._getCallerInfo(3)
-			console.log(`%c${location}`, this._config.location.style)
-		}
+		if (!this._shouldLog()) return
+		const indent = this._getIndent()
+		console.error(indent, ...args)
 	},
 
 	// Warn
 	warn(...args) {
-		if (!this._config.active) return
-		console.warn(...args)
-		if (this._config.location.active) {
-			const { location } = this._getCallerInfo(3)
-			console.log(`%c${location}`, this._config.location.style)
-		}
+		if (!this._shouldLog()) return
+		const indent = this._getIndent()
+		console.warn(indent, ...args)
 	},
 
 	// Divider
 	divider(text = '') {
-		if (!this._config.active || !this._config.divider.active) return
+		if (!this._shouldLog() || !this.config.divider.active) return
 
-		const char = this._config.divider.char
-		const style = this._config.divider.style
+		const char = this.config.divider.char
+		const style = this.config.divider.style
+		const indent = this._getIndent()
 
 		if (text) {
-			console.log(`%c${text}\n${char.repeat(text.length)}`, style)
+			console.log(`${indent}%c${text}\n${indent}${char.repeat(text.length)}`, style)
 		} else {
-			console.log(`%c${char.repeat(this._config.divider.length)}`, style)
+			console.log(`${indent}%c${char.repeat(this.config.divider.length)}`, style)
 		}
-	},
-
-	// Start
-	start(text = 'Logs') {
-		if (!this._config.active || !this._config.group.active) return
-		const method = this._config.group.collapsed ? console.groupCollapsed : console.group
-		method(`%c${text}`, this._config.group.style)
-	},
-
-	// End
-	end() {
-		if (!this._config.active || !this._config.group.active) return
-		console.groupEnd()
 	},
 
 	// Init
 	init() {
-		Object.keys(this._styles).forEach((mode) => {
-			this[mode] = (...args) => this.styled(mode, ...args)
+		Object.keys(this.styles).forEach((color) => {
+			this[color] = (...args) => this._styled(color, ...args)
+			this.start[color] = (text = null) => this._startWithStyle(color, text)
+			this.enter[color] = (...data) => this._enterWithStyle(color, ...data)
 		})
 	},
 }
@@ -161,8 +209,7 @@ const Log = {
 // @g Storage
 //------------------------
 const Storage = {
-	// @b Get from
-	//------------------------
+	// Get
 	get: (key, defaultValue = null) => {
 		try {
 			const item = localStorage.getItem(key)
@@ -172,8 +219,7 @@ const Storage = {
 			return defaultValue
 		}
 	},
-	// @b Set to
-	//------------------------
+	// Set
 	set: (key, value) => {
 		try {
 			localStorage.setItem(key, JSON.stringify(value))
@@ -477,11 +523,13 @@ ${pgn}`
 	//------------------------
 	// Calculate optimal board size based on container width
 	calculateBoardSize: (containerWidth, columns) => {
+		Log.enter()
 		const minBoardSize = 150
 		const maxBoardSize = 750
 		const gap = 10
 		let boardSize = (containerWidth - (columns - 1) * gap) / columns
 		boardSize = Math.max(minBoardSize, Math.min(boardSize, maxBoardSize))
+		Log.exit()
 		return Math.floor(boardSize)
 	},
 
@@ -524,12 +572,14 @@ const Effects = {
 	// @b Scroll to active move in list
 	//------------------------
 	scrollToActiveMove: () => {
+		Log.enter()
 		const activeMoveElement = DOM.get('.modal__move-list .active-move')
 		if (!activeMoveElement) return
 		const listContainer = activeMoveElement.parentElement
 		const containerWidth = listContainer.clientWidth
 		const scrollPosition = activeMoveElement.offsetLeft - containerWidth / 2 + activeMoveElement.offsetWidth / 2
 		DOM.scrollTo(listContainer, { left: scrollPosition, behavior: 'smooth' })
+		Log.exit()
 	},
 
 	// @b Draw mini chessboard on canvas
@@ -549,10 +599,12 @@ const Effects = {
 	// @b Update logo and favicon
 	//------------------------
 	updateLogo: () => {
+		Log.enter()
 		const canvas = DOM.create({ type: 'canvas', width: 16, height: 16 })
 		Effects.drawMiniBoard(canvas)
 		Effects.drawMiniBoard($.logo)
 		DOM.setFavicon(canvas)
+		Log.exit()
 	},
 
 	// @b Show error modal with message
@@ -567,7 +619,9 @@ const Effects = {
 	// @b Hide error modal
 	//------------------------
 	hideError: () => {
+		Log.enter()
 		DOM.removeClass($.error.modal, 'show-modal')
+		Log.exit()
 	},
 }
 
@@ -580,9 +634,10 @@ const Settings = {
 	// @b Load settings from storage
 	//------------------------
 	load: () => {
+		Log.enter.blue(STATE.settings)
 		const saved = Storage.get('settings', {})
 		STATE.settings = { ...STATE.settings, ...saved }
-		Log.orange(STATE.settings)
+		Log.exit()
 	},
 
 	// @b Save settings to storage
@@ -594,13 +649,15 @@ const Settings = {
 			highlightColor: DOM.getValue($.settings.highlightColor),
 			orientation: STATE.settings.orientation,
 		}
+		Log.enter.blue(settings)
 		Storage.set('settings', settings)
-		Log.orange(settings)
+		Log.exit()
 	},
 
 	// @b Apply settings to UI
 	//------------------------
 	applyToUI: () => {
+		Log.enter()
 		DOM.setValue($.settings.columns, STATE.settings.columns)
 		DOM.setValue($.settings.darkColor, STATE.settings.darkColor)
 		DOM.setValue($.settings.highlightColor, STATE.settings.highlightColor)
@@ -608,30 +665,33 @@ const Settings = {
 		Settings.updateHighlightColor()
 		Settings.updateColumnsSelect()
 		Settings.updateBoardLayout()
+		Log.exit()
 	},
 
 	// @b Update board colors in CSS
 	//------------------------
 	updateBoardColors: () => {
-		Log.white()
+		Log.enter()
 		const { darkColor, lightColor } = Pure.getBoardColors()
 		DOM.setCSS('--board-dark-color', darkColor)
 		DOM.setCSS('--board-light-color', lightColor)
 		Effects.updateLogo()
+		Log.exit()
 	},
 
 	// @b Update highlight color in CSS
 	//------------------------
 	updateHighlightColor: () => {
-		Log.white()
+		Log.enter()
 		const highlightColor = Pure.getHighlightColor()
 		DOM.setCSS('--highlight-color', highlightColor)
+		Log.exit()
 	},
 
 	// @b Update columns select options
 	//------------------------
 	updateColumnsSelect: () => {
-		Log.white()
+		Log.enter()
 		if (!$.settings.columns) return
 		const containerWidth = $.boards.clientWidth - 20
 		const maxColumns = Pure.calculateMaxColumns(containerWidth)
@@ -648,12 +708,13 @@ const Settings = {
 		if (isNaN(current) || current > maxColumns || current < 1) current = maxColumns
 		DOM.setValue($.settings.columns, current)
 		STATE.settings.columns = current
+		Log.exit()
 	},
 
 	// @b Update game select dropdown
 	//------------------------
 	updateGameSelect: () => {
-		Log.white()
+		Log.enter()
 		DOM.clear($.settings.game)
 		DOM.show($.settings.game, 'block')
 		STATE.allGames.forEach((game, index) => {
@@ -665,15 +726,18 @@ const Settings = {
 				value: index.toString(),
 			})
 		})
+		Log.exit()
 	},
 
 	// @b Update board grid layout
 	//------------------------
 	updateBoardLayout: () => {
+		Log.enter()
 		if ($.settings.columns) {
 			const columns = DOM.getValue($.settings.columns)
 			DOM.setStyle($.boards, 'gridTemplateColumns', `repeat(${columns}, 1fr)`)
 		}
+		Log.exit()
 	},
 }
 
@@ -686,8 +750,11 @@ const Renderers = {
 	// @b Highlight last moves on all boards
 	//------------------------
 	highlightMoves: () => {
-		Log.gray()
-		if (!STATE.positions.length) return
+		Log.enter()
+		if (!STATE.positions.length) {
+			Log.exit()
+			return
+		}
 		const currentPosition = STATE.positions[STATE.currentBoardIndex]
 		const highlightColor = Pure.getHighlightColor()
 
@@ -698,16 +765,19 @@ const Renderers = {
 			Effects.applyHighlight(fromSquare, toSquare, highlightColor)
 		})
 
-		if (!STATE.bigBoard || !currentPosition) return
-		const fromBig = DOM.get(`#big-board .square-${currentPosition.from}`)
-		const toBig = DOM.get(`#big-board .square-${currentPosition.to}`)
-		Effects.applyHighlight(fromBig, toBig, highlightColor)
+		if (STATE.bigBoard && currentPosition) {
+			const fromBig = DOM.get(`#big-board .square-${currentPosition.from}`)
+			const toBig = DOM.get(`#big-board .square-${currentPosition.to}`)
+			Effects.applyHighlight(fromBig, toBig, highlightColor)
+		}
+
+		Log.exit()
 	},
 
 	// @b Render all small boards in grid
 	//------------------------
 	renderBoards: () => {
-		Log.orange()
+		Log.enter()
 		DOM.clear($.boards)
 		STATE.chessboards.length = 0
 		const currentSize = Pure.calculateBoardSize(
@@ -760,12 +830,13 @@ const Renderers = {
 
 		Settings.updateBoardLayout()
 		Renderers.highlightMoves()
+		Log.exit()
 	},
 
 	// @b Render big board in modal
 	//------------------------
 	renderBigBoard: () => {
-		Log.orange()
+		Log.enter()
 		const position = STATE.positions[STATE.currentBoardIndex]
 		if (!position) return
 
@@ -792,12 +863,13 @@ const Renderers = {
 		DOM.setDisabled($.bigBoard.prev, STATE.currentBoardIndex === 0)
 		DOM.setDisabled($.bigBoard.next, STATE.currentBoardIndex >= STATE.positions.length - 1)
 		Renderers.renderMoveList()
+		Log.exit()
 	},
 
 	// @b Render move list above big board
 	//------------------------
 	renderMoveList: () => {
-		Log.gray()
+		Log.enter()
 		DOM.clear($.bigBoard.moveList)
 		STATE.positions.forEach((pos, index) => {
 			const moveSpan = DOM.create({
@@ -809,11 +881,14 @@ const Renderers = {
 				DOM.addClass(moveSpan, 'active-move')
 			}
 			DOM.on(moveSpan, 'click', () => {
+				Log.start("moveListClick")
 				STATE.currentBoardIndex = index
 				Renderers.renderBigBoard()
+				Log.end()
 			})
 		})
 		Effects.scrollToActiveMove()
+		Log.exit()
 	},
 }
 
@@ -843,7 +918,8 @@ const Logic = {
 	// @b Process PGN string
 	//------------------------
 	processPgn: () => {
-		Log.yellow()
+		Log.start()
+		Log.enter()
 		try {
 			DOM.clear($.boards)
 			STATE.chessboards.length = 0
@@ -888,13 +964,16 @@ const Logic = {
 		} catch (error) {
 			Log.red('Błąd podczas przetwarzania PGN:', error)
 			Effects.showError('Wystąpił błąd podczas przetwarzania PGN. Upewnij się, że format jest poprawny.')
+		} finally {
+			Log.exit()
+			Log.end()
 		}
 	},
 
 	// @b Process boards for single game
 	//------------------------
 	processBoards: (pgnToRender) => {
-		Log.yellow()
+		Log.enter()
 		try {
 			DOM.clear($.boards)
 			STATE.chessboards.length = 0
@@ -937,6 +1016,8 @@ const Logic = {
 		} catch (error) {
 			Log.red('Błąd podczas renderowania partii:', error)
 			console.error('Błąd podczas renderowania partii:', error)
+		} finally {
+			Log.exit()
 		}
 	},
 }
@@ -952,7 +1033,7 @@ const Handlers = {
 		// @b Handle keyboard navigation
 		//------------------------
 		keyDown: (event) => {
-			Log.blue(event.key)
+			Log.enter.orange(event.key)
 			if (DOM.hasClass($.bigBoard.modal, 'show-modal')) {
 				if (event.key === 'ArrowLeft') Handlers.navigation.prevMoveClick()
 				else if (event.key === 'ArrowRight') Handlers.navigation.nextMoveClick()
@@ -962,19 +1043,23 @@ const Handlers = {
 			} else if (DOM.hasClass($.error.modal, 'show-modal') && event.key === 'Escape') {
 				Effects.hideError()
 			}
+			Log.exit()
 		},
 
 		// @b Handle window resize
 		//------------------------
 		resize: () => {
+			Log.start()
 			const currentWidth = window.innerWidth
 			const currentHeight = window.innerHeight
 			const widthDifference = Math.abs(currentWidth - STATE.lastWidth)
 			const heightDifference = Math.abs(currentHeight - STATE.lastHeight)
-			Log.blue(widthDifference, heightDifference)
+			Log.enter(widthDifference, heightDifference)
 
 			const MIN_CHANGE_THRESHOLD = 100
 			if (widthDifference < MIN_CHANGE_THRESHOLD && heightDifference < MIN_CHANGE_THRESHOLD) {
+				Log.exit()
+				Log.end()
 				return
 			}
 
@@ -988,6 +1073,8 @@ const Handlers = {
 			if (DOM.hasClass($.bigBoard.modal, 'show-modal')) {
 				Renderers.renderBigBoard()
 			}
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Block background scroll when modal open
@@ -1001,8 +1088,9 @@ const Handlers = {
 		// @b Print current board grid
 		//------------------------
 		printBoards: () => {
-			Log.blue()
+			Log.start()
 			window.print()
+			Log.end()
 		},
 	},
 
@@ -1083,8 +1171,9 @@ const Handlers = {
 		// @b Handle game selection change
 		//------------------------
 		gameSelectChange: () => {
+			Log.start()
 			const selectedIndex = DOM.getValue($.settings.game)
-			Log.blue(selectedIndex)
+			Log.enter(selectedIndex)
 			if (selectedIndex !== '') {
 				const selectedGame = STATE.allGames[selectedIndex]
 				const gameTitle = selectedGame.header.Event
@@ -1093,15 +1182,20 @@ const Handlers = {
 			} else {
 				DOM.clear($.boards)
 			}
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Handle columns selection change
 		//------------------------
 		columnsSelectChange: () => {
-			Log.blue(DOM.getValue($.settings.game))
+			Log.start()
+			Log.enter(DOM.getValue($.settings.game))
 			Logic.processBoards(STATE.allGames[DOM.getValue($.settings.game)].pgn)
 			Settings.updateBoardLayout()
 			Settings.save()
+			Log.exit()
+			Log.end()
 		},
 	},
 
@@ -1112,26 +1206,35 @@ const Handlers = {
 		//------------------------
 		orientationToggle: () => {
 			STATE.settings.orientation = STATE.settings.orientation === 'white' ? 'black' : 'white'
-			Log.blue(STATE.settings.orientation)
+			Log.start()
+			Log.enter(STATE.settings.orientation)
 			Renderers.renderBoards()
 			Settings.save()
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Handle board color picker change
 		//------------------------
 		boardColorPicker: () => {
-			Log.blue()
+			Log.start()
+			Log.enter()
 			Settings.updateBoardColors()
 			Settings.save()
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Handle highlight color picker change
 		//------------------------
 		highlightColorPicker: () => {
-			Log.blue()
+			Log.start()
+			Log.enter()
 			Settings.updateHighlightColor()
 			Renderers.highlightMoves()
 			Settings.save()
+			Log.exit()
+			Log.end()
 		},
 	},
 
@@ -1141,51 +1244,63 @@ const Handlers = {
 		// @b Open settings modal
 		//------------------------
 		settingsClick: () => {
-			Log.blue()
+			Log.start()
 			DOM.addClass($.settings.modal, 'show-modal')
+			Log.end()
 		},
 
 		// @b Close settings modal
 		//------------------------
 		closeSettingsClick: (event) => {
-			Log.blue()
-			if (event.target === $.settings.modal || event.target === $.settings.close) {
+			Log.enter()
+			if (event.key || event.target === $.settings.modal || event.target === $.settings.close) {
 				DOM.removeClass($.settings.modal, 'show-modal')
 			}
+			Log.exit()
 		},
 
 		// @b Open big board modal
 		//------------------------
 		boardClick: (index) => {
-			Log.blue(index)
+			Log.start()
+			Log.enter(index)
 			STATE.currentBoardIndex = index
 			DOM.addClass($.bigBoard.modal, 'show-modal')
 			DOM.on($.bigBoard.modal, 'wheel', Handlers.navigation.wheelNavigation, { passive: false })
 			DOM.on($.bigBoard.board, 'touchstart', Handlers.navigation.touchStart, { passive: false })
 			DOM.on($.bigBoard.board, 'touchend', Handlers.navigation.touchEnd, { passive: false })
 			Renderers.renderBigBoard()
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Close big board modal
 		//------------------------
 		closeBoardClick: (event) => {
-			Log.blue()
+			Log.enter()
 			event.stopPropagation()
-			if (event.target === $.bigBoard.modal || event.currentTarget === $.bigBoard.close) {
+			if (event.key || event.target === $.bigBoard.modal || event.currentTarget === $.bigBoard.close) {
 				DOM.removeClass($.bigBoard.modal, 'show-modal')
 				DOM.off($.bigBoard.modal, 'wheel', Handlers.navigation.wheelNavigation)
 				DOM.off($.bigBoard.board, 'touchstart', Handlers.navigation.touchStart)
 				DOM.off($.bigBoard.board, 'touchend', Handlers.navigation.touchEnd)
 			}
+			Log.exit()
 		},
 
 		// @b Close error modal
 		//------------------------
 		closeErrorClick: (event) => {
-			Log.blue()
-			if (event.target === $.error.modal || event.target === $.error.close || event.target === $.error.ok) {
+			Log.enter()
+			if (
+				event.key ||
+				event.target === $.error.modal ||
+				event.target === $.error.close ||
+				event.target === $.error.ok
+			) {
 				Effects.hideError()
 			}
+			Log.exit()
 		},
 	},
 
@@ -1195,21 +1310,27 @@ const Handlers = {
 		// @b Navigate to previous move
 		//------------------------
 		prevMoveClick: () => {
-			Log.blue()
+			Log.start()
+			Log.enter()
 			if (STATE.currentBoardIndex > 0) {
 				STATE.currentBoardIndex--
 				Renderers.renderBigBoard()
 			}
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Navigate to next move
 		//------------------------
 		nextMoveClick: () => {
-			Log.blue()
+			Log.start()
+			Log.enter()
 			if (STATE.currentBoardIndex < STATE.positions.length - 1) {
 				STATE.currentBoardIndex++
 				Renderers.renderBigBoard()
 			}
+			Log.exit()
+			Log.end()
 		},
 
 		// @b Handle mouse wheel navigation
@@ -1247,6 +1368,7 @@ const Handlers = {
 
 const Listeners = {
 	setup: () => {
+		Log.enter()
 		window.onresize = Tools.debounce(Handlers.window.resize, 200)
 		DOM.on(window, 'touchmove', Handlers.window.blockScroll, { passive: false })
 		DOM.on(document, 'keydown', Handlers.window.keyDown)
@@ -1292,6 +1414,7 @@ const Listeners = {
 		// Color Pickers
 		DOM.on($.settings.darkColor, 'input', Handlers.settings.boardColorPicker)
 		DOM.on($.settings.highlightColor, 'input', Handlers.settings.highlightColorPicker)
+		Log.exit()
 	},
 }
 
@@ -1303,12 +1426,15 @@ const Listeners = {
 const App = {
 	init: () => {
 		Log.init()
-		Log.yellow()
+		Log.start('App init')
+		Log.enter()
 		Settings.load()
 		Settings.applyToUI()
 		Listeners.setup()
+		Log.exit()
+		Log.end()
 	},
 }
-	
+
 App.init()
 // #endregion
