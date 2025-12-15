@@ -819,7 +819,7 @@ const Renderers = {
 			const config = {
 				position: pos.fen,
 				draggable: false,
-				pieceTheme: 'img/{piece}.png',
+				pieceTheme: 'src/img/{piece}.png',
 				orientation: STATE.settings.orientation,
 				showNotation: false,
 			}
