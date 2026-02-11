@@ -59,7 +59,7 @@ const Log = {
 	_formatArgs: (args) =>
 		args
 			.map((a) =>
-				a instanceof HTMLElement ? `[${a.tagName}]` : typeof a === 'object' ? JSON.stringify(a, null, 2) : a
+				a instanceof HTMLElement ? `[${a.tagName}]` : typeof a === 'object' ? JSON.stringify(a, null, 2) : a,
 			)
 			.join(', '),
 
@@ -383,8 +383,20 @@ const Tools = {
 		hex.slice(1).replace(/../g, (c) =>
 			Math.round(parseInt(c, 16) + (255 - parseInt(c, 16)) * percent)
 				.toString(16)
-				.padStart(2, '0')
+				.padStart(2, '0'),
 		),
+}
+
+// #endregion
+//========================
+//#region @r CONFIG
+//========================
+
+const CONFIG = {
+	pieceThemePath: 'src/img/{piece}.png',
+	minBoardSize: 150,
+	maxBoardSize: 750,
+	boardGap: 10,
 }
 
 // #endregion
@@ -524,20 +536,15 @@ ${pgn}`
 	// Calculate optimal board size based on container width
 	calculateBoardSize: (containerWidth, columns) => {
 		Log.enter()
-		const minBoardSize = 150
-		const maxBoardSize = 750
-		const gap = 10
-		let boardSize = (containerWidth - (columns - 1) * gap) / columns
-		boardSize = Math.max(minBoardSize, Math.min(boardSize, maxBoardSize))
+		let boardSize = (containerWidth - (columns - 1) * CONFIG.boardGap) / columns
+		boardSize = Math.max(CONFIG.minBoardSize, Math.min(boardSize, CONFIG.maxBoardSize))
 		Log.exit()
 		return Math.floor(boardSize)
 	},
 
 	// Calculate maximum number of columns that fit
 	calculateMaxColumns: (containerWidth) => {
-		const minBoardSize = 150
-		const gap = 10
-		return Math.max(1, Math.floor((containerWidth + gap) / (minBoardSize + gap)))
+		return Math.max(1, Math.floor((containerWidth + CONFIG.boardGap) / (CONFIG.minBoardSize + CONFIG.boardGap)))
 	},
 
 	// @b Color helpers
@@ -782,7 +789,7 @@ const Renderers = {
 		STATE.chessboards.length = 0
 		const currentSize = Pure.calculateBoardSize(
 			$.boards.clientWidth - 20,
-			parseInt(DOM.getValue($.settings.columns), 10)
+			parseInt(DOM.getValue($.settings.columns), 10),
 		)
 
 		STATE.positions.forEach((pos, index) => {
@@ -819,7 +826,7 @@ const Renderers = {
 			const config = {
 				position: pos.fen,
 				draggable: false,
-				pieceTheme: 'src/img/{piece}.png',
+				pieceTheme: CONFIG.pieceThemePath,
 				orientation: STATE.settings.orientation,
 				showNotation: false,
 			}
@@ -846,7 +853,7 @@ const Renderers = {
 			const config = {
 				position: position.fen,
 				draggable: false,
-				pieceTheme: 'img/{piece}.png',
+				pieceTheme: CONFIG.pieceThemePath,
 				showNotation: true,
 				orientation: STATE.settings.orientation,
 			}
@@ -881,7 +888,7 @@ const Renderers = {
 				DOM.addClass(moveSpan, 'active-move')
 			}
 			DOM.on(moveSpan, 'click', () => {
-				Log.start("moveListClick")
+				Log.start('moveListClick')
 				STATE.currentBoardIndex = index
 				Renderers.renderBigBoard()
 				Log.end()
