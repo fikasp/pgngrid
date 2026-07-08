@@ -393,7 +393,7 @@ const Tools = {
 //========================
 
 const CONFIG = {
-	pieceThemePath: 'src/img/{piece}.png',
+	pieceThemePath: 'img/{piece}.png',
 	minBoardSize: 150,
 	maxBoardSize: 750,
 	boardGap: 10,
