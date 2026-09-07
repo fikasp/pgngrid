@@ -393,6 +393,7 @@ const Tools = {
 //========================
 
 const CONFIG = {
+	storage_key: 'PGN_settings',
 	pieceThemePath: 'img/{piece}.png',
 	minBoardSize: 150,
 	maxBoardSize: 750,
@@ -488,7 +489,7 @@ const $ = {
 
 // #endregion
 //========================
-//#region @r PURE FUNCTIONS
+//#region @r PURE
 //========================
 
 const Pure = {
@@ -562,7 +563,7 @@ ${pgn}`
 
 // #endregion
 //========================
-//#region @r SIDE EFFECTS
+//#region @r EFFECTS
 //========================
 
 const Effects = {
@@ -642,7 +643,7 @@ const Settings = {
 	//------------------------
 	load: () => {
 		Log.enter.blue(STATE.settings)
-		const saved = Storage.get('settings', {})
+		const saved = Storage.get(CONFIG.storage_key, {})
 		STATE.settings = { ...STATE.settings, ...saved }
 		Log.exit()
 	},
@@ -657,7 +658,7 @@ const Settings = {
 			orientation: STATE.settings.orientation,
 		}
 		Log.enter.blue(settings)
-		Storage.set('settings', settings)
+		Storage.set(CONFIG.storage_key, settings)
 		Log.exit()
 	},
 
@@ -1427,7 +1428,7 @@ const Listeners = {
 
 // #endregion
 //========================
-//#region @r APP INIT
+//#region @r APP
 //========================
 
 const App = {

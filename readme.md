@@ -38,6 +38,11 @@ Aplikację można przetestować pod adresem: **[https://fikasp.github.io/pgngrid
 
 ## ⏱️ Historia wersji 
 
+* **v1.6 (2026-09-03):** 
+    * Przebudowa systemu logów konsolowych.
+    * Poprawa zachowania przy zmianie rozmiaru okna.
+    * Aktualizacja komentarzy dokumentacyjnych.
+
 * **v1.5 (2025-10-03):** 
     * Przebudowa systemu logów konsolowych.
     * Poprawa zachowania przy zmianie rozmiaru okna.

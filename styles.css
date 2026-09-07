@@ -216,17 +216,32 @@ body {
 /* Desktop layout (min-width 1000px) */
 @media screen and (min-width: 1000px) {
 	.header {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		column-gap: 20px;
 		height: 60px;
-		flex-direction: row;
-		justify-content: space-between;
+	}
+	.header__top {
+		display: contents;
+	}
+	.header__left {
+		order: 1;
 	}
 	.header__center {
 		display: flex;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
+		position: static;
+		transform: none;
 		padding-top: 0;
-		width: auto;
+		width: 100%;
+		order: 2;
+	}
+	.header__right {
+		order: 3;
+	}
+	.header__select--game {
+		width: 100%;
+		max-width: none;
 	}
 }
 /* Mobile layout fixes (max-width 1000px) */
